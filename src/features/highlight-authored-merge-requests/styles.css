@@ -1,0 +1,55 @@
+/*
+ * A full box outline reads as a validation state and boxes the row in. A left
+ * accent bar plus a faint info-coloured wash is the quieter, more native way to
+ * say "this one is yours": it marks the row's start, tints without hiding
+ * GitLab's own row states, and keeps the row's edges intact.
+ *
+ * The bar is safe to use here even though Draft dimming deliberately dropped
+ * one: dimming no longer paints any bar, so a bar now means exactly one thing.
+ */
+[data-tonic-for-gitlab-highlight-authored-merge-requests-root]
+[data-tonic-for-gitlab-authored-merge-request] {
+	background-color: color-mix(
+		in oklab,
+		var(--gl-status-info-background-color) 30%,
+		transparent
+	);
+	box-shadow: inset 3px 0 0 var(--gl-status-info-icon-color);
+	transition:
+		background-color 120ms ease-in-out,
+		box-shadow 120ms ease-in-out;
+}
+
+[data-tonic-for-gitlab-highlight-authored-merge-requests-root]
+	[data-tonic-for-gitlab-authored-merge-request]:is(:hover, :focus-within) {
+	background-color: color-mix(
+		in oklab,
+		var(--gl-status-info-background-color) 55%,
+		transparent
+	);
+	box-shadow: inset 4px 0 0 var(--gl-status-info-text-color);
+}
+
+/*
+ * Composed with Draft dimming: the row's own opacity already fades everything
+ * inside it, which is what should happen, but the marker has to survive that
+ * fade or an authored Draft stops being findable. Strengthening the wash and
+ * the bar here means the composed row still reads as "mine" after the row
+ * opacity multiplies it down, while the row as a whole stays de-emphasized.
+ */
+[data-tonic-for-gitlab-highlight-authored-merge-requests-root][data-tonic-for-gitlab-dim-draft-merge-requests-root]
+[data-tonic-for-gitlab-authored-merge-request][data-tonic-for-gitlab-dim-draft-merge-request] {
+	background-color: color-mix(
+		in oklab,
+		var(--gl-status-info-background-color) 55%,
+		transparent
+	);
+	box-shadow: inset 3px 0 0 var(--gl-status-info-text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-tonic-for-gitlab-highlight-authored-merge-requests-root]
+		[data-tonic-for-gitlab-authored-merge-request] {
+		transition: none;
+	}
+}

@@ -1,0 +1,28 @@
+/*
+ * Dimming must remove visual weight, never add it. Painting a surface and an
+ * inset bar reads as emphasis: GitLab's "subtle" background is lighter than the
+ * list surface in the dark theme, so a Draft row treated that way stood out
+ * more than the ready rows around it, and the bar drew the eye on both themes.
+ *
+ * Lowering the row's own opacity is the one change that always recedes, in
+ * either theme, without depending on which GitLab surface token happens to be
+ * lighter or darker. Hover and keyboard focus restore full emphasis, so nothing
+ * is permanently hard to read.
+ */
+[data-tonic-for-gitlab-dim-draft-merge-requests-root]
+[data-tonic-for-gitlab-dim-draft-merge-request] {
+	opacity: 0.55;
+	transition: opacity 120ms ease-in-out;
+}
+
+[data-tonic-for-gitlab-dim-draft-merge-requests-root]
+	[data-tonic-for-gitlab-dim-draft-merge-request]:is(:hover, :focus-within) {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-tonic-for-gitlab-dim-draft-merge-requests-root]
+		[data-tonic-for-gitlab-dim-draft-merge-request] {
+		transition: none;
+	}
+}

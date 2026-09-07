@@ -1,0 +1,79 @@
+name: tonic-for-gitlab
+version: 0.1.0
+description: Agent context for the Tonic for GitLab extension
+license: MIT
+
+includes: auto
+
+targets:
+  - claude
+  - codex
+  - copilot
+  - cursor
+  - opencode
+
+dependencies:
+  apm:
+    - extensiondev/skill/skills/extension-dev
+    - anthropics/skills/skills/frontend-design
+    - addyosmani/agent-skills/skills/frontend-ui-engineering
+    - pbakaus/impeccable/.agents/skills/impeccable
+    - shadcn-ui/ui/skills/shadcn
+    - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+    - vercel-labs/agent-skills/skills/react-best-practices
+
+  mcp:
+    # Only fields modeled by APM are used here (name/registry/transport/command/
+    # args/env/url). Harness-specific keys are deliberately omitted so this
+    # manifest renders correctly for every agent, not just one.
+    #
+    # Every server pins @latest: bunx re-resolves from npm on each start, so the
+    # newest release always wins over any copy in node_modules.
+    - name: extension-dev
+      registry: false
+      transport: stdio
+      command: bunx
+      args: ["@extension.dev/mcp@latest"]
+      env:
+        # Headed browser session. EXTENSION_BROWSER_FLAGS is pinned empty because
+        # an inherited --headless=new would keep the window hidden regardless.
+        EXTENSION_HEADLESS: "0"
+        EXTENSION_BROWSER_FLAGS: ""
+
+    - name: chrome-devtools
+      registry: false
+      transport: stdio
+      command: bunx
+      args:
+        - "chrome-devtools-mcp@latest"
+        - "--category-extensions=true"
+        - "--isolated=true"
+        - "--viewport=1280x800"
+        - "--screenshot-max-width=1600"
+        - "--no-usage-statistics"
+      env:
+        npm_config_cache: /tmp/gitlab-tonic-npm-cache
+
+    - name: playwright
+      registry: false
+      transport: stdio
+      command: bunx
+      args:
+        - "@playwright/mcp@latest"
+        - "--browser=chrome"
+        - "--viewport-size=1280x800"
+        - "--caps=pdf,devtools"
+
+    - name: shadcn
+      registry: false
+      transport: stdio
+      command: bunx
+      args: ["--bun", "shadcn@latest", "mcp"]
+      env:
+        TMPDIR: /tmp
+        BUN_INSTALL_CACHE_DIR: .cache/bun
+
+    - name: extensionjs
+      registry: false
+      transport: http
+      url: https://extensionjs.mintlify.app/mcp

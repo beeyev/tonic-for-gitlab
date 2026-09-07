@@ -1,0 +1,56 @@
+/*
+ * The chip sits under GitLab's filter bar and discloses what Tonic knows about
+ * this list's filters.
+ *
+ * Every colour is a GitLab semantic custom property, so the chip follows the
+ * active GitLab theme without this file knowing whether the page is light or
+ * dark, and without Tonic shipping a second palette that would drift from
+ * GitLab's own. No Tailwind or shadcn class reaches GitLab-owned DOM; this is
+ * light DOM that participates in GitLab layout, so it is styled the same way
+ * the two row decorations are.
+ *
+ * Status properties deliberately declare no literal fallback. A fixed colour
+ * would be wrong in one of the two themes, and a light pill behind subtle light
+ * text in dark mode is a worse failure than no pill. A missing property inside
+ * `color-mix` makes the declaration invalid at computed-value time, which drops
+ * `background-color` to transparent. A missing shadow colour drops the shadow.
+ * The label then loses its decoration and keeps inherited, legible text.
+ */
+[data-tonic-for-gitlab-list-filter-status] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+[data-tonic-for-gitlab-list-filter-label] {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	min-block-size: 1.5rem;
+	padding: 0.125rem 0.5rem;
+	border-radius: 624.9375rem;
+	background-color: color-mix(
+		in oklab,
+		var(--gl-status-info-background-color) 45%,
+		transparent
+	);
+	box-shadow: inset 0 0 0 1px var(--gl-status-info-icon-color);
+}
+
+/*
+ * The two states where the list on screen is not the saved set share the warned
+ * treatment, so the pill colour means one thing: what you are looking at is not
+ * what Tonic has saved. Neutral styling would let that read as decoration.
+ */
+[data-tonic-for-gitlab-list-filter-state="diverged"]
+[data-tonic-for-gitlab-list-filter-label],
+[data-tonic-for-gitlab-list-filter-state="saved-not-applied"]
+	[data-tonic-for-gitlab-list-filter-label] {
+	background-color: color-mix(
+		in oklab,
+		var(--gl-status-warning-background-color) 45%,
+		transparent
+	);
+	box-shadow: inset 0 0 0 1px var(--gl-status-warning-icon-color);
+}

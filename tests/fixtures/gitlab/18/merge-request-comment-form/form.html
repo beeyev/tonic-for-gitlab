@@ -1,0 +1,123 @@
+<!--
+GitLab version: 18.11.9-ce.0
+Page: authenticated merge request detail, main comment form and its comment-type control
+Page identifier: projects:merge_requests:show
+Capture date: 2026-08-21
+Source type: independently minimized live local-lab DOM
+Sanitization: synthetic namespace and generated element IDs; asset digest URLs reduced to the sprite
+fragment GitLab references; tracking attributes, layout-only utility classes, the rich text editor,
+and unrelated form controls removed; no executable scripts. The dropdown is collapsed, which is how
+GitLab renders it before the user opens it, and the listbox is present in the DOM in that state.
+Version difference: only the check-icon sprite fragment differs between the supported versions
+(`#mobile-issue-close` on 18.11, `#check` on 19.2). The comment-type contract itself is identical.
+-->
+<form
+	class="new-note common-note-form gfm-form js-main-target-form"
+	data-testid="comment-form"
+>
+	<div class="note-form-actions gl-flex gl-flex-wrap gl-gap-3">
+		<div
+			role="group"
+			class="js-comment-button js-comment-submit-button comment-type-dropdown gl-button-group btn-group"
+			data-testid="comment-button"
+		>
+			<button type="submit" disabled="disabled" class="btn gl-button btn-confirm">
+				<span class="gl-button-text">Comment</span>
+			</button>
+			<div class="gl-new-dropdown">
+				<button
+					type="button"
+					role="combobox"
+					disabled="disabled"
+					aria-controls="base-dropdown-comment-type"
+					aria-expanded="false"
+					aria-haspopup="listbox"
+					aria-labelledby="dropdown-toggle-comment-type"
+					data-testid="base-dropdown-toggle"
+					class="btn gl-button btn-confirm gl-new-dropdown-toggle"
+				>
+					<span class="gl-button-text">
+						<span
+							id="dropdown-toggle-comment-type"
+							data-testid="base-dropdown-span"
+							class="gl-new-dropdown-button-text gl-sr-only"
+						>
+							Comment type
+						</span>
+					</span>
+				</button>
+				<div class="gl-new-dropdown-container">
+					<div
+						id="base-dropdown-comment-type"
+						data-testid="base-dropdown-menu"
+						class="gl-new-dropdown-panel"
+					>
+						<div class="gl-new-dropdown-inner">
+							<ul
+								id="listbox-comment-type"
+								role="listbox"
+								tabindex="0"
+								aria-labelledby="dropdown-toggle-comment-type"
+								class="gl-new-dropdown-contents"
+							>
+								<li aria-hidden="true" data-testid="top-scrim" class="top-scrim-wrapper"></li>
+								<li
+									id="listbox-item-comment-type-comment"
+									role="option"
+									tabindex="-1"
+									aria-selected="true"
+									data-testid="listbox-item-comment"
+									class="gl-new-dropdown-item"
+								>
+									<span class="gl-new-dropdown-item-content">
+										<svg
+											role="img"
+											aria-hidden="true"
+											data-testid="dropdown-item-checkbox"
+											class="gl-new-dropdown-item-check-icon"
+										>
+											<use href="#mobile-issue-close"></use>
+										</svg>
+										<span class="gl-new-dropdown-item-text-wrapper">
+											<div>
+												<strong>Comment</strong>
+												<p class="gl-m-0">Add a general comment to this merge request.</p>
+											</div>
+										</span>
+									</span>
+								</li>
+								<li
+									id="listbox-item-comment-type-discussion"
+									role="option"
+									tabindex="-1"
+									data-testid="listbox-item-discussion"
+									class="gl-new-dropdown-item"
+								>
+									<span class="gl-new-dropdown-item-content">
+										<svg
+											role="img"
+											aria-hidden="true"
+											data-testid="dropdown-item-checkbox"
+											class="gl-new-dropdown-item-check-icon gl-invisible"
+										>
+											<use href="#mobile-issue-close"></use>
+										</svg>
+										<span class="gl-new-dropdown-item-text-wrapper">
+											<div>
+												<strong>Start thread</strong>
+												<p class="gl-m-0">
+													Discuss a specific suggestion or question that needs to be resolved.
+												</p>
+											</div>
+										</span>
+									</span>
+								</li>
+								<li aria-hidden="true" data-testid="bottom-scrim" class="bottom-scrim-wrapper"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

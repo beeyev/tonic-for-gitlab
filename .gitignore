@@ -1,0 +1,24 @@
+/.idea
+/.vscode
+*_Zone.Identifier
+/.ignore
+/node_modules
+/.cache
+/dist
+/extensions
+/.playwright-mcp
+/.serena
+/.agents
+/.claude
+/.codex
+/.cursor
+/.opencode
+
+.mcp.json
+opencode.json
+
+# extension.js local session state
+.extension-js
+
+# APM dependencies
+apm_modules/

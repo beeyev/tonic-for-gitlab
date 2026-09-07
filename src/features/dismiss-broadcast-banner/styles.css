@@ -1,0 +1,4 @@
+[data-tonic-for-gitlab-broadcast-hidden] {
+	/* biome-ignore lint/complexity/noImportantStyles: GitLab author CSS must not override this owned hidden state. */
+	display: none !important;
+}

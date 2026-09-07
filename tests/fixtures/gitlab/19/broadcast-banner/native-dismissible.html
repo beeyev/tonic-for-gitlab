@@ -1,0 +1,43 @@
+<!--
+GitLab version: 19.2.2-ce.0
+Component: active natively dismissible broadcast banner
+Capture date: 2026-08-29
+Source type: independently minimized live local-lab DOM
+Sanitization: synthetic message text, broadcast identifier, cookie key, and expiry; asset digest
+reduced to a synthetic sprite name; native dismiss classes, data attributes, accessibility label,
+and icon contract retained; no credentials, tokens, external content, or executable scripts.
+Version difference: GitLab 19.2 adds rounded and overflow utility classes to the wrapper. The inner
+broadcast and native dismiss contracts are identical to GitLab 18.11.
+-->
+<div class="broadcast-wrapper gl-rounded-lg gl-overflow-hidden">
+	<div
+		class="gl-broadcast-message banner js-broadcast-notification-1 indigo"
+		data-broadcast-banner
+		data-testid="banner-broadcast-message"
+		role="alert"
+	>
+		<div class="gl-broadcast-message-content">
+			<div class="gl-broadcast-message-icon">
+				<svg class="s16" data-testid="bullhorn-icon">
+					<use href="/assets/icons-synthetic.svg#bullhorn"></use>
+				</svg>
+			</div>
+			<div class="gl-broadcast-message-text">
+				<h2 class="gl-sr-only">Admin message</h2>
+				<p>Tonic native dismissal probe</p>
+			</div>
+		</div>
+		<button
+			class="gl-button btn btn-icon btn-sm btn-default btn-default-tertiary gl-broadcast-message-dismiss js-dismiss-current-broadcast-notification"
+			aria-label="Close"
+			data-id="1"
+			data-expire-date="2099-01-01T00:00:00Z"
+			data-cookie-key="hide_broadcast_message_1"
+			type="button"
+		>
+			<svg class="s16 gl-icon gl-button-icon " data-testid="close-icon">
+				<use href="/assets/icons-synthetic.svg#close"></use>
+			</svg>
+		</button>
+	</div>
+</div>

@@ -1,0 +1,105 @@
+[data-tonic-for-gitlab-confirm-merge-request-dialog] {
+	box-sizing: border-box;
+	inline-size: min(32rem, calc(100vw - 2rem));
+	max-inline-size: none;
+	max-block-size: calc(100dvh - 2rem);
+	margin: auto;
+	padding: 0;
+	overflow: auto;
+	color: var(--gl-text-color-default, CanvasText);
+	font: inherit;
+	background: var(--gl-background-color-default, Canvas);
+	border: 1px solid var(--gl-border-color-default, ButtonBorder);
+	border-radius: 0.5rem;
+	box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 24%);
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog]:not([open]) {
+	display: none;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog]::backdrop {
+	background: rgb(0 0 0 / 48%);
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-panel] {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 1rem;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-panel] h2 {
+	margin: 0;
+	color: inherit;
+	font: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-description] {
+	max-inline-size: 65ch;
+	margin: 0;
+	color: var(--gl-text-color-subtle, GrayText);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions] {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	margin-block-start: 0.25rem;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions] button {
+	box-sizing: border-box;
+	min-block-size: 2rem;
+	padding: 0.375rem 0.75rem;
+	color: var(--gl-text-color-default, ButtonText);
+	font: inherit;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.25rem;
+	background: var(--gl-control-background-color-default, ButtonFace);
+	border: 1px solid var(--gl-control-border-color-default, ButtonBorder);
+	border-radius: 0.25rem;
+	cursor: pointer;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions] button:hover {
+	background: var(--gl-control-background-color-hover, ButtonFace);
+	border-color: var(--gl-control-border-color-hover, ButtonText);
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions]
+	button:focus-visible {
+	outline: 2px solid var(--gl-focus-ring-outer-color, Highlight);
+	outline-offset: 2px;
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions]
+	[data-tonic-for-gitlab-confirm-merge-request-continue] {
+	color: var(--gl-button-confirm-foreground-color-default, white);
+	background: var(--gl-button-confirm-background-color-default, #108548);
+	border-color: var(--gl-button-confirm-border-color-default, #108548);
+}
+
+[data-tonic-for-gitlab-confirm-merge-request-dialog-actions]
+	[data-tonic-for-gitlab-confirm-merge-request-continue]:hover {
+	background: var(--gl-button-confirm-background-color-hover, #217645);
+	border-color: var(--gl-button-confirm-border-color-hover, #217645);
+}
+
+@media (max-width: 30rem) {
+	[data-tonic-for-gitlab-confirm-merge-request-dialog-actions] {
+		flex-direction: column-reverse;
+	}
+
+	[data-tonic-for-gitlab-confirm-merge-request-dialog-actions] button {
+		inline-size: 100%;
+	}
+}

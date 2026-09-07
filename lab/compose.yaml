@@ -1,0 +1,161 @@
+name: tonic-lab
+
+# Local GitLab CE lab for manual and live-Chrome verification.
+# Two omnibus instances (all dependencies bundled) plus a one-shot seeder.
+# Everything is open on purpose: plain HTTP, fixed passwords, no SSH.
+
+x-gitlab: &gitlab
+  shm_size: 256m
+  # The image's own HEALTHCHECK exits 0 while `gitlab-healthcheck-rc` is missing,
+  # which is the whole early boot, so it cannot gate the seeder. Probe the app
+  # through nginx and require the published admin token instead.
+  healthcheck:
+    test:
+      - CMD-SHELL
+      - test -f "$${LAB_TOKEN_FILE}" && /opt/gitlab/embedded/bin/curl -fsS --max-time 10 -o /dev/null http://localhost/-/readiness
+    interval: 20s
+    timeout: 15s
+    retries: 20
+    start_period: 15m
+
+x-gitlab-env: &gitlab-env
+  # No SSH in the lab: seeding and verification go through HTTP only.
+  GITLAB_DISABLE_OPENSSH: "true"
+  # Keep `docker compose up` output readable; logs stay in the logs volume.
+  GITLAB_SKIP_TAIL_LOGS: "true"
+  # The lab needs no event-level product usage collection or delivery.
+  GITLAB_PRODUCT_USAGE_DATA_ENABLED: "false"
+  GITLAB_OMNIBUS_CONFIG: |
+    external_url ENV.fetch('LAB_EXTERNAL_URL')
+    # external_url carries the host-side port, so nginx would otherwise listen on
+    # it inside the container and break the published `<port>:80` mapping.
+    nginx['listen_port'] = 80
+    nginx['listen_https'] = false
+    # GitLab rejects weak passwords, including anything containing "password".
+    gitlab_rails['initial_root_password'] = 'Kestrel-Anchor-7413'
+    gitlab_rails['display_initial_root_password'] = false
+    gitlab_rails['usage_ping_enabled'] = false
+    gitlab_rails['usage_ping_generation_enabled'] = false
+    # The image has no MTA, and GitLab defaults to sendmail delivery, so every
+    # notification email fails with Errno::ENOENT and burns three Sidekiq retries.
+    gitlab_rails['gitlab_email_enabled'] = false
+    # Covers Prometheus itself, Alertmanager and every exporter, so the
+    # individual exporter keys are redundant.
+    prometheus_monitoring['enable'] = false
+    gitlab_kas['enable'] = false
+    registry['enable'] = false
+    gitlab_pages['enable'] = false
+    # Single-mode Puma: one process instead of a master plus workers. Costs
+    # throughput and gives up phased restart and the memory killers, both
+    # irrelevant for a throwaway lab.
+    puma['worker_processes'] = 0
+    puma['min_threads'] = 1
+    puma['max_threads'] = 4
+    puma['exporter_enabled'] = false
+    sidekiq['concurrency'] = 5
+    sidekiq['metrics_enabled'] = false
+    sidekiq['health_checks_enabled'] = false
+    nginx['worker_processes'] = 1
+    postgresql['shared_buffers'] = "128MB"
+    postgresql['max_connections'] = 100
+    postgresql['max_worker_processes'] = 4
+    # Storage-backed features the lab never exercises. Off means no directories,
+    # no background workers and no UI entry points for them.
+    gitlab_rails['artifacts_enabled'] = false
+    gitlab_rails['lfs_enabled'] = false
+    gitlab_rails['packages_enabled'] = false
+    gitlab_rails['dependency_proxy_enabled'] = false
+    gitlab_rails['terraform_state_enabled'] = false
+    gitlab_rails['ci_secure_files_enabled'] = false
+    # Seeded projects only need issues and merge requests.
+    gitlab_rails['gitlab_default_projects_features_builds'] = false
+    gitlab_rails['gitlab_default_projects_features_wiki'] = false
+    gitlab_rails['gitlab_default_projects_features_snippets'] = false
+    gitlab_rails['gitlab_default_projects_features_container_registry'] = false
+  # Drop the previous token before services start, so the seeder can never
+  # pick up a stale one from an earlier run.
+  # `$$` keeps the variable for the container shell instead of Compose interpolation.
+  GITLAB_PRE_RECONFIGURE_SCRIPT: |
+    rm -f "$${LAB_TOKEN_FILE}"
+  # Mint a fresh admin token for the seeder and publish it on the shared volume.
+  # `gitlab-rails runner` drops to the `git` user, which cannot write to the
+  # root-owned volume, so it only prints the token and the hook shell stores it.
+  # Retried rather than attempted once: after an unclean host shutdown Postgres
+  # is still in crash recovery when this hook runs, `gitlab-rails runner` dies on
+  # "the database system is starting up", and a single attempt takes the whole
+  # container down for a condition that clears itself in under a minute. Nothing
+  # then self-heals, because the next start repeats the same race.
+  GITLAB_POST_RECONFIGURE_SCRIPT: |
+    attempt=0
+    token=""
+    while [ -z "$$token" ] && [ "$$attempt" -lt 30 ]; do
+      attempt=$$((attempt + 1))
+      token=$$(gitlab-rails runner '
+        user = User.find_by_username("root")
+        user.personal_access_tokens.where(name: "lab-seed").find_each(&:revoke!)
+        created = user.personal_access_tokens.create!(
+          name: "lab-seed",
+          scopes: ["api", "sudo"],
+          expires_at: 300.days.from_now
+        )
+        puts "LAB_TOKEN=#{created.token}"
+      ' | sed -n 's/^LAB_TOKEN=//p')
+      if [ -z "$$token" ]; then
+        echo "lab: admin token not minted yet, attempt $$attempt of 30"
+        sleep 10
+      fi
+    done
+    test -n "$$token"
+    printf '%s' "$$token" > "$${LAB_TOKEN_FILE}"
+
+services:
+  gitlab-18:
+    <<: *gitlab
+    image: gitlab/gitlab-ce:18.11.9-ce.0
+    environment:
+      <<: *gitlab-env
+      LAB_EXTERNAL_URL: http://localhost:10018
+      LAB_TOKEN_FILE: /lab/token-18
+    ports:
+      - "10018:80"
+    volumes:
+      - gitlab-18-config:/etc/gitlab
+      - gitlab-18-data:/var/opt/gitlab
+      - gitlab-18-logs:/var/log/gitlab
+      - tokens:/lab
+
+  gitlab-19:
+    <<: *gitlab
+    image: gitlab/gitlab-ce:19.2.2-ce.0
+    environment:
+      <<: *gitlab-env
+      LAB_EXTERNAL_URL: http://localhost:10019
+      LAB_TOKEN_FILE: /lab/token-19
+    ports:
+      - "10019:80"
+    volumes:
+      - gitlab-19-config:/etc/gitlab
+      - gitlab-19-data:/var/opt/gitlab
+      - gitlab-19-logs:/var/log/gitlab
+      - tokens:/lab
+
+  seed:
+    image: oven/bun:1.3.14-alpine
+    depends_on:
+      gitlab-18:
+        condition: service_healthy
+      gitlab-19:
+        condition: service_healthy
+    volumes:
+      - ./seed.ts:/seed.ts:ro
+      - tokens:/lab:ro
+    command: ["bun", "/seed.ts"]
+
+volumes:
+  gitlab-18-config:
+  gitlab-18-data:
+  gitlab-18-logs:
+  gitlab-19-config:
+  gitlab-19-data:
+  gitlab-19-logs:
+  tokens:

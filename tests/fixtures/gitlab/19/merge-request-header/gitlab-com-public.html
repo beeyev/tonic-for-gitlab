@@ -1,0 +1,39 @@
+<!--
+GitLab version: GitLab.com deployment observed on 2026-09-04; exact build not exposed
+GitLab surface: GitLab.com merge request detail header, signed out
+Page: https://gitlab.com/gitlab-org/ci-cd/gitlab-ci-skill/-/merge_requests/2
+Page identifier: projects:merge_requests:show
+Capture date: 2026-09-04
+Source type: independently minimized live hydrated GitLab.com DOM, checked against official master source
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/master/app/views/projects/merge_requests/_mr_title.html.haml
+Sanitization: synthetic namespace and title; dropdown contents, generated IDs, Rapid Diffs contents,
+and unrelated controls removed; no executable scripts. Retained placement wrappers, test IDs,
+button structure, and the observed GitLab SVG sprite URL.
+-->
+<div class="detail-page-header is-merge-request">
+	<h1 data-testid="title-content">Improve project presentation</h1>
+	<div class="gl-flex gl-flex-row gl-gap-3 gl-w-full js-issuable-actions @sm/panel:gl-w-auto">
+		<div class="!gl-hidden" id="js-rapid-diffs-toggle"></div>
+		<div class="gl-flex-1">
+			<div
+				class="gl-disclosure-dropdown gl-w-full gl-align-top gl-leading-normal gl-new-dropdown"
+				data-testid="mr-code-dropdown"
+			>
+				<button
+					data-testid="base-dropdown-toggle"
+					aria-expanded="false"
+					type="button"
+					class="btn gl-button btn-default btn-md gl-w-full @sm/panel:gl-w-auto gl-new-dropdown-toggle"
+				>
+					<span class="gl-button-text">Code</span>
+					<svg data-testid="chevron-down-icon" aria-hidden="true" class="gl-button-icon gl-icon s16">
+						<use href="/assets/icons-744c96d42bcc6345fdb1c870432a980c5f983ed177df344a4a5f94b625ac4ce8.svg#chevron-down"></use>
+					</svg>
+				</button>
+			</div>
+		</div>
+		<button class="gl-button btn btn-md btn-default btn-icon gl-h-fit gutter-toggle" type="button">
+			<span class="gl-sr-only">Expand sidebar</span>
+		</button>
+	</div>
+</div>

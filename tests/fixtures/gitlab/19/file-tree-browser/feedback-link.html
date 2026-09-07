@@ -1,0 +1,57 @@
+<!--
+GitLab version: 19.1.4-ee
+Surface: Repository file tree browser on a blob page, with the "Provide feedback" link rendered as a
+fixed-position sibling of the panel, which is how 19.1 places it. 19.2 removed the link entirely, so
+the version baseline of the other 19 fixtures cannot carry this contract.
+Source type: independently reconstructed 2026-08-31 from the official v19.1.4-ee
+`app/views/projects/blob/show.html.haml`, `file_tree_browser.vue`, and `tree_list.vue` post-mount
+contract
+Sanitization: component state, Vue bindings, layout utility classes including the link's own
+fixed-position utilities, tracking attributes, icon sprite references, resizer internals, and all but
+one file tree row removed; the sibling file content is reduced to a single external link that
+carries the same icon; no executable scripts
+-->
+<div class="navigation-root">
+	<div class="gl-relative">
+		<!--
+		The peek-mode overlay, a `v-if` sibling rendered before the panel in all of
+		18.7 through 19.1. It precedes the panel, so the following-sibling selector
+		this feature observes must not match it.
+		-->
+		<div class="file-tree-browser-overlay" data-testid="overlay"></div>
+		<div class="file-tree-browser file-tree-browser-responsive">
+			<div class="drag-handle"></div>
+			<section aria-labelledby="tree-list-heading">
+				<h3 id="tree-list-heading">Files</h3>
+				<nav aria-label="File tree">
+					<ul role="tree">
+						<li role="treeitem" aria-level="1">
+							<a href="/example/project/-/blob/main/versions.tf">versions.tf</a>
+						</li>
+					</ul>
+				</nav>
+			</section>
+		</div>
+		<a
+			rel="noopener noreferrer"
+			target="_blank"
+			href="https://gitlab.com/gitlab-org/gitlab/-/issues/581271"
+			class="btn gl-button btn-default btn-md"
+		>
+			<svg data-testid="comment-dots-icon" role="img" aria-hidden="true"></svg>
+			<span class="gl-button-text">Provide feedback</span>
+		</a>
+	</div>
+	<div id="tree-holder">
+		<!--
+		The rendered file content, a sibling of the browser's Vue root rather than a
+		descendant. It carries an external link with the same icon so a resolution
+		scope that widened past the Vue root, or a mutation selector that reached
+		the content, would be caught by a test rather than shipped.
+		-->
+		<a rel="noopener noreferrer" target="_blank" href="https://docs.gitlab.com/">
+			<svg data-testid="comment-dots-icon" role="img" aria-hidden="true"></svg>
+			<span>Docs</span>
+		</a>
+	</div>
+</div>

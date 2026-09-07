@@ -1,0 +1,141 @@
+<!--
+GitLab version: 19 master, whose job log top bar and section header markup is identical to 18.11.9-ee
+Surface: CI job detail page (`/-/jobs/:id`), the job log top bar search box and icon button group,
+and two section-header log lines
+Source type: independently reconstructed 2026-09-06 from the official
+`ci/job_details/components/log/job_log_top_bar.vue`, `log.vue`, and `line_header.vue` post-mount
+contract recorded for this change; not copied from any other project
+Sanitization: component state, Vue bindings, tooltip directives, job output, line numbers beyond
+two placeholders, and every icon sprite fragment removed or replaced with a placeholder; the search
+box keeps only its `GlSearchBoxByClick` wrapper attribute and its input, with the clear and submit
+controls and their icons removed; the sprite path carries a placeholder digest; no executable
+scripts
+-->
+<div class="top-bar js-job-log-top-bar">
+	<div class="gl-flex gl-flex-wrap gl-gap-3">
+		<div class="gl-search-box-by-click gl-w-30 gl-grow gl-flex-nowrap" data-testid="job-log-search-box">
+			<input
+				type="search"
+				class="gl-form-input form-control"
+				placeholder="Search visible log output"
+				aria-label="Search visible log output"
+			/>
+		</div>
+		<div class="gl-flex gl-gap-2">
+			<div title="Scroll to previous failure">
+				<button
+					type="button"
+					data-testid="job-scroll-to-prev-btn"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Scroll to previous failure"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+			<div title="Scroll to next failure">
+				<button
+					type="button"
+					data-testid="job-scroll-to-next-btn"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Scroll to next failure"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+			<!--
+			The raw log link is the one group child that is not wrapped, so an
+			insertion rule that assumes a uniform wrapper would be wrong here.
+			-->
+			<a
+				data-testid="job-raw-link-controller"
+				class="btn gl-button btn-default btn-md btn-icon"
+				href="/example/project/-/jobs/1/raw"
+				aria-label="Show complete raw"
+			>
+				<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+					<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+				</svg>
+			</a>
+			<div title="Scroll to first failure">
+				<button
+					type="button"
+					data-testid="job-top-bar-scroll-to-failure"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Scroll to first failure"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+			<div title="Scroll to top">
+				<button
+					type="button"
+					data-testid="job-top-bar-scroll-top"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Scroll to top"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+			<div title="Scroll to bottom">
+				<button
+					type="button"
+					data-testid="job-top-bar-scroll-bottom"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Scroll to bottom"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+			<div title="Show full screen">
+				<button
+					type="button"
+					data-testid="job-top-bar-enter-fullscreen"
+					class="btn gl-button btn-default btn-md btn-icon"
+					aria-label="Show full screen"
+				>
+					<svg class="gl-button-icon gl-icon s16 gl-fill-current" role="img" aria-hidden="true">
+						<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#icon"></use>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+The rendered log is flat. A closed section contributes only its own header, so
+the headers of any sections nested inside it are absent from the document until
+that parent is opened.
+-->
+<code class="job-log d-block" data-testid="job-log-content">
+	<div role="button" class="js-log-line job-log-line-header job-log-line">
+		<svg data-testid="chevron-lg-down-icon" class="arrow gl-absolute gl-top-2 gl-icon s16 gl-fill-current">
+			<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#chevron-lg-down"></use>
+		</svg>
+		<a id="L1" href="#L1" class="job-log-line-number">1</a>
+		<span class="job-log-time">00:00:00</span>
+		<span class="job-log-line-content">open section</span>
+	</div>
+	<div class="js-log-line job-log-line">
+		<a id="L2" href="#L2" class="job-log-line-number">2</a>
+		<span class="job-log-time">00:00:00</span>
+		<span class="job-log-line-content">line inside the open section</span>
+	</div>
+	<div role="button" class="js-log-line job-log-line-header job-log-line">
+		<svg data-testid="chevron-lg-right-icon" class="arrow gl-absolute gl-top-2 gl-icon s16 gl-fill-current">
+			<use href="/assets/icons-0000000000000000000000000000000000000000000000000000000000000000.svg#chevron-lg-right"></use>
+		</svg>
+		<a id="L3" href="#L3" class="job-log-line-number">3</a>
+		<span class="job-log-time">00:00:00</span>
+		<span class="job-log-line-content">closed section</span>
+	</div>
+</code>

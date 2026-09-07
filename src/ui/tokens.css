@@ -1,0 +1,84 @@
+/*
+ * Semantic tokens shared by both extension-owned surfaces.
+ *
+ * The in-page control panel renders inside a `ShadowRoot`, where `:host` is the
+ * token carrier and `:root` matches nothing. The toolbar action renders in its
+ * own document, where the reverse is true. One declaration list therefore serves
+ * both, and neither surface can drift from the other's palette.
+ *
+ * Dark selection is an explicit `data-tonic-theme` state, not a media query, so
+ * the two surfaces can choose their own trigger for it: the in-page panel maps
+ * GitLab's `gl-dark` class, and the toolbar action follows `prefers-color-scheme`
+ * until an explicit extension theme preference exists.
+ */
+
+:host,
+:root {
+	--background: oklch(0.99 0.003 247);
+	--foreground: oklch(0.21 0.02 248);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.21 0.02 248);
+	--primary: oklch(0.43 0.1 175);
+	--primary-foreground: oklch(0.99 0.004 175);
+	--muted: oklch(0.96 0.008 247);
+	--muted-foreground: oklch(0.47 0.025 248);
+	--secondary: oklch(0.95 0.008 247);
+	--secondary-foreground: oklch(0.27 0.02 248);
+	--destructive: oklch(0.52 0.19 27);
+	--warning: oklch(0.55 0.14 70);
+	--border: oklch(0.88 0.015 247);
+	/*
+	 * In the light map this is consumed only by the unchecked switch track. At
+	 * the shadcn default lightness the off state measured 1.58:1 against its own
+	 * thumb and 1.63:1 against the popup surface, so neither the control nor its
+	 * position indicator met the 3:1 in WCAG 1.4.11 and the off switch read as a
+	 * blank pill. This value measures 3.26:1 and 3.35:1. The dark map needs no
+	 * such change: its off thumb already measures 8.48:1 against the track.
+	 */
+	--input: oklch(0.64 0.02 247);
+	--ring: oklch(0.54 0.11 175);
+	--radius: 0.5rem;
+	color-scheme: light;
+}
+
+:host([data-tonic-theme="dark"]),
+:root[data-tonic-theme="dark"] {
+	--background: oklch(0.19 0.018 248);
+	--foreground: oklch(0.95 0.008 247);
+	--popover: oklch(0.23 0.02 248);
+	--popover-foreground: oklch(0.95 0.008 247);
+	--primary: oklch(0.72 0.11 175);
+	--primary-foreground: oklch(0.18 0.035 175);
+	--muted: oklch(0.28 0.02 248);
+	--muted-foreground: oklch(0.75 0.02 247);
+	--secondary: oklch(0.28 0.02 248);
+	--secondary-foreground: oklch(0.93 0.01 247);
+	--destructive: oklch(0.71 0.17 24);
+	--warning: oklch(0.8 0.13 80);
+	--border: oklch(0.36 0.025 248);
+	--input: oklch(0.42 0.03 248);
+	--ring: oklch(0.72 0.11 175);
+	color-scheme: dark;
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-destructive: var(--destructive);
+	--color-warning: var(--warning);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}

@@ -1,0 +1,76 @@
+<!-- biome-ignore-all lint/a11y/useFocusableInteractive: captured GitLab markup, reproduced as observed -->
+<!-- biome-ignore-all lint/a11y/useSemanticElements: captured GitLab markup, reproduced as observed -->
+<!--
+GitLab version: 19.2.2-ce.0
+Page: authenticated personal merge request dashboard
+Page identifier: dashboard:merge_requests
+Capture date: 2026-08-21
+Source type: independently minimized live local-lab DOM
+Sanitization: synthetic namespace, title, reference, and author; asset URLs, Vue scope attributes, and unrelated controls removed; no executable scripts
+-->
+<main id="content-body">
+	<div
+		data-testid="merge-request-dashboard-tab"
+		role="tabpanel"
+		aria-hidden="false"
+	>
+		<section data-testid="merge-request-dashboard-list">
+			<div data-testid="crud-body">
+				<div role="row" data-testid="merge-request">
+					<div role="cell">
+						<span data-testid="merge-request-status-badge">Draft</span>
+					</div>
+					<div role="cell">
+						<a href="/example/project/-/merge_requests/1">
+							<span>Draft: Improve dashboard presentation</span>
+						</a>
+						<div>
+							example/project!1
+							<a
+								class="js-user-link"
+								data-user-id="19001"
+								data-username="current.user"
+								href="/current.user"
+							>
+								<span>Current User</span>
+							</a>
+						</div>
+					</div>
+					<div role="cell"></div>
+					<div role="cell"></div>
+					<div role="cell"></div>
+				</div>
+			</div>
+		</section>
+		<section data-testid="merge-request-dashboard-list">
+			<div data-testid="crud-body">
+				<div data-testid="crud-empty">No merge requests</div>
+			</div>
+		</section>
+	</div>
+	<div
+		data-testid="merge-request-dashboard-tab"
+		role="tabpanel"
+		aria-hidden="true"
+		style="display: none"
+	>
+		<section data-testid="merge-request-dashboard-list">
+			<div data-testid="crud-body">
+				<div role="row" data-testid="merge-request">
+					<div role="cell"></div>
+					<div role="cell">
+						<a href="/example/project/-/merge_requests/99">Hidden tab decoy</a>
+						<a
+							class="js-user-link"
+							data-user-id="19999"
+							data-username="hidden.user"
+							href="/hidden.user"
+						>
+							<span>Hidden User</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</main>

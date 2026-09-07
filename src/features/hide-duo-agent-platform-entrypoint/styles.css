@@ -1,0 +1,5 @@
+[data-tonic-for-gitlab-hidden-duo-agent-platform-entrypoint],
+[data-tonic-for-gitlab-hidden-duo-agent-platform-rail] {
+	/* biome-ignore lint/complexity/noImportantStyles: GitLab author CSS must not override this owned hidden state. */
+	display: none !important;
+}

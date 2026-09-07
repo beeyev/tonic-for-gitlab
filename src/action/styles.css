@@ -1,0 +1,98 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+/*
+ * Same reason as the control-panel entry: automatic source detection roots at
+ * the repository and harvests class names out of markdown and skill files.
+ */
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "../ui/tokens.css";
+/*
+ * Action only: resolves the dark palette from the OS preference before script
+ * runs. `color-scheme.ts` still sets the explicit state afterwards, which is
+ * what `dark:` utilities and a future in-extension theme preference key on.
+ */
+@import "../ui/tokens-preferred-dark.css";
+
+@source "./";
+/*
+ * Only these are shared with the control panel. Sourcing the whole component
+ * directory would emit every shadcn variant class into a popup that renders
+ * none of them.
+ */
+@source "../ui/components/icons.tsx";
+@source "../ui/components/button.tsx";
+@source "../ui/components/input.tsx";
+
+/*
+ * The action document has no GitLab page to follow, so the dark state comes
+ * from `prefers-color-scheme`, applied to the root element as an attribute so
+ * both surfaces share one token map. See `color-scheme.ts`.
+ */
+@custom-variant dark (:root[data-tonic-theme="dark"] &);
+
+@layer base {
+	*,
+	::before,
+	::after {
+		border-color: var(--border);
+		outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+	}
+
+	body {
+		/*
+		 * A browser action popup is sized by its content. Fixing the width keeps
+		 * the popup from resizing between status states.
+		 */
+		width: 20rem;
+		color: var(--foreground);
+		background: var(--background);
+		font-family:
+			ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			sans-serif;
+		font-size: var(--text-sm);
+		line-height: var(--text-sm--line-height);
+	}
+}
+
+@layer components {
+	/*
+	 * Marks the configured instance the current tab belongs to. The dot is
+	 * decoration: the row also states "Active on this tab" in text, so the
+	 * meaning survives without colour and without motion.
+	 *
+	 * The ring is a pseudo-element rather than an animation on the dot itself,
+	 * so the solid marker stays fully opaque while the ring expands out of it.
+	 */
+	.tonic-active-dot {
+		position: relative;
+	}
+
+	.tonic-active-dot::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: calc(infinity * 1px);
+		background: var(--primary);
+		animation: tonic-active-pulse 2s ease-out infinite;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tonic-active-dot::after {
+			display: none;
+		}
+	}
+}
+
+@keyframes tonic-active-pulse {
+	from {
+		opacity: 0.55;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(2.6);
+	}
+}

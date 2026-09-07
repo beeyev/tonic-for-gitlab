@@ -1,0 +1,66 @@
+<!-- biome-ignore-all lint/a11y/useValidAnchor: captured GitLab markup, reproduced as observed -->
+<!-- biome-ignore-all lint/a11y/noNoninteractiveElementToInteractiveRole: captured GitLab markup, reproduced as observed -->
+<!--
+GitLab version: 18.11.11 filtered-search bar; 18.11.9-ce.0 authenticated current-user link
+Component: authenticated current-user link, project merge request list navigation, state tabs, and filtered search bar
+Capture date: filtered-search bar 2026-08-19; authenticated current-user link 2026-08-28
+Source type: independently minimized live signed-out DOM observed on a public self-managed instance, plus the authenticated current-user link observed in the local lab
+Sanitization: synthetic namespace, project path, and host; row and label text replaced; counts removed; no executable scripts
+-->
+<aside class="super-sidebar">
+	<a
+		data-testid="nav-item-link"
+		class="super-sidebar-nav-item"
+		href="/example/project/-/merge_requests"
+		>Merge requests</a
+	>
+	<a
+		data-testid="nav-item-link"
+		class="super-sidebar-nav-item"
+		href="/example/project/-/issues"
+		>Issues</a
+	>
+</aside>
+<nav class="gl-breadcrumbs">
+	<li class="gl-breadcrumb-item">
+		<a href="/example/project/-/merge_requests?state=all&amp;label_name%5B%5D=Bug"
+			>Merge requests</a
+		>
+	</li>
+</nav>
+<main id="content-body">
+	<a data-testid="user-menu-toggle" href="/current.user">Current user menu</a>
+	<ul class="nav-links gl-tabs-nav" role="tablist">
+		<li><a role="tab" class="nav-link active" href="#"><span data-testid="opened-issuables-tab">Open</span></a></li>
+		<li><a role="tab" class="nav-link" href="#"><span data-testid="merged-issuables-tab">Merged</span></a></li>
+		<li><a role="tab" class="nav-link" href="#"><span data-testid="closed-issuables-tab">Closed</span></a></li>
+		<li><a role="tab" class="nav-link" href="#"><span data-testid="all-issuables-tab">All</span></a></li>
+	</ul>
+	<div class="vue-filtered-search-bar-container">
+		<div data-testid="issuable-search-container">
+			<input data-testid="filtered-search-input" />
+			<button data-testid="filtered-search-clear-button" type="button">Clear</button>
+		</div>
+	</div>
+	<div class="issuable-list-container">
+		<ul class="content-list issuable-list issues-list">
+			<li id="issuable_1801" class="issue merge-request">
+				<div class="issuable-main-info">
+					<div class="issue-title title">
+						<a class="issue-title-text" href="/example/project/-/merge_requests/1"
+							>Improve legacy presentation</a
+						>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="gl-keyset-pagination">
+		<button data-testid="prevButton" type="button">Previous</button>
+		<button data-testid="nextButton" type="button">Next</button>
+	</div>
+</main>
+<a class="gl-new-dropdown-item-content" href="/example/project/-/merge_requests.atom"
+	>Subscribe to RSS feed</a
+>
+<a href="https://other.example.com/example/project/-/merge_requests">Other instance</a>

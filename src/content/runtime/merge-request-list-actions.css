@@ -1,0 +1,52 @@
+/*
+ * Independent merge request list actions share one row under GitLab's filter
+ * bar. It owns the layout and the quiet control treatment shared by independent
+ * features. Semantic GitLab properties keep it readable in either page theme.
+ */
+[data-tonic-for-gitlab-merge-request-list-actions] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-block-start: 0.5rem;
+	font-size: 0.75rem;
+	line-height: 1.25rem;
+	color: var(--gl-text-color-subtle, inherit);
+}
+
+/*
+ * List actions stay quieter than GitLab's Search and Clear controls above them.
+ * The shared reset keeps anchors and buttons visually identical while retaining
+ * native link and button semantics. The 24px block size meets WCAG 2.2 target
+ * size requirements and remains usable when the row wraps on a narrow viewport.
+ */
+[data-tonic-for-gitlab-merge-request-list-action-control] {
+	display: inline-flex;
+	align-items: center;
+	min-block-size: 1.5rem;
+	padding: 0.125rem 0.375rem;
+	border: 0;
+	border-radius: 0.25rem;
+	background: none;
+	font: inherit;
+	color: var(--gl-text-color-link, inherit);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+[data-tonic-for-gitlab-merge-request-list-action-control]:is(
+	:hover,
+	:focus-visible
+) {
+	background-color: color-mix(
+		in oklab,
+		var(--gl-background-color-strong) 60%,
+		transparent
+	);
+	text-decoration: none;
+}
+
+[data-tonic-for-gitlab-merge-request-list-action-control]:focus-visible {
+	outline: 2px solid var(--gl-focus-ring-outer-color, currentColor);
+	outline-offset: 1px;
+}

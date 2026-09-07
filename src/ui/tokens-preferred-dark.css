@@ -1,0 +1,42 @@
+/*
+ * The dark map again, selected by the OS preference instead of by the explicit
+ * `data-tonic-theme` state.
+ *
+ * Only the toolbar action imports this. That surface has no GitLab page to take
+ * a theme from, so its dark state is resolved by script, and script runs after
+ * the render-blocking stylesheet: without this the popup paints its light
+ * palette on a dark desktop until the first frame after the bundle executes.
+ * The in-page panel must not have it, because there the OS preference says
+ * nothing about the GitLab theme the panel has to match.
+ *
+ * The duplication is deliberate and guarded: `styles.test.ts` fails when these
+ * declarations stop matching the dark block in `tokens.css`. CSS has no way to
+ * apply one declaration list under both a selector and a media query, and the
+ * alternative, leaving the popup's dark palette entirely to script, loses it
+ * whenever script has not run yet.
+ */
+
+@media (prefers-color-scheme: dark) {
+	/*
+	 * An explicit light state still wins, so a future in-extension theme
+	 * preference does not have to fight the OS.
+	 */
+	:root:not([data-tonic-theme="light"]) {
+		--background: oklch(0.19 0.018 248);
+		--foreground: oklch(0.95 0.008 247);
+		--popover: oklch(0.23 0.02 248);
+		--popover-foreground: oklch(0.95 0.008 247);
+		--primary: oklch(0.72 0.11 175);
+		--primary-foreground: oklch(0.18 0.035 175);
+		--muted: oklch(0.28 0.02 248);
+		--muted-foreground: oklch(0.75 0.02 247);
+		--secondary: oklch(0.28 0.02 248);
+		--secondary-foreground: oklch(0.93 0.01 247);
+		--destructive: oklch(0.71 0.17 24);
+		--warning: oklch(0.8 0.13 80);
+		--border: oklch(0.36 0.025 248);
+		--input: oklch(0.42 0.03 248);
+		--ring: oklch(0.72 0.11 175);
+		color-scheme: dark;
+	}
+}

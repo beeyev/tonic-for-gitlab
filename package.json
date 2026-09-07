@@ -1,0 +1,44 @@
+{
+	"name": "tonic-for-gitlab",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": "https://github.com/beeyev/tonic-for-gitlab",
+	"type": "module",
+	"packageManager": "bun@1.4.2",
+	"scripts": {
+		"dev:chrome": "extension dev --browser chrome",
+		"browsers:install": "TMPDIR=/tmp BUN_INSTALL_CACHE_DIR=.cache/bun extension install --browser chrome",
+		"browsers:where": "extension install --browser chrome --where --output json",
+		"format": "biome format --write .",
+		"fix": "biome check --write .",
+		"check": "biome check --error-on-warnings . && tsc --noEmit",
+		"test": "bun test --preload @happy-dom/global-registrator/register",
+		"build": "extension build --browser chrome && bun lab/extension/check-shipping-manifests.ts",
+		"verify": "bun run check && bun run test && bun run build"
+	},
+	"dependencies": {
+		"@base-ui/react": "1.8.0",
+		"class-variance-authority": "0.7.1",
+		"clsx": "2.1.1",
+		"react": "19.2.8",
+		"react-dom": "19.2.8",
+		"tailwind-merge": "3.6.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.12",
+		"@happy-dom/global-registrator": "20.14.0",
+		"@tailwindcss/postcss": "4.3.3",
+		"@testing-library/dom": "10.4.1",
+		"@testing-library/react": "16.3.3",
+		"@testing-library/user-event": "14.6.7",
+		"@types/bun": "1.4.1",
+		"@types/chrome": "0.2.9",
+		"@types/react": "19.2.18",
+		"@types/react-dom": "19.2.7",
+		"@webext-core/fake-browser": "2.0.1",
+		"extension": "4.1.14",
+		"happy-dom": "20.14.0",
+		"tailwindcss": "4.3.3",
+		"typescript": "7.0.2"
+	}
+}

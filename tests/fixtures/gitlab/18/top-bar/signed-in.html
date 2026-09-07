@@ -1,0 +1,12 @@
+<!-- GitLab 18.11 top bar, reconstructed 2026-08-16 from official v18.11.9-ee source.
+     `user_menu.vue` renders the toggle as `<gl-button :href="data.link_to_profile">`,
+     and GlButton renders an anchor whenever href is set, so the toggle is an <a>
+     with the profile path. The identity contract reads that href. -->
+<header class="js-super-topbar">
+	<div class="gl-flex gl-justify-end gl-gap-3">
+		<button type="button" data-testid="super-topbar-search-button-xs">Search</button>
+		<div class="user-menu">
+			<a data-testid="user-menu-toggle" href="/current.user">User menu</a>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,51 @@
+{
+	"$schema": "https://json.schemastore.org/chrome-manifest.json",
+	"manifest_version": 3,
+	"version": "0.1.0",
+	"name": "Tonic for GitLab",
+	"description": "Focused, configurable improvements for GitLab.",
+	"homepage_url": "https://github.com/beeyev/tonic-for-gitlab",
+	"icons": {
+		"16": "icons/icon16.png",
+		"32": "icons/icon32.png",
+		"48": "icons/icon48.png",
+		"64": "icons/icon64.png",
+		"96": "icons/icon96.png",
+		"128": "icons/icon128.png",
+		"256": "icons/icon256.png",
+		"512": "icons/icon512.png"
+	},
+	"permissions": ["storage", "scripting"],
+	"optional_host_permissions": ["http://*/*", "https://*/*"],
+	"content_scripts": [
+		{
+			"matches": ["https://gitlab.com:443/*"],
+			"js": ["content/index.ts"],
+			"css": [
+				"content/runtime/merge-request-list-actions.css",
+				"features/confirm-merge-request/styles.css",
+				"features/dim-draft-merge-requests/styles.css",
+				"features/dismiss-broadcast-banner/styles.css",
+				"features/hide-duo-agent-platform-entrypoint/styles.css",
+				"features/hide-file-tree-browser-feedback-button/styles.css",
+				"features/highlight-authored-merge-requests/styles.css",
+				"features/remember-merge-request-list-filters/styles.css"
+			],
+			"run_at": "document_idle"
+		}
+	],
+	"background": {
+		"service_worker": "background/index.ts"
+	},
+	"action": {
+		"default_icon": {
+			"16": "icons/icon16.png",
+			"19": "icons/icon19.png",
+			"24": "icons/icon24.png",
+			"32": "icons/icon32.png",
+			"38": "icons/icon38.png"
+		},
+		"default_popup": "action/index.html",
+		"default_title": "Tonic for GitLab"
+	}
+}

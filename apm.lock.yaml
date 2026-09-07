@@ -1,0 +1,4122 @@
+lockfile_version: '1'
+generated_at: '2026-09-06T11:00:15.347641+00:00'
+apm_version: 0.28.0
+dependencies:
+- repo_url: addyosmani/agent-skills
+  name: frontend-ui-engineering
+  host: github.com
+  resolved_commit: 48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a
+  version: unknown
+  virtual_path: skills/frontend-ui-engineering
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/frontend-ui-engineering
+  - .agents/skills/frontend-ui-engineering/SKILL.md
+  - .claude/skills/frontend-ui-engineering
+  - .claude/skills/frontend-ui-engineering/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/frontend-ui-engineering/SKILL.md: sha256:2b74ac4862be3902ec918dceac9366a6fe83b9e003601c0deaf6be09c1766aca
+    .claude/skills/frontend-ui-engineering/SKILL.md: sha256:2b74ac4862be3902ec918dceac9366a6fe83b9e003601c0deaf6be09c1766aca
+  content_hash: sha256:cb4e981ecb5f701b451fc4e937a38049b49fd4523f213e06cffbd00b007060dc
+- repo_url: anthropics/skills
+  name: frontend-design
+  host: github.com
+  resolved_commit: 41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f
+  version: unknown
+  virtual_path: skills/frontend-design
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/frontend-design
+  - .agents/skills/frontend-design/LICENSE.txt
+  - .agents/skills/frontend-design/SKILL.md
+  - .claude/skills/frontend-design
+  - .claude/skills/frontend-design/LICENSE.txt
+  - .claude/skills/frontend-design/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/frontend-design/LICENSE.txt: sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594
+    .agents/skills/frontend-design/SKILL.md: sha256:d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3
+    .claude/skills/frontend-design/LICENSE.txt: sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594
+    .claude/skills/frontend-design/SKILL.md: sha256:d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3
+  content_hash: sha256:89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576
+- repo_url: extensiondev/skill
+  name: extension-dev
+  host: github.com
+  resolved_commit: 2e4a324110625869f4d5cc28194c2a88cbb14794
+  version: unknown
+  virtual_path: skills/extension-dev
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/extension-dev
+  - .agents/skills/extension-dev/SKILL.md
+  - .agents/skills/extension-dev/references/api-gotchas.md
+  - .agents/skills/extension-dev/references/cross-browser.md
+  - .agents/skills/extension-dev/references/debugging.md
+  - .agents/skills/extension-dev/references/project-structure.md
+  - .agents/skills/extension-dev/references/publishing.md
+  - .agents/skills/extension-dev/references/store-md.md
+  - .agents/skills/extension-dev/references/templates.md
+  - .claude/skills/extension-dev
+  - .claude/skills/extension-dev/SKILL.md
+  - .claude/skills/extension-dev/references/api-gotchas.md
+  - .claude/skills/extension-dev/references/cross-browser.md
+  - .claude/skills/extension-dev/references/debugging.md
+  - .claude/skills/extension-dev/references/project-structure.md
+  - .claude/skills/extension-dev/references/publishing.md
+  - .claude/skills/extension-dev/references/store-md.md
+  - .claude/skills/extension-dev/references/templates.md
+  deployed_file_hashes:
+    .agents/skills/extension-dev/SKILL.md: sha256:38c5e3f9b4d5fc46eb7560b8ba7773ade8c2b0af974ba471b3e0bf50bf373627
+    .agents/skills/extension-dev/references/api-gotchas.md: sha256:9edfe6752103983efc50fd218bbedfcf99adb66e6c0dbb6a7fa27b93aead28a3
+    .agents/skills/extension-dev/references/cross-browser.md: sha256:27582cdbfc48696457cd0f53e9adc580542188ec8f2852c8a4d312a395dc1bcd
+    .agents/skills/extension-dev/references/debugging.md: sha256:b76eb01816d954c152f140c4b746fd48fe31e684574f9eb6b7bcf76996b11f06
+    .agents/skills/extension-dev/references/project-structure.md: sha256:f00ce83261bcf8b79fabaa55e43a7a2b134dc79e3edcfac8cf166c7d52ebc546
+    .agents/skills/extension-dev/references/publishing.md: sha256:db3ed5119351a3748d12d3362973be39113efab122ba03b38db7559a656561e1
+    .agents/skills/extension-dev/references/store-md.md: sha256:0dbbd29959e4fc45b5533e7e26dc6095e68bb7f064832adcf5c33a25b62de674
+    .agents/skills/extension-dev/references/templates.md: sha256:2352e954565e480f3378521be9b7845fcf697f6eec3f43db0110a976922a635c
+    .claude/skills/extension-dev/SKILL.md: sha256:38c5e3f9b4d5fc46eb7560b8ba7773ade8c2b0af974ba471b3e0bf50bf373627
+    .claude/skills/extension-dev/references/api-gotchas.md: sha256:9edfe6752103983efc50fd218bbedfcf99adb66e6c0dbb6a7fa27b93aead28a3
+    .claude/skills/extension-dev/references/cross-browser.md: sha256:27582cdbfc48696457cd0f53e9adc580542188ec8f2852c8a4d312a395dc1bcd
+    .claude/skills/extension-dev/references/debugging.md: sha256:b76eb01816d954c152f140c4b746fd48fe31e684574f9eb6b7bcf76996b11f06
+    .claude/skills/extension-dev/references/project-structure.md: sha256:f00ce83261bcf8b79fabaa55e43a7a2b134dc79e3edcfac8cf166c7d52ebc546
+    .claude/skills/extension-dev/references/publishing.md: sha256:db3ed5119351a3748d12d3362973be39113efab122ba03b38db7559a656561e1
+    .claude/skills/extension-dev/references/store-md.md: sha256:0dbbd29959e4fc45b5533e7e26dc6095e68bb7f064832adcf5c33a25b62de674
+    .claude/skills/extension-dev/references/templates.md: sha256:2352e954565e480f3378521be9b7845fcf697f6eec3f43db0110a976922a635c
+  content_hash: sha256:f34e19e4e7956b249ca3520a0ab8abf46c6ba9a82daa6e0801fda95437d9f425
+- repo_url: pbakaus/impeccable
+  name: impeccable
+  host: github.com
+  resolved_commit: 831cabee8b4bc1a2b66e5ae22003e9a19b57d464
+  version: unknown
+  virtual_path: .agents/skills/impeccable
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/impeccable
+  - .agents/skills/impeccable/SKILL.md
+  - .agents/skills/impeccable/agents/impeccable_asset_producer.toml
+  - .agents/skills/impeccable/agents/impeccable_documenter.toml
+  - .agents/skills/impeccable/agents/impeccable_finish_reviewer.toml
+  - .agents/skills/impeccable/agents/impeccable_manual_edit_applier.toml
+  - .agents/skills/impeccable/agents/openai.yaml
+  - .agents/skills/impeccable/reference/adapt.md
+  - .agents/skills/impeccable/reference/adapt.native.md
+  - .agents/skills/impeccable/reference/android.md
+  - .agents/skills/impeccable/reference/animate.md
+  - .agents/skills/impeccable/reference/audit.md
+  - .agents/skills/impeccable/reference/audit.native.md
+  - .agents/skills/impeccable/reference/bolder.md
+  - .agents/skills/impeccable/reference/clarify.md
+  - .agents/skills/impeccable/reference/colorize.md
+  - .agents/skills/impeccable/reference/craft-floor.md
+  - .agents/skills/impeccable/reference/craft.md
+  - .agents/skills/impeccable/reference/critique.md
+  - .agents/skills/impeccable/reference/degraded/asset-producer.md
+  - .agents/skills/impeccable/reference/degraded/documenter.md
+  - .agents/skills/impeccable/reference/degraded/finish-reviewer.md
+  - .agents/skills/impeccable/reference/degraded/manual-edit-applier.md
+  - .agents/skills/impeccable/reference/delight.md
+  - .agents/skills/impeccable/reference/distill.md
+  - .agents/skills/impeccable/reference/doctor.md
+  - .agents/skills/impeccable/reference/document.md
+  - .agents/skills/impeccable/reference/extract.md
+  - .agents/skills/impeccable/reference/harden.md
+  - .agents/skills/impeccable/reference/hooks.md
+  - .agents/skills/impeccable/reference/init.md
+  - .agents/skills/impeccable/reference/ios.md
+  - .agents/skills/impeccable/reference/layout.md
+  - .agents/skills/impeccable/reference/live-setup.md
+  - .agents/skills/impeccable/reference/live.md
+  - .agents/skills/impeccable/reference/new-work.md
+  - .agents/skills/impeccable/reference/onboard.md
+  - .agents/skills/impeccable/reference/operate.md
+  - .agents/skills/impeccable/reference/optimize.md
+  - .agents/skills/impeccable/reference/overdrive.md
+  - .agents/skills/impeccable/reference/polish.md
+  - .agents/skills/impeccable/reference/quieter.md
+  - .agents/skills/impeccable/reference/routing.md
+  - .agents/skills/impeccable/reference/shape.md
+  - .agents/skills/impeccable/reference/typeset.md
+  - .agents/skills/impeccable/reference/visualize.md
+  - .agents/skills/impeccable/scripts/VERSION
+  - .agents/skills/impeccable/scripts/command-metadata.json
+  - .agents/skills/impeccable/scripts/data/font-index-failures.json
+  - .agents/skills/impeccable/scripts/data/font-index.json
+  - .agents/skills/impeccable/scripts/impeccable
+  - .agents/skills/impeccable/scripts/impeccable.cmd
+  - .agents/skills/impeccable/scripts/live-browser-dom.js
+  - .agents/skills/impeccable/scripts/live-browser-ignores.js
+  - .agents/skills/impeccable/scripts/live-browser-session.js
+  - .agents/skills/impeccable/scripts/live-browser.js
+  - .agents/skills/impeccable/scripts/modern-screenshot.umd.js
+  - .claude/skills/impeccable
+  - .claude/skills/impeccable/SKILL.md
+  - .claude/skills/impeccable/agents/impeccable_asset_producer.toml
+  - .claude/skills/impeccable/agents/impeccable_documenter.toml
+  - .claude/skills/impeccable/agents/impeccable_finish_reviewer.toml
+  - .claude/skills/impeccable/agents/impeccable_manual_edit_applier.toml
+  - .claude/skills/impeccable/agents/openai.yaml
+  - .claude/skills/impeccable/reference/adapt.md
+  - .claude/skills/impeccable/reference/adapt.native.md
+  - .claude/skills/impeccable/reference/android.md
+  - .claude/skills/impeccable/reference/animate.md
+  - .claude/skills/impeccable/reference/audit.md
+  - .claude/skills/impeccable/reference/audit.native.md
+  - .claude/skills/impeccable/reference/bolder.md
+  - .claude/skills/impeccable/reference/clarify.md
+  - .claude/skills/impeccable/reference/colorize.md
+  - .claude/skills/impeccable/reference/craft-floor.md
+  - .claude/skills/impeccable/reference/craft.md
+  - .claude/skills/impeccable/reference/critique.md
+  - .claude/skills/impeccable/reference/degraded/asset-producer.md
+  - .claude/skills/impeccable/reference/degraded/documenter.md
+  - .claude/skills/impeccable/reference/degraded/finish-reviewer.md
+  - .claude/skills/impeccable/reference/degraded/manual-edit-applier.md
+  - .claude/skills/impeccable/reference/delight.md
+  - .claude/skills/impeccable/reference/distill.md
+  - .claude/skills/impeccable/reference/doctor.md
+  - .claude/skills/impeccable/reference/document.md
+  - .claude/skills/impeccable/reference/extract.md
+  - .claude/skills/impeccable/reference/harden.md
+  - .claude/skills/impeccable/reference/hooks.md
+  - .claude/skills/impeccable/reference/init.md
+  - .claude/skills/impeccable/reference/ios.md
+  - .claude/skills/impeccable/reference/layout.md
+  - .claude/skills/impeccable/reference/live-setup.md
+  - .claude/skills/impeccable/reference/live.md
+  - .claude/skills/impeccable/reference/new-work.md
+  - .claude/skills/impeccable/reference/onboard.md
+  - .claude/skills/impeccable/reference/operate.md
+  - .claude/skills/impeccable/reference/optimize.md
+  - .claude/skills/impeccable/reference/overdrive.md
+  - .claude/skills/impeccable/reference/polish.md
+  - .claude/skills/impeccable/reference/quieter.md
+  - .claude/skills/impeccable/reference/routing.md
+  - .claude/skills/impeccable/reference/shape.md
+  - .claude/skills/impeccable/reference/typeset.md
+  - .claude/skills/impeccable/reference/visualize.md
+  - .claude/skills/impeccable/scripts/VERSION
+  - .claude/skills/impeccable/scripts/command-metadata.json
+  - .claude/skills/impeccable/scripts/data/font-index-failures.json
+  - .claude/skills/impeccable/scripts/data/font-index.json
+  - .claude/skills/impeccable/scripts/impeccable
+  - .claude/skills/impeccable/scripts/impeccable.cmd
+  - .claude/skills/impeccable/scripts/live-browser-dom.js
+  - .claude/skills/impeccable/scripts/live-browser-ignores.js
+  - .claude/skills/impeccable/scripts/live-browser-session.js
+  - .claude/skills/impeccable/scripts/live-browser.js
+  - .claude/skills/impeccable/scripts/modern-screenshot.umd.js
+  deployed_file_hashes:
+    .agents/skills/impeccable/SKILL.md: sha256:20b5c4d3c0f447f618a3317deb3283191d246ffb5597d72eb8f2bb41a62fc15e
+    .agents/skills/impeccable/agents/impeccable_asset_producer.toml: sha256:4a200cdc0bbe2ae0ee91d88d1f97dd0cfdc828bc32685eea14e86f5ebc82d966
+    .agents/skills/impeccable/agents/impeccable_documenter.toml: sha256:d5922228b571900e21a47855d7de9e081c2246fc9cec6c6235b1a6da31098896
+    .agents/skills/impeccable/agents/impeccable_finish_reviewer.toml: sha256:869fa5390b84bfd00d072f5280a9002ea3e3936edf5985241be641a87f03ff7b
+    .agents/skills/impeccable/agents/impeccable_manual_edit_applier.toml: sha256:6c9ce3e27ec4520ead001da3aad2a2ebba481c4e5cd22873db8890259ee579fe
+    .agents/skills/impeccable/agents/openai.yaml: sha256:cbd8bd68fa00935dd0f179adb169252629cf7ee443ea9dc7db77e7ef2cf77446
+    .agents/skills/impeccable/reference/adapt.md: sha256:bead87679caad7c537dd7c04c3bb78be56ac7eec279ad6aad7322f48ff2df2d9
+    .agents/skills/impeccable/reference/adapt.native.md: sha256:6acc0bf221a4ddc6e5c6438348920b2ca2393b29c4314dbde2cdc23f2b1a9639
+    .agents/skills/impeccable/reference/android.md: sha256:058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe
+    .agents/skills/impeccable/reference/animate.md: sha256:d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c
+    .agents/skills/impeccable/reference/audit.md: sha256:910461b1c1f8216155165955c860a884a1e2f557cb38f21ef512ea90ef6503c2
+    .agents/skills/impeccable/reference/audit.native.md: sha256:960cb922bc934adbf9192e9428ff6bec1f382038166f02a785939c93b7391067
+    .agents/skills/impeccable/reference/bolder.md: sha256:f964506c0fae87b3c2c1db7016ddc9be9ef970bbcf5548d684b997b5d5991586
+    .agents/skills/impeccable/reference/clarify.md: sha256:173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133
+    .agents/skills/impeccable/reference/colorize.md: sha256:bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9
+    .agents/skills/impeccable/reference/craft-floor.md: sha256:e802e4f7bdc89050a9c0f2ca506e1d493a2316e6e810c0336c57aa073717ef3e
+    .agents/skills/impeccable/reference/craft.md: sha256:9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c
+    .agents/skills/impeccable/reference/critique.md: sha256:cb8caddbb3919e5bf7f252143b519fb16db28a244642d937b186cb89962d9201
+    .agents/skills/impeccable/reference/degraded/asset-producer.md: sha256:fadd4a57ec67175230191b4a6d7415580ca24caf2fbfb359496ffec0f6442f50
+    .agents/skills/impeccable/reference/degraded/documenter.md: sha256:97a09e350c383cb2f6bba027b83bedffd12a23b1b439ad4a045a48953eb19365
+    .agents/skills/impeccable/reference/degraded/finish-reviewer.md: sha256:5f24c5a97b4ffcabc7c432b064cfdd04c7a2ad52f52e765be648dc0aadab8f38
+    .agents/skills/impeccable/reference/degraded/manual-edit-applier.md: sha256:5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58
+    .agents/skills/impeccable/reference/delight.md: sha256:098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c
+    .agents/skills/impeccable/reference/distill.md: sha256:ea8432c90c30ecb0426662a681ead5c0941113079704e1a766cda09e85b15b4f
+    .agents/skills/impeccable/reference/doctor.md: sha256:a98b397cedeeaa1da57f3395b3d9b6c1fc477f4247fb9dc13e4da3da588283ff
+    .agents/skills/impeccable/reference/document.md: sha256:3673248740bcdd1122ccc610093ba2fe52f3943a61ce0b7170b74dc49e5b6098
+    .agents/skills/impeccable/reference/extract.md: sha256:31b90048c0b540daec46762a10c2b6b6434737a89af005054d8b848d829d003b
+    .agents/skills/impeccable/reference/harden.md: sha256:b31ff29c7a1ea979c6d039f7e8d17007410697ab49536690dca109f0af3f20f8
+    .agents/skills/impeccable/reference/hooks.md: sha256:12fefe52d80d25014e5f7e2f9b278275a675653d3d99ae8f0ecf344cdb9abbe6
+    .agents/skills/impeccable/reference/init.md: sha256:bb069b43c09109d7031b0374e31955749fec657b252d39782f11e8985aca2b51
+    .agents/skills/impeccable/reference/ios.md: sha256:40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668
+    .agents/skills/impeccable/reference/layout.md: sha256:0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c
+    .agents/skills/impeccable/reference/live-setup.md: sha256:6e20b51661edfae5a035ec10f532e63420591e0d13834ec93b4a1e196bc3aa45
+    .agents/skills/impeccable/reference/live.md: sha256:69e767b667cff142683d11613ab1e30294dae48deca2653c2e65e6af3c8a9e97
+    .agents/skills/impeccable/reference/new-work.md: sha256:0e26bc3f24067ccb5c08bce4a673fab96164c81b8794206dfdd124e566b2c45d
+    .agents/skills/impeccable/reference/onboard.md: sha256:ef2dde00030580ed2765cbf7be9b2ea4a6f64cb915b804fd6f6abcf38051c7b9
+    .agents/skills/impeccable/reference/operate.md: sha256:a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d
+    .agents/skills/impeccable/reference/optimize.md: sha256:f672ef8251a3ed4051a053d30819664951b17540b2899acd27d20e500c234abc
+    .agents/skills/impeccable/reference/overdrive.md: sha256:fce6688138d2ceb1e3d2cde5231f54b1d8dc8748b4c95a7919aa83b6f924cf96
+    .agents/skills/impeccable/reference/polish.md: sha256:81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a
+    .agents/skills/impeccable/reference/quieter.md: sha256:190a4e642ca362d7499f3c3ab123e21f18f75457d11f072b545a183f296e6495
+    .agents/skills/impeccable/reference/routing.md: sha256:ef0b8eca20e1321cf7216fd0bda41ce54b0cca197cfd1b075eb51f3436f59059
+    .agents/skills/impeccable/reference/shape.md: sha256:a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23
+    .agents/skills/impeccable/reference/typeset.md: sha256:442749aed338f51c1a3ccfb182c6ade9b74b90590b67984062ac94a5b100e914
+    .agents/skills/impeccable/reference/visualize.md: sha256:2806ada0ec5b488409e57bdbf639626b77661aba6cfde9899df7291fdb7abfcc
+    .agents/skills/impeccable/scripts/VERSION: sha256:297b50f08386d3521f8fdaf2f78eb8d9d0acdf452d2e61596905fba37208c792
+    .agents/skills/impeccable/scripts/command-metadata.json: sha256:6bdbc3f745ceee15e10b050f109ce42bbeb53ab3c3b5239257de1d596654dee7
+    .agents/skills/impeccable/scripts/data/font-index-failures.json: sha256:835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4
+    .agents/skills/impeccable/scripts/data/font-index.json: sha256:47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da
+    .agents/skills/impeccable/scripts/impeccable: sha256:0a88d2c7d7b40789758ae42f78437587fb05893454f64f9271e49378b6235a7d
+    .agents/skills/impeccable/scripts/impeccable.cmd: sha256:c29367992504a8da13697443672641317de6a92adef537adbad2e64143b9ec89
+    .agents/skills/impeccable/scripts/live-browser-dom.js: sha256:de1b7404f4cdfd7b515196afb17b74b1980f0bc88cb8681ae93a76ca48ec7bdb
+    .agents/skills/impeccable/scripts/live-browser-ignores.js: sha256:c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f
+    .agents/skills/impeccable/scripts/live-browser-session.js: sha256:edddeb3fad88adec9a055b1bf9d5c75418cbe97a13b1a7f6765e73249e482563
+    .agents/skills/impeccable/scripts/live-browser.js: sha256:7af0a8665057c83b39bca2c8c7427ef2343734f70d4128c377113a6726a1e3b1
+    .agents/skills/impeccable/scripts/modern-screenshot.umd.js: sha256:bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b
+    .claude/skills/impeccable/SKILL.md: sha256:20b5c4d3c0f447f618a3317deb3283191d246ffb5597d72eb8f2bb41a62fc15e
+    .claude/skills/impeccable/agents/impeccable_asset_producer.toml: sha256:4a200cdc0bbe2ae0ee91d88d1f97dd0cfdc828bc32685eea14e86f5ebc82d966
+    .claude/skills/impeccable/agents/impeccable_documenter.toml: sha256:d5922228b571900e21a47855d7de9e081c2246fc9cec6c6235b1a6da31098896
+    .claude/skills/impeccable/agents/impeccable_finish_reviewer.toml: sha256:869fa5390b84bfd00d072f5280a9002ea3e3936edf5985241be641a87f03ff7b
+    .claude/skills/impeccable/agents/impeccable_manual_edit_applier.toml: sha256:6c9ce3e27ec4520ead001da3aad2a2ebba481c4e5cd22873db8890259ee579fe
+    .claude/skills/impeccable/agents/openai.yaml: sha256:cbd8bd68fa00935dd0f179adb169252629cf7ee443ea9dc7db77e7ef2cf77446
+    .claude/skills/impeccable/reference/adapt.md: sha256:bead87679caad7c537dd7c04c3bb78be56ac7eec279ad6aad7322f48ff2df2d9
+    .claude/skills/impeccable/reference/adapt.native.md: sha256:6acc0bf221a4ddc6e5c6438348920b2ca2393b29c4314dbde2cdc23f2b1a9639
+    .claude/skills/impeccable/reference/android.md: sha256:058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe
+    .claude/skills/impeccable/reference/animate.md: sha256:d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c
+    .claude/skills/impeccable/reference/audit.md: sha256:910461b1c1f8216155165955c860a884a1e2f557cb38f21ef512ea90ef6503c2
+    .claude/skills/impeccable/reference/audit.native.md: sha256:960cb922bc934adbf9192e9428ff6bec1f382038166f02a785939c93b7391067
+    .claude/skills/impeccable/reference/bolder.md: sha256:f964506c0fae87b3c2c1db7016ddc9be9ef970bbcf5548d684b997b5d5991586
+    .claude/skills/impeccable/reference/clarify.md: sha256:173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133
+    .claude/skills/impeccable/reference/colorize.md: sha256:bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9
+    .claude/skills/impeccable/reference/craft-floor.md: sha256:e802e4f7bdc89050a9c0f2ca506e1d493a2316e6e810c0336c57aa073717ef3e
+    .claude/skills/impeccable/reference/craft.md: sha256:9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c
+    .claude/skills/impeccable/reference/critique.md: sha256:cb8caddbb3919e5bf7f252143b519fb16db28a244642d937b186cb89962d9201
+    .claude/skills/impeccable/reference/degraded/asset-producer.md: sha256:fadd4a57ec67175230191b4a6d7415580ca24caf2fbfb359496ffec0f6442f50
+    .claude/skills/impeccable/reference/degraded/documenter.md: sha256:97a09e350c383cb2f6bba027b83bedffd12a23b1b439ad4a045a48953eb19365
+    .claude/skills/impeccable/reference/degraded/finish-reviewer.md: sha256:5f24c5a97b4ffcabc7c432b064cfdd04c7a2ad52f52e765be648dc0aadab8f38
+    .claude/skills/impeccable/reference/degraded/manual-edit-applier.md: sha256:5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58
+    .claude/skills/impeccable/reference/delight.md: sha256:098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c
+    .claude/skills/impeccable/reference/distill.md: sha256:ea8432c90c30ecb0426662a681ead5c0941113079704e1a766cda09e85b15b4f
+    .claude/skills/impeccable/reference/doctor.md: sha256:a98b397cedeeaa1da57f3395b3d9b6c1fc477f4247fb9dc13e4da3da588283ff
+    .claude/skills/impeccable/reference/document.md: sha256:3673248740bcdd1122ccc610093ba2fe52f3943a61ce0b7170b74dc49e5b6098
+    .claude/skills/impeccable/reference/extract.md: sha256:31b90048c0b540daec46762a10c2b6b6434737a89af005054d8b848d829d003b
+    .claude/skills/impeccable/reference/harden.md: sha256:b31ff29c7a1ea979c6d039f7e8d17007410697ab49536690dca109f0af3f20f8
+    .claude/skills/impeccable/reference/hooks.md: sha256:12fefe52d80d25014e5f7e2f9b278275a675653d3d99ae8f0ecf344cdb9abbe6
+    .claude/skills/impeccable/reference/init.md: sha256:bb069b43c09109d7031b0374e31955749fec657b252d39782f11e8985aca2b51
+    .claude/skills/impeccable/reference/ios.md: sha256:40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668
+    .claude/skills/impeccable/reference/layout.md: sha256:0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c
+    .claude/skills/impeccable/reference/live-setup.md: sha256:6e20b51661edfae5a035ec10f532e63420591e0d13834ec93b4a1e196bc3aa45
+    .claude/skills/impeccable/reference/live.md: sha256:69e767b667cff142683d11613ab1e30294dae48deca2653c2e65e6af3c8a9e97
+    .claude/skills/impeccable/reference/new-work.md: sha256:0e26bc3f24067ccb5c08bce4a673fab96164c81b8794206dfdd124e566b2c45d
+    .claude/skills/impeccable/reference/onboard.md: sha256:ef2dde00030580ed2765cbf7be9b2ea4a6f64cb915b804fd6f6abcf38051c7b9
+    .claude/skills/impeccable/reference/operate.md: sha256:a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d
+    .claude/skills/impeccable/reference/optimize.md: sha256:f672ef8251a3ed4051a053d30819664951b17540b2899acd27d20e500c234abc
+    .claude/skills/impeccable/reference/overdrive.md: sha256:fce6688138d2ceb1e3d2cde5231f54b1d8dc8748b4c95a7919aa83b6f924cf96
+    .claude/skills/impeccable/reference/polish.md: sha256:81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a
+    .claude/skills/impeccable/reference/quieter.md: sha256:190a4e642ca362d7499f3c3ab123e21f18f75457d11f072b545a183f296e6495
+    .claude/skills/impeccable/reference/routing.md: sha256:ef0b8eca20e1321cf7216fd0bda41ce54b0cca197cfd1b075eb51f3436f59059
+    .claude/skills/impeccable/reference/shape.md: sha256:a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23
+    .claude/skills/impeccable/reference/typeset.md: sha256:442749aed338f51c1a3ccfb182c6ade9b74b90590b67984062ac94a5b100e914
+    .claude/skills/impeccable/reference/visualize.md: sha256:2806ada0ec5b488409e57bdbf639626b77661aba6cfde9899df7291fdb7abfcc
+    .claude/skills/impeccable/scripts/VERSION: sha256:297b50f08386d3521f8fdaf2f78eb8d9d0acdf452d2e61596905fba37208c792
+    .claude/skills/impeccable/scripts/command-metadata.json: sha256:6bdbc3f745ceee15e10b050f109ce42bbeb53ab3c3b5239257de1d596654dee7
+    .claude/skills/impeccable/scripts/data/font-index-failures.json: sha256:835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4
+    .claude/skills/impeccable/scripts/data/font-index.json: sha256:47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da
+    .claude/skills/impeccable/scripts/impeccable: sha256:0a88d2c7d7b40789758ae42f78437587fb05893454f64f9271e49378b6235a7d
+    .claude/skills/impeccable/scripts/impeccable.cmd: sha256:c29367992504a8da13697443672641317de6a92adef537adbad2e64143b9ec89
+    .claude/skills/impeccable/scripts/live-browser-dom.js: sha256:de1b7404f4cdfd7b515196afb17b74b1980f0bc88cb8681ae93a76ca48ec7bdb
+    .claude/skills/impeccable/scripts/live-browser-ignores.js: sha256:c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f
+    .claude/skills/impeccable/scripts/live-browser-session.js: sha256:edddeb3fad88adec9a055b1bf9d5c75418cbe97a13b1a7f6765e73249e482563
+    .claude/skills/impeccable/scripts/live-browser.js: sha256:7af0a8665057c83b39bca2c8c7427ef2343734f70d4128c377113a6726a1e3b1
+    .claude/skills/impeccable/scripts/modern-screenshot.umd.js: sha256:bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b
+  content_hash: sha256:91bf02a1bbbbe10d5a79d9d04c00bf14974f9c71200a2c0edeae8249997b0871
+- repo_url: shadcn-ui/ui
+  name: shadcn
+  host: github.com
+  resolved_commit: 4dbe072997507545dbf648ab45662d9c1e5b5b56
+  version: unknown
+  virtual_path: skills/shadcn
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/shadcn
+  - .agents/skills/shadcn/SKILL.md
+  - .agents/skills/shadcn/agents/openai.yml
+  - .agents/skills/shadcn/assets/shadcn-small.png
+  - .agents/skills/shadcn/assets/shadcn.png
+  - .agents/skills/shadcn/cli.md
+  - .agents/skills/shadcn/customization.md
+  - .agents/skills/shadcn/evals/evals.json
+  - .agents/skills/shadcn/mcp.md
+  - .agents/skills/shadcn/registry.md
+  - .agents/skills/shadcn/rules/base-vs-radix.md
+  - .agents/skills/shadcn/rules/chat.md
+  - .agents/skills/shadcn/rules/composition.md
+  - .agents/skills/shadcn/rules/forms.md
+  - .agents/skills/shadcn/rules/icons.md
+  - .agents/skills/shadcn/rules/styling.md
+  - .claude/skills/shadcn
+  - .claude/skills/shadcn/SKILL.md
+  - .claude/skills/shadcn/agents/openai.yml
+  - .claude/skills/shadcn/assets/shadcn-small.png
+  - .claude/skills/shadcn/assets/shadcn.png
+  - .claude/skills/shadcn/cli.md
+  - .claude/skills/shadcn/customization.md
+  - .claude/skills/shadcn/evals/evals.json
+  - .claude/skills/shadcn/mcp.md
+  - .claude/skills/shadcn/registry.md
+  - .claude/skills/shadcn/rules/base-vs-radix.md
+  - .claude/skills/shadcn/rules/chat.md
+  - .claude/skills/shadcn/rules/composition.md
+  - .claude/skills/shadcn/rules/forms.md
+  - .claude/skills/shadcn/rules/icons.md
+  - .claude/skills/shadcn/rules/styling.md
+  deployed_file_hashes:
+    .agents/skills/shadcn/SKILL.md: sha256:deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4
+    .agents/skills/shadcn/agents/openai.yml: sha256:35db91b1eef58b2abe01da9b88577de5a44e233b740cd93d692ddeeadd2afe4d
+    .agents/skills/shadcn/assets/shadcn-small.png: sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7
+    .agents/skills/shadcn/assets/shadcn.png: sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7
+    .agents/skills/shadcn/cli.md: sha256:a381e35bf36fe7bb851952c13707e01e82434fd7a4a4e53f6df26c6370838904
+    .agents/skills/shadcn/customization.md: sha256:84c1d47168c4b8adb5840e4af30a4e373ae3377c1110478c8974f398dd63f5ba
+    .agents/skills/shadcn/evals/evals.json: sha256:58aca2760b0cc5265bb575f76cd8eed344b88544314b8cb2cd53e0b8007dc936
+    .agents/skills/shadcn/mcp.md: sha256:8d696b4e45b7d0e337367248513bd9acebe8f3bcfd7b748c775e5a337c8f38c8
+    .agents/skills/shadcn/registry.md: sha256:4f239be36bd2b58e17047db1ca80ab7da00e15a8b73242e5e4d50d113c4caa05
+    .agents/skills/shadcn/rules/base-vs-radix.md: sha256:2b2deb47d004285220c1fc6b38bb2edc2d0ccbcdafd031b0b189d5d8ed0d1ba8
+    .agents/skills/shadcn/rules/chat.md: sha256:de29c12524a27578a59ecf8c95ea939278c1a3572a3706bfc99f6f92cb770b7b
+    .agents/skills/shadcn/rules/composition.md: sha256:f282df828d83a91132a846ddb62eea149a7c7c94822e9ca88cfddf85af01aa41
+    .agents/skills/shadcn/rules/forms.md: sha256:29593e14381e34626f8e0e9c15c59f3394b92a0623af6a6ec94585400123853c
+    .agents/skills/shadcn/rules/icons.md: sha256:d4a58266648872d9ee07d0c2368843a1cb88b8253b7f528dd7bda9d68b6c2535
+    .agents/skills/shadcn/rules/styling.md: sha256:f88fbd72dff862805b786dc7d7e4c74c83030fc278c5b97c993e4e665001798c
+    .claude/skills/shadcn/SKILL.md: sha256:deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4
+    .claude/skills/shadcn/agents/openai.yml: sha256:35db91b1eef58b2abe01da9b88577de5a44e233b740cd93d692ddeeadd2afe4d
+    .claude/skills/shadcn/assets/shadcn-small.png: sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7
+    .claude/skills/shadcn/assets/shadcn.png: sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7
+    .claude/skills/shadcn/cli.md: sha256:a381e35bf36fe7bb851952c13707e01e82434fd7a4a4e53f6df26c6370838904
+    .claude/skills/shadcn/customization.md: sha256:84c1d47168c4b8adb5840e4af30a4e373ae3377c1110478c8974f398dd63f5ba
+    .claude/skills/shadcn/evals/evals.json: sha256:58aca2760b0cc5265bb575f76cd8eed344b88544314b8cb2cd53e0b8007dc936
+    .claude/skills/shadcn/mcp.md: sha256:8d696b4e45b7d0e337367248513bd9acebe8f3bcfd7b748c775e5a337c8f38c8
+    .claude/skills/shadcn/registry.md: sha256:4f239be36bd2b58e17047db1ca80ab7da00e15a8b73242e5e4d50d113c4caa05
+    .claude/skills/shadcn/rules/base-vs-radix.md: sha256:2b2deb47d004285220c1fc6b38bb2edc2d0ccbcdafd031b0b189d5d8ed0d1ba8
+    .claude/skills/shadcn/rules/chat.md: sha256:de29c12524a27578a59ecf8c95ea939278c1a3572a3706bfc99f6f92cb770b7b
+    .claude/skills/shadcn/rules/composition.md: sha256:f282df828d83a91132a846ddb62eea149a7c7c94822e9ca88cfddf85af01aa41
+    .claude/skills/shadcn/rules/forms.md: sha256:29593e14381e34626f8e0e9c15c59f3394b92a0623af6a6ec94585400123853c
+    .claude/skills/shadcn/rules/icons.md: sha256:d4a58266648872d9ee07d0c2368843a1cb88b8253b7f528dd7bda9d68b6c2535
+    .claude/skills/shadcn/rules/styling.md: sha256:f88fbd72dff862805b786dc7d7e4c74c83030fc278c5b97c993e4e665001798c
+  content_hash: sha256:bfc2cdcbe8ca341e90d398f9f65eed5e7cd9d147c376554cfcb0d703e7872c41
+- repo_url: vercel-labs/agent-skills
+  name: vercel-react-best-practices
+  host: github.com
+  resolved_commit: 063bee94c3f4df8453406c830b0a7df0f2860278
+  version: unknown
+  virtual_path: skills/react-best-practices
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/react-best-practices
+  - .agents/skills/react-best-practices/AGENTS.md
+  - .agents/skills/react-best-practices/README.md
+  - .agents/skills/react-best-practices/SKILL.md
+  - .agents/skills/react-best-practices/metadata.json
+  - .agents/skills/react-best-practices/rules/_sections.md
+  - .agents/skills/react-best-practices/rules/_template.md
+  - .agents/skills/react-best-practices/rules/advanced-effect-event-deps.md
+  - .agents/skills/react-best-practices/rules/advanced-event-handler-refs.md
+  - .agents/skills/react-best-practices/rules/advanced-init-once.md
+  - .agents/skills/react-best-practices/rules/advanced-use-latest.md
+  - .agents/skills/react-best-practices/rules/async-api-routes.md
+  - .agents/skills/react-best-practices/rules/async-cheap-condition-before-await.md
+  - .agents/skills/react-best-practices/rules/async-defer-await.md
+  - .agents/skills/react-best-practices/rules/async-dependencies.md
+  - .agents/skills/react-best-practices/rules/async-parallel.md
+  - .agents/skills/react-best-practices/rules/async-suspense-boundaries.md
+  - .agents/skills/react-best-practices/rules/bundle-analyzable-paths.md
+  - .agents/skills/react-best-practices/rules/bundle-barrel-imports.md
+  - .agents/skills/react-best-practices/rules/bundle-conditional.md
+  - .agents/skills/react-best-practices/rules/bundle-defer-third-party.md
+  - .agents/skills/react-best-practices/rules/bundle-dynamic-imports.md
+  - .agents/skills/react-best-practices/rules/bundle-preload.md
+  - .agents/skills/react-best-practices/rules/client-event-listeners.md
+  - .agents/skills/react-best-practices/rules/client-localstorage-schema.md
+  - .agents/skills/react-best-practices/rules/client-passive-event-listeners.md
+  - .agents/skills/react-best-practices/rules/client-swr-dedup.md
+  - .agents/skills/react-best-practices/rules/js-batch-dom-css.md
+  - .agents/skills/react-best-practices/rules/js-cache-function-results.md
+  - .agents/skills/react-best-practices/rules/js-cache-property-access.md
+  - .agents/skills/react-best-practices/rules/js-cache-storage.md
+  - .agents/skills/react-best-practices/rules/js-combine-iterations.md
+  - .agents/skills/react-best-practices/rules/js-early-exit.md
+  - .agents/skills/react-best-practices/rules/js-flatmap-filter.md
+  - .agents/skills/react-best-practices/rules/js-hoist-regexp.md
+  - .agents/skills/react-best-practices/rules/js-index-maps.md
+  - .agents/skills/react-best-practices/rules/js-length-check-first.md
+  - .agents/skills/react-best-practices/rules/js-min-max-loop.md
+  - .agents/skills/react-best-practices/rules/js-request-idle-callback.md
+  - .agents/skills/react-best-practices/rules/js-set-map-lookups.md
+  - .agents/skills/react-best-practices/rules/js-tosorted-immutable.md
+  - .agents/skills/react-best-practices/rules/rendering-activity.md
+  - .agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md
+  - .agents/skills/react-best-practices/rules/rendering-conditional-render.md
+  - .agents/skills/react-best-practices/rules/rendering-content-visibility.md
+  - .agents/skills/react-best-practices/rules/rendering-hoist-jsx.md
+  - .agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md
+  - .agents/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md
+  - .agents/skills/react-best-practices/rules/rendering-resource-hints.md
+  - .agents/skills/react-best-practices/rules/rendering-script-defer-async.md
+  - .agents/skills/react-best-practices/rules/rendering-svg-precision.md
+  - .agents/skills/react-best-practices/rules/rendering-usetransition-loading.md
+  - .agents/skills/react-best-practices/rules/rerender-defer-reads.md
+  - .agents/skills/react-best-practices/rules/rerender-dependencies.md
+  - .agents/skills/react-best-practices/rules/rerender-derived-state-no-effect.md
+  - .agents/skills/react-best-practices/rules/rerender-derived-state.md
+  - .agents/skills/react-best-practices/rules/rerender-functional-setstate.md
+  - .agents/skills/react-best-practices/rules/rerender-lazy-state-init.md
+  - .agents/skills/react-best-practices/rules/rerender-memo-with-default-value.md
+  - .agents/skills/react-best-practices/rules/rerender-memo.md
+  - .agents/skills/react-best-practices/rules/rerender-move-effect-to-event.md
+  - .agents/skills/react-best-practices/rules/rerender-no-inline-components.md
+  - .agents/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md
+  - .agents/skills/react-best-practices/rules/rerender-split-combined-hooks.md
+  - .agents/skills/react-best-practices/rules/rerender-transitions.md
+  - .agents/skills/react-best-practices/rules/rerender-use-deferred-value.md
+  - .agents/skills/react-best-practices/rules/rerender-use-ref-transient-values.md
+  - .agents/skills/react-best-practices/rules/server-after-nonblocking.md
+  - .agents/skills/react-best-practices/rules/server-auth-actions.md
+  - .agents/skills/react-best-practices/rules/server-cache-lru.md
+  - .agents/skills/react-best-practices/rules/server-cache-react.md
+  - .agents/skills/react-best-practices/rules/server-dedup-props.md
+  - .agents/skills/react-best-practices/rules/server-hoist-static-io.md
+  - .agents/skills/react-best-practices/rules/server-no-shared-module-state.md
+  - .agents/skills/react-best-practices/rules/server-parallel-fetching.md
+  - .agents/skills/react-best-practices/rules/server-parallel-nested-fetching.md
+  - .agents/skills/react-best-practices/rules/server-serialization.md
+  - .claude/skills/react-best-practices
+  - .claude/skills/react-best-practices/AGENTS.md
+  - .claude/skills/react-best-practices/README.md
+  - .claude/skills/react-best-practices/SKILL.md
+  - .claude/skills/react-best-practices/metadata.json
+  - .claude/skills/react-best-practices/rules/_sections.md
+  - .claude/skills/react-best-practices/rules/_template.md
+  - .claude/skills/react-best-practices/rules/advanced-effect-event-deps.md
+  - .claude/skills/react-best-practices/rules/advanced-event-handler-refs.md
+  - .claude/skills/react-best-practices/rules/advanced-init-once.md
+  - .claude/skills/react-best-practices/rules/advanced-use-latest.md
+  - .claude/skills/react-best-practices/rules/async-api-routes.md
+  - .claude/skills/react-best-practices/rules/async-cheap-condition-before-await.md
+  - .claude/skills/react-best-practices/rules/async-defer-await.md
+  - .claude/skills/react-best-practices/rules/async-dependencies.md
+  - .claude/skills/react-best-practices/rules/async-parallel.md
+  - .claude/skills/react-best-practices/rules/async-suspense-boundaries.md
+  - .claude/skills/react-best-practices/rules/bundle-analyzable-paths.md
+  - .claude/skills/react-best-practices/rules/bundle-barrel-imports.md
+  - .claude/skills/react-best-practices/rules/bundle-conditional.md
+  - .claude/skills/react-best-practices/rules/bundle-defer-third-party.md
+  - .claude/skills/react-best-practices/rules/bundle-dynamic-imports.md
+  - .claude/skills/react-best-practices/rules/bundle-preload.md
+  - .claude/skills/react-best-practices/rules/client-event-listeners.md
+  - .claude/skills/react-best-practices/rules/client-localstorage-schema.md
+  - .claude/skills/react-best-practices/rules/client-passive-event-listeners.md
+  - .claude/skills/react-best-practices/rules/client-swr-dedup.md
+  - .claude/skills/react-best-practices/rules/js-batch-dom-css.md
+  - .claude/skills/react-best-practices/rules/js-cache-function-results.md
+  - .claude/skills/react-best-practices/rules/js-cache-property-access.md
+  - .claude/skills/react-best-practices/rules/js-cache-storage.md
+  - .claude/skills/react-best-practices/rules/js-combine-iterations.md
+  - .claude/skills/react-best-practices/rules/js-early-exit.md
+  - .claude/skills/react-best-practices/rules/js-flatmap-filter.md
+  - .claude/skills/react-best-practices/rules/js-hoist-regexp.md
+  - .claude/skills/react-best-practices/rules/js-index-maps.md
+  - .claude/skills/react-best-practices/rules/js-length-check-first.md
+  - .claude/skills/react-best-practices/rules/js-min-max-loop.md
+  - .claude/skills/react-best-practices/rules/js-request-idle-callback.md
+  - .claude/skills/react-best-practices/rules/js-set-map-lookups.md
+  - .claude/skills/react-best-practices/rules/js-tosorted-immutable.md
+  - .claude/skills/react-best-practices/rules/rendering-activity.md
+  - .claude/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md
+  - .claude/skills/react-best-practices/rules/rendering-conditional-render.md
+  - .claude/skills/react-best-practices/rules/rendering-content-visibility.md
+  - .claude/skills/react-best-practices/rules/rendering-hoist-jsx.md
+  - .claude/skills/react-best-practices/rules/rendering-hydration-no-flicker.md
+  - .claude/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md
+  - .claude/skills/react-best-practices/rules/rendering-resource-hints.md
+  - .claude/skills/react-best-practices/rules/rendering-script-defer-async.md
+  - .claude/skills/react-best-practices/rules/rendering-svg-precision.md
+  - .claude/skills/react-best-practices/rules/rendering-usetransition-loading.md
+  - .claude/skills/react-best-practices/rules/rerender-defer-reads.md
+  - .claude/skills/react-best-practices/rules/rerender-dependencies.md
+  - .claude/skills/react-best-practices/rules/rerender-derived-state-no-effect.md
+  - .claude/skills/react-best-practices/rules/rerender-derived-state.md
+  - .claude/skills/react-best-practices/rules/rerender-functional-setstate.md
+  - .claude/skills/react-best-practices/rules/rerender-lazy-state-init.md
+  - .claude/skills/react-best-practices/rules/rerender-memo-with-default-value.md
+  - .claude/skills/react-best-practices/rules/rerender-memo.md
+  - .claude/skills/react-best-practices/rules/rerender-move-effect-to-event.md
+  - .claude/skills/react-best-practices/rules/rerender-no-inline-components.md
+  - .claude/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md
+  - .claude/skills/react-best-practices/rules/rerender-split-combined-hooks.md
+  - .claude/skills/react-best-practices/rules/rerender-transitions.md
+  - .claude/skills/react-best-practices/rules/rerender-use-deferred-value.md
+  - .claude/skills/react-best-practices/rules/rerender-use-ref-transient-values.md
+  - .claude/skills/react-best-practices/rules/server-after-nonblocking.md
+  - .claude/skills/react-best-practices/rules/server-auth-actions.md
+  - .claude/skills/react-best-practices/rules/server-cache-lru.md
+  - .claude/skills/react-best-practices/rules/server-cache-react.md
+  - .claude/skills/react-best-practices/rules/server-dedup-props.md
+  - .claude/skills/react-best-practices/rules/server-hoist-static-io.md
+  - .claude/skills/react-best-practices/rules/server-no-shared-module-state.md
+  - .claude/skills/react-best-practices/rules/server-parallel-fetching.md
+  - .claude/skills/react-best-practices/rules/server-parallel-nested-fetching.md
+  - .claude/skills/react-best-practices/rules/server-serialization.md
+  deployed_file_hashes:
+    .agents/skills/react-best-practices/AGENTS.md: sha256:fc93e7421177bbf869cce892bc60a6c83a4517d974bc3bf65c4e2c1e58a6ccf6
+    .agents/skills/react-best-practices/README.md: sha256:9eafb2123d3b8b2aef41fba0db2648a3f4f49996f8c7c8bb2c86263befd8b48a
+    .agents/skills/react-best-practices/SKILL.md: sha256:71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355
+    .agents/skills/react-best-practices/metadata.json: sha256:c4e18bac3290fbe1b471a605867d4df68b03144ea26b8befdbe8f9d8fd124354
+    .agents/skills/react-best-practices/rules/_sections.md: sha256:01c59969e4e867f0708c8f8ef9c6d87fab9a07d0586244f429ff84013db8a115
+    .agents/skills/react-best-practices/rules/_template.md: sha256:99df2a3ea088c6c22de2484ddc7e964d0e9923846f44c63380343ecc64455442
+    .agents/skills/react-best-practices/rules/advanced-effect-event-deps.md: sha256:55ed8f9f27a1bff803d6fa55828176207714b02123cbb97ddb8a90d88024a723
+    .agents/skills/react-best-practices/rules/advanced-event-handler-refs.md: sha256:a3097edeecfb2ff6851cd66ed8cdf0617c3c88180504bee824aa6e75a215bbbc
+    .agents/skills/react-best-practices/rules/advanced-init-once.md: sha256:3e4dc22173eb0e2b6dcf583e3babd862b8696328f8f59aee7c4d746c5bc05f6c
+    .agents/skills/react-best-practices/rules/advanced-use-latest.md: sha256:8a3f64dfe5a77d1564248faf17fe662ae75b55d497a243cb30b38eb07ccbbf9a
+    .agents/skills/react-best-practices/rules/async-api-routes.md: sha256:523338540d73427dc14c0cbb19f2741ebccdf8b105a7b2c1b33d2905cf237a42
+    .agents/skills/react-best-practices/rules/async-cheap-condition-before-await.md: sha256:03107c1f70a293cd58a8abc5474c5548e20ea4efdf01b6d45aae7ad0ac1cb32c
+    .agents/skills/react-best-practices/rules/async-defer-await.md: sha256:f3c142d090615abdcc99d31c123be37b31f0f1ed8d9ec9f7789a3bc6883ae0fb
+    .agents/skills/react-best-practices/rules/async-dependencies.md: sha256:16ef469f877e30c6b8e1e1b4bc3e527312fa3c6318cb785a4eca186ea236131a
+    .agents/skills/react-best-practices/rules/async-parallel.md: sha256:6d2f841896279e976dfcdc1ac89e70771ac188baadfd43c096b5706cb838b961
+    .agents/skills/react-best-practices/rules/async-suspense-boundaries.md: sha256:de05fedac2eb7ae563b887b5a424464ec3dfaf84e5b7797467ebe2a796ac8afc
+    .agents/skills/react-best-practices/rules/bundle-analyzable-paths.md: sha256:62090b5c815fd71bf1133dce754f51abc16a9456d0ccd025fd627de27726e92a
+    .agents/skills/react-best-practices/rules/bundle-barrel-imports.md: sha256:e648f6d54525f07a691357040ca5bff6ea3424788a91ff63812adb29622a671b
+    .agents/skills/react-best-practices/rules/bundle-conditional.md: sha256:09c8259c3efb04fc0abb8e412ccbda217c222ae8118516283e571c995fe3a7d4
+    .agents/skills/react-best-practices/rules/bundle-defer-third-party.md: sha256:3719fb47b191e8db4fe22686ec88448ad5af9e6838585425abbe103d0b642e37
+    .agents/skills/react-best-practices/rules/bundle-dynamic-imports.md: sha256:401817a7369f315fc5a68a1095742ff7d53d0461906880dc9d64a41495ee1986
+    .agents/skills/react-best-practices/rules/bundle-preload.md: sha256:d1f7cc28da7cd5ab249acd287edc5b761afcfb194e9cb62cd44c5f3543db2de2
+    .agents/skills/react-best-practices/rules/client-event-listeners.md: sha256:242a873349febc1ce685e85617994784dbab92c2eaa68aed7fed5a83e7680e93
+    .agents/skills/react-best-practices/rules/client-localstorage-schema.md: sha256:0fb7cdf9dc93fdf22f87e3669f953fb9d4ac9b0be42eec4a29fe9a2560610b88
+    .agents/skills/react-best-practices/rules/client-passive-event-listeners.md: sha256:1f35016f9053de69e884ee9be00654e37979c2ca85f5e57764dc2626ff7acb4b
+    .agents/skills/react-best-practices/rules/client-swr-dedup.md: sha256:644652c39c6cc00de8d1c77a7273612e868dc3f7edda30764164c12ec0f764a3
+    .agents/skills/react-best-practices/rules/js-batch-dom-css.md: sha256:480b891b9eaf96e929dc1e964274a4828e3a78009b7d00ccd965a0d425215959
+    .agents/skills/react-best-practices/rules/js-cache-function-results.md: sha256:3daaa11d24f4295cb6be8bc6f407f2ce83cc7b5bd1f0e68891ea8ab835721dc7
+    .agents/skills/react-best-practices/rules/js-cache-property-access.md: sha256:73e47431e74878a927061bf0ddc7cd91a7556cb35d2573f3421e82300d9ae311
+    .agents/skills/react-best-practices/rules/js-cache-storage.md: sha256:11b826b0433898c1ece2d3547010d8e77db9fb240185748c45db91493de9b6cc
+    .agents/skills/react-best-practices/rules/js-combine-iterations.md: sha256:71add08aeeb43091d4ff4c0b2842cce8b4bdef8ad3e732cc034bb5a84827e746
+    .agents/skills/react-best-practices/rules/js-early-exit.md: sha256:925ce5ce87f3347186ca62212f29cc6baa2b8c85a96d2720ad07c3d0abf781c0
+    .agents/skills/react-best-practices/rules/js-flatmap-filter.md: sha256:9e5b166a41914d975bef7635467f8fb32cd98b5c3126c0bc6f163490812fb5f0
+    .agents/skills/react-best-practices/rules/js-hoist-regexp.md: sha256:f9e9aef2f7c2307dd7310f283df85dcada45fc43e9bb941b0c3aa414dec21ec4
+    .agents/skills/react-best-practices/rules/js-index-maps.md: sha256:5df1bdc2cfabb2c98abd55d26762e5c18189535c2e686184f426082e62920391
+    .agents/skills/react-best-practices/rules/js-length-check-first.md: sha256:8b54a311c826b299272f29187fc58bc55772a04c4a72eeb29456ee96dc9fc624
+    .agents/skills/react-best-practices/rules/js-min-max-loop.md: sha256:87dfb67e2f39df6ad8bcfb5b78c5fb364d3c07554ad188a202408d99f3763421
+    .agents/skills/react-best-practices/rules/js-request-idle-callback.md: sha256:ee08f83905b4011abbc33d594033157d77561b5bbd9b36b04f0f409581ffec32
+    .agents/skills/react-best-practices/rules/js-set-map-lookups.md: sha256:a7fd781a6ba9ad49065961b6f9a90ef486bf6b648390e1a08704025f98e1642b
+    .agents/skills/react-best-practices/rules/js-tosorted-immutable.md: sha256:d0a5e1b0fec48a0a81397957e2f068e224329f7c42cb5feeed8aae6fa64025e8
+    .agents/skills/react-best-practices/rules/rendering-activity.md: sha256:1e5e7eaf3555e61d6a2e900089c676527d26259501db5594f59544b6c664f85a
+    .agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md: sha256:9c6ae0ca7a51434e803887c64cded760956579a1452ccb80a461a03f9c937c77
+    .agents/skills/react-best-practices/rules/rendering-conditional-render.md: sha256:2ec2fa23c4148285144687050c52369adba3da2fbe3d486f8d3e0aad8f06f2bc
+    .agents/skills/react-best-practices/rules/rendering-content-visibility.md: sha256:64eee6d5b916fe74df33363994b27fc7f71bea3bcedc7ee04bda23107ca3e6e4
+    .agents/skills/react-best-practices/rules/rendering-hoist-jsx.md: sha256:93b229560fae92005ed9a2a829064607b39b2e984e92d221d05b2d41df2b7c0e
+    .agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md: sha256:dc7ab358c67c177bca6e6f360fbc935ebe4efa928c0ba3ebd3f9f3d9e2000ca3
+    .agents/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md: sha256:915bacb934e2927d84b37a3f3d225a47b309ac8f9e494ed2bcb66ce07c5676a2
+    .agents/skills/react-best-practices/rules/rendering-resource-hints.md: sha256:351b1095d641717b930f1b2253282b7120af3023bc74e06c17675168d4286864
+    .agents/skills/react-best-practices/rules/rendering-script-defer-async.md: sha256:4cea07b7875ba7fc2c7465ff23b63a2bb334f90aaf2d9293d38d67b05fdb32ab
+    .agents/skills/react-best-practices/rules/rendering-svg-precision.md: sha256:ed468533f6e95f622859c884b122cf21f9f593ed6bb3d500a54de4b9f9bcb9fb
+    .agents/skills/react-best-practices/rules/rendering-usetransition-loading.md: sha256:3a1249c3f13026b6f54ab5712c388df219d6af01b12aa542749acd99a46f4bc1
+    .agents/skills/react-best-practices/rules/rerender-defer-reads.md: sha256:234050a77faf50cb306be10a9e15bd4421134ab5907e75f13e6d78e2bd262dc9
+    .agents/skills/react-best-practices/rules/rerender-dependencies.md: sha256:17eb5830956fb56486fd3cfc7431f5849d39751730c05ad9e77dd4f0c27169c5
+    .agents/skills/react-best-practices/rules/rerender-derived-state-no-effect.md: sha256:cb11ec76f50aa7b6847269f02d79b120c889a30d9ecd2c1d578f75144419c77a
+    .agents/skills/react-best-practices/rules/rerender-derived-state.md: sha256:1c326bb67b01fb084eb00c8911b0a7cff54681c2315b629f88e49b64eaa6481d
+    .agents/skills/react-best-practices/rules/rerender-functional-setstate.md: sha256:5e68df6b2ae8058e67f476ff1ac67bde159f5a9d18df439e46eabcdeb7b52e58
+    .agents/skills/react-best-practices/rules/rerender-lazy-state-init.md: sha256:4ae844740f266fc8cbf050701230286624a2440ec5be67b9a63d9edc3c580573
+    .agents/skills/react-best-practices/rules/rerender-memo-with-default-value.md: sha256:81c47476564ad8a79fc68fc442734255ca7d6829424359464503fda0a9f9a0dd
+    .agents/skills/react-best-practices/rules/rerender-memo.md: sha256:1f258990c2f27ff6256b3cc5c43300631bb3f0d81f749aed08d07fcdcc131dd1
+    .agents/skills/react-best-practices/rules/rerender-move-effect-to-event.md: sha256:abc2cbf167bee056743023351e96806a411d3398da8802093620aecf0721f029
+    .agents/skills/react-best-practices/rules/rerender-no-inline-components.md: sha256:1cc32907a770272524ba682eef9e7efdd8ad4533b6f89b718a1fcd7d1d0eb6a3
+    .agents/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md: sha256:5bdcf2d1558ba5204e643c887b7b4060f89630969425651eb68e96427d97f800
+    .agents/skills/react-best-practices/rules/rerender-split-combined-hooks.md: sha256:6f45d703343484ef9acef9388397f3642966ae6a5a258899a0cf1f9977cfbf6c
+    .agents/skills/react-best-practices/rules/rerender-transitions.md: sha256:60f4033909a62df5e5b8c601494f9e50a562e2f8c1c2d81eac24f38142265f1c
+    .agents/skills/react-best-practices/rules/rerender-use-deferred-value.md: sha256:8c3579576a61a949884167745dcfaf1d5426ba305cc61fd0a79602d70fda4909
+    .agents/skills/react-best-practices/rules/rerender-use-ref-transient-values.md: sha256:f1a649af9d1d0b5c762f6c9c4c1c70c90d7df82aa10296ee87aadb78c1b76c54
+    .agents/skills/react-best-practices/rules/server-after-nonblocking.md: sha256:d0b8d24a3db9f0f65f9e2bddbf230b0e03a5f60e1229d93a4a18f5e7a991c7c2
+    .agents/skills/react-best-practices/rules/server-auth-actions.md: sha256:a2ca8aa102839251c7971ec784560fab943c20b36fe6f80365d4110c13260c23
+    .agents/skills/react-best-practices/rules/server-cache-lru.md: sha256:1924b64561841923b88a657085097a0aeba3e0ba2d5470b9f5c15cc10d6ae70f
+    .agents/skills/react-best-practices/rules/server-cache-react.md: sha256:fddeea6c870bb3da4134b61d54b7d09b83d2603f929b7547cd3dc1dc269edd5c
+    .agents/skills/react-best-practices/rules/server-dedup-props.md: sha256:c2747424cdac46be62f835f245a0aa887b0090b416d28e2ac8676702645eeb37
+    .agents/skills/react-best-practices/rules/server-hoist-static-io.md: sha256:5abea4dd882b13661bd5f7dfb93f9e547d5f08176c61c448ade91b210ed5d49f
+    .agents/skills/react-best-practices/rules/server-no-shared-module-state.md: sha256:4d869bf1cd2f1632e5ca4c0e64b1cf0e71c5f5a0f940bc8a22174d205e735ed7
+    .agents/skills/react-best-practices/rules/server-parallel-fetching.md: sha256:569a2e9fc04f9606686cd75c5894ef8781b502786a7fffe241396846c7733472
+    .agents/skills/react-best-practices/rules/server-parallel-nested-fetching.md: sha256:ad5d9656984d4a959997a2367bf59cc6632297b4634a1dd13a087939d83f30b3
+    .agents/skills/react-best-practices/rules/server-serialization.md: sha256:f4c7d68b29c82381baad059c4a7f09e868e71ec9c3115a26ad3ae7d24c0dfe1f
+    .claude/skills/react-best-practices/AGENTS.md: sha256:fc93e7421177bbf869cce892bc60a6c83a4517d974bc3bf65c4e2c1e58a6ccf6
+    .claude/skills/react-best-practices/README.md: sha256:9eafb2123d3b8b2aef41fba0db2648a3f4f49996f8c7c8bb2c86263befd8b48a
+    .claude/skills/react-best-practices/SKILL.md: sha256:71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355
+    .claude/skills/react-best-practices/metadata.json: sha256:c4e18bac3290fbe1b471a605867d4df68b03144ea26b8befdbe8f9d8fd124354
+    .claude/skills/react-best-practices/rules/_sections.md: sha256:01c59969e4e867f0708c8f8ef9c6d87fab9a07d0586244f429ff84013db8a115
+    .claude/skills/react-best-practices/rules/_template.md: sha256:99df2a3ea088c6c22de2484ddc7e964d0e9923846f44c63380343ecc64455442
+    .claude/skills/react-best-practices/rules/advanced-effect-event-deps.md: sha256:55ed8f9f27a1bff803d6fa55828176207714b02123cbb97ddb8a90d88024a723
+    .claude/skills/react-best-practices/rules/advanced-event-handler-refs.md: sha256:a3097edeecfb2ff6851cd66ed8cdf0617c3c88180504bee824aa6e75a215bbbc
+    .claude/skills/react-best-practices/rules/advanced-init-once.md: sha256:3e4dc22173eb0e2b6dcf583e3babd862b8696328f8f59aee7c4d746c5bc05f6c
+    .claude/skills/react-best-practices/rules/advanced-use-latest.md: sha256:8a3f64dfe5a77d1564248faf17fe662ae75b55d497a243cb30b38eb07ccbbf9a
+    .claude/skills/react-best-practices/rules/async-api-routes.md: sha256:523338540d73427dc14c0cbb19f2741ebccdf8b105a7b2c1b33d2905cf237a42
+    .claude/skills/react-best-practices/rules/async-cheap-condition-before-await.md: sha256:03107c1f70a293cd58a8abc5474c5548e20ea4efdf01b6d45aae7ad0ac1cb32c
+    .claude/skills/react-best-practices/rules/async-defer-await.md: sha256:f3c142d090615abdcc99d31c123be37b31f0f1ed8d9ec9f7789a3bc6883ae0fb
+    .claude/skills/react-best-practices/rules/async-dependencies.md: sha256:16ef469f877e30c6b8e1e1b4bc3e527312fa3c6318cb785a4eca186ea236131a
+    .claude/skills/react-best-practices/rules/async-parallel.md: sha256:6d2f841896279e976dfcdc1ac89e70771ac188baadfd43c096b5706cb838b961
+    .claude/skills/react-best-practices/rules/async-suspense-boundaries.md: sha256:de05fedac2eb7ae563b887b5a424464ec3dfaf84e5b7797467ebe2a796ac8afc
+    .claude/skills/react-best-practices/rules/bundle-analyzable-paths.md: sha256:62090b5c815fd71bf1133dce754f51abc16a9456d0ccd025fd627de27726e92a
+    .claude/skills/react-best-practices/rules/bundle-barrel-imports.md: sha256:e648f6d54525f07a691357040ca5bff6ea3424788a91ff63812adb29622a671b
+    .claude/skills/react-best-practices/rules/bundle-conditional.md: sha256:09c8259c3efb04fc0abb8e412ccbda217c222ae8118516283e571c995fe3a7d4
+    .claude/skills/react-best-practices/rules/bundle-defer-third-party.md: sha256:3719fb47b191e8db4fe22686ec88448ad5af9e6838585425abbe103d0b642e37
+    .claude/skills/react-best-practices/rules/bundle-dynamic-imports.md: sha256:401817a7369f315fc5a68a1095742ff7d53d0461906880dc9d64a41495ee1986
+    .claude/skills/react-best-practices/rules/bundle-preload.md: sha256:d1f7cc28da7cd5ab249acd287edc5b761afcfb194e9cb62cd44c5f3543db2de2
+    .claude/skills/react-best-practices/rules/client-event-listeners.md: sha256:242a873349febc1ce685e85617994784dbab92c2eaa68aed7fed5a83e7680e93
+    .claude/skills/react-best-practices/rules/client-localstorage-schema.md: sha256:0fb7cdf9dc93fdf22f87e3669f953fb9d4ac9b0be42eec4a29fe9a2560610b88
+    .claude/skills/react-best-practices/rules/client-passive-event-listeners.md: sha256:1f35016f9053de69e884ee9be00654e37979c2ca85f5e57764dc2626ff7acb4b
+    .claude/skills/react-best-practices/rules/client-swr-dedup.md: sha256:644652c39c6cc00de8d1c77a7273612e868dc3f7edda30764164c12ec0f764a3
+    .claude/skills/react-best-practices/rules/js-batch-dom-css.md: sha256:480b891b9eaf96e929dc1e964274a4828e3a78009b7d00ccd965a0d425215959
+    .claude/skills/react-best-practices/rules/js-cache-function-results.md: sha256:3daaa11d24f4295cb6be8bc6f407f2ce83cc7b5bd1f0e68891ea8ab835721dc7
+    .claude/skills/react-best-practices/rules/js-cache-property-access.md: sha256:73e47431e74878a927061bf0ddc7cd91a7556cb35d2573f3421e82300d9ae311
+    .claude/skills/react-best-practices/rules/js-cache-storage.md: sha256:11b826b0433898c1ece2d3547010d8e77db9fb240185748c45db91493de9b6cc
+    .claude/skills/react-best-practices/rules/js-combine-iterations.md: sha256:71add08aeeb43091d4ff4c0b2842cce8b4bdef8ad3e732cc034bb5a84827e746
+    .claude/skills/react-best-practices/rules/js-early-exit.md: sha256:925ce5ce87f3347186ca62212f29cc6baa2b8c85a96d2720ad07c3d0abf781c0
+    .claude/skills/react-best-practices/rules/js-flatmap-filter.md: sha256:9e5b166a41914d975bef7635467f8fb32cd98b5c3126c0bc6f163490812fb5f0
+    .claude/skills/react-best-practices/rules/js-hoist-regexp.md: sha256:f9e9aef2f7c2307dd7310f283df85dcada45fc43e9bb941b0c3aa414dec21ec4
+    .claude/skills/react-best-practices/rules/js-index-maps.md: sha256:5df1bdc2cfabb2c98abd55d26762e5c18189535c2e686184f426082e62920391
+    .claude/skills/react-best-practices/rules/js-length-check-first.md: sha256:8b54a311c826b299272f29187fc58bc55772a04c4a72eeb29456ee96dc9fc624
+    .claude/skills/react-best-practices/rules/js-min-max-loop.md: sha256:87dfb67e2f39df6ad8bcfb5b78c5fb364d3c07554ad188a202408d99f3763421
+    .claude/skills/react-best-practices/rules/js-request-idle-callback.md: sha256:ee08f83905b4011abbc33d594033157d77561b5bbd9b36b04f0f409581ffec32
+    .claude/skills/react-best-practices/rules/js-set-map-lookups.md: sha256:a7fd781a6ba9ad49065961b6f9a90ef486bf6b648390e1a08704025f98e1642b
+    .claude/skills/react-best-practices/rules/js-tosorted-immutable.md: sha256:d0a5e1b0fec48a0a81397957e2f068e224329f7c42cb5feeed8aae6fa64025e8
+    .claude/skills/react-best-practices/rules/rendering-activity.md: sha256:1e5e7eaf3555e61d6a2e900089c676527d26259501db5594f59544b6c664f85a
+    .claude/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md: sha256:9c6ae0ca7a51434e803887c64cded760956579a1452ccb80a461a03f9c937c77
+    .claude/skills/react-best-practices/rules/rendering-conditional-render.md: sha256:2ec2fa23c4148285144687050c52369adba3da2fbe3d486f8d3e0aad8f06f2bc
+    .claude/skills/react-best-practices/rules/rendering-content-visibility.md: sha256:64eee6d5b916fe74df33363994b27fc7f71bea3bcedc7ee04bda23107ca3e6e4
+    .claude/skills/react-best-practices/rules/rendering-hoist-jsx.md: sha256:93b229560fae92005ed9a2a829064607b39b2e984e92d221d05b2d41df2b7c0e
+    .claude/skills/react-best-practices/rules/rendering-hydration-no-flicker.md: sha256:dc7ab358c67c177bca6e6f360fbc935ebe4efa928c0ba3ebd3f9f3d9e2000ca3
+    .claude/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md: sha256:915bacb934e2927d84b37a3f3d225a47b309ac8f9e494ed2bcb66ce07c5676a2
+    .claude/skills/react-best-practices/rules/rendering-resource-hints.md: sha256:351b1095d641717b930f1b2253282b7120af3023bc74e06c17675168d4286864
+    .claude/skills/react-best-practices/rules/rendering-script-defer-async.md: sha256:4cea07b7875ba7fc2c7465ff23b63a2bb334f90aaf2d9293d38d67b05fdb32ab
+    .claude/skills/react-best-practices/rules/rendering-svg-precision.md: sha256:ed468533f6e95f622859c884b122cf21f9f593ed6bb3d500a54de4b9f9bcb9fb
+    .claude/skills/react-best-practices/rules/rendering-usetransition-loading.md: sha256:3a1249c3f13026b6f54ab5712c388df219d6af01b12aa542749acd99a46f4bc1
+    .claude/skills/react-best-practices/rules/rerender-defer-reads.md: sha256:234050a77faf50cb306be10a9e15bd4421134ab5907e75f13e6d78e2bd262dc9
+    .claude/skills/react-best-practices/rules/rerender-dependencies.md: sha256:17eb5830956fb56486fd3cfc7431f5849d39751730c05ad9e77dd4f0c27169c5
+    .claude/skills/react-best-practices/rules/rerender-derived-state-no-effect.md: sha256:cb11ec76f50aa7b6847269f02d79b120c889a30d9ecd2c1d578f75144419c77a
+    .claude/skills/react-best-practices/rules/rerender-derived-state.md: sha256:1c326bb67b01fb084eb00c8911b0a7cff54681c2315b629f88e49b64eaa6481d
+    .claude/skills/react-best-practices/rules/rerender-functional-setstate.md: sha256:5e68df6b2ae8058e67f476ff1ac67bde159f5a9d18df439e46eabcdeb7b52e58
+    .claude/skills/react-best-practices/rules/rerender-lazy-state-init.md: sha256:4ae844740f266fc8cbf050701230286624a2440ec5be67b9a63d9edc3c580573
+    .claude/skills/react-best-practices/rules/rerender-memo-with-default-value.md: sha256:81c47476564ad8a79fc68fc442734255ca7d6829424359464503fda0a9f9a0dd
+    .claude/skills/react-best-practices/rules/rerender-memo.md: sha256:1f258990c2f27ff6256b3cc5c43300631bb3f0d81f749aed08d07fcdcc131dd1
+    .claude/skills/react-best-practices/rules/rerender-move-effect-to-event.md: sha256:abc2cbf167bee056743023351e96806a411d3398da8802093620aecf0721f029
+    .claude/skills/react-best-practices/rules/rerender-no-inline-components.md: sha256:1cc32907a770272524ba682eef9e7efdd8ad4533b6f89b718a1fcd7d1d0eb6a3
+    .claude/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md: sha256:5bdcf2d1558ba5204e643c887b7b4060f89630969425651eb68e96427d97f800
+    .claude/skills/react-best-practices/rules/rerender-split-combined-hooks.md: sha256:6f45d703343484ef9acef9388397f3642966ae6a5a258899a0cf1f9977cfbf6c
+    .claude/skills/react-best-practices/rules/rerender-transitions.md: sha256:60f4033909a62df5e5b8c601494f9e50a562e2f8c1c2d81eac24f38142265f1c
+    .claude/skills/react-best-practices/rules/rerender-use-deferred-value.md: sha256:8c3579576a61a949884167745dcfaf1d5426ba305cc61fd0a79602d70fda4909
+    .claude/skills/react-best-practices/rules/rerender-use-ref-transient-values.md: sha256:f1a649af9d1d0b5c762f6c9c4c1c70c90d7df82aa10296ee87aadb78c1b76c54
+    .claude/skills/react-best-practices/rules/server-after-nonblocking.md: sha256:d0b8d24a3db9f0f65f9e2bddbf230b0e03a5f60e1229d93a4a18f5e7a991c7c2
+    .claude/skills/react-best-practices/rules/server-auth-actions.md: sha256:a2ca8aa102839251c7971ec784560fab943c20b36fe6f80365d4110c13260c23
+    .claude/skills/react-best-practices/rules/server-cache-lru.md: sha256:1924b64561841923b88a657085097a0aeba3e0ba2d5470b9f5c15cc10d6ae70f
+    .claude/skills/react-best-practices/rules/server-cache-react.md: sha256:fddeea6c870bb3da4134b61d54b7d09b83d2603f929b7547cd3dc1dc269edd5c
+    .claude/skills/react-best-practices/rules/server-dedup-props.md: sha256:c2747424cdac46be62f835f245a0aa887b0090b416d28e2ac8676702645eeb37
+    .claude/skills/react-best-practices/rules/server-hoist-static-io.md: sha256:5abea4dd882b13661bd5f7dfb93f9e547d5f08176c61c448ade91b210ed5d49f
+    .claude/skills/react-best-practices/rules/server-no-shared-module-state.md: sha256:4d869bf1cd2f1632e5ca4c0e64b1cf0e71c5f5a0f940bc8a22174d205e735ed7
+    .claude/skills/react-best-practices/rules/server-parallel-fetching.md: sha256:569a2e9fc04f9606686cd75c5894ef8781b502786a7fffe241396846c7733472
+    .claude/skills/react-best-practices/rules/server-parallel-nested-fetching.md: sha256:ad5d9656984d4a959997a2367bf59cc6632297b4634a1dd13a087939d83f30b3
+    .claude/skills/react-best-practices/rules/server-serialization.md: sha256:f4c7d68b29c82381baad059c4a7f09e868e71ec9c3115a26ad3ae7d24c0dfe1f
+  content_hash: sha256:74f142d28d360d78e8bac4f239a84c87f0ced9015729bc72b5458d82ff45b015
+- repo_url: wshobson/agents
+  name: tailwind-design-system
+  host: github.com
+  resolved_commit: a30778f8c4e6b0a87567941b7cca4f534bf642b6
+  version: unknown
+  virtual_path: plugins/frontend-mobile-development/skills/tailwind-design-system
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/tailwind-design-system
+  - .agents/skills/tailwind-design-system/SKILL.md
+  - .agents/skills/tailwind-design-system/references/advanced-patterns.md
+  - .agents/skills/tailwind-design-system/references/details.md
+  - .claude/skills/tailwind-design-system
+  - .claude/skills/tailwind-design-system/SKILL.md
+  - .claude/skills/tailwind-design-system/references/advanced-patterns.md
+  - .claude/skills/tailwind-design-system/references/details.md
+  deployed_file_hashes:
+    .agents/skills/tailwind-design-system/SKILL.md: sha256:b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83
+    .agents/skills/tailwind-design-system/references/advanced-patterns.md: sha256:40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2
+    .agents/skills/tailwind-design-system/references/details.md: sha256:22e5e4500edc1f11c32871d6aad013b10e34724f29d486f080faea46a95bd6e7
+    .claude/skills/tailwind-design-system/SKILL.md: sha256:b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83
+    .claude/skills/tailwind-design-system/references/advanced-patterns.md: sha256:40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2
+    .claude/skills/tailwind-design-system/references/details.md: sha256:22e5e4500edc1f11c32871d6aad013b10e34724f29d486f080faea46a95bd6e7
+  content_hash: sha256:15a866b57164d8b79f990437ae7315362a922fe2ac4fe5a8adc0f911873bbbd0
+deployments:
+- kind: project-relative
+  target: agents
+  value: .agents/skills/tonic-feature
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: agents
+  value: .agents/skills/tonic-feature/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3d7cfe5a21ef3653d100d905436edd3b75a7fc6bbb6f0c0fe79d9d6cbcd39874
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:38c5e3f9b4d5fc46eb7560b8ba7773ade8c2b0af974ba471b3e0bf50bf373627
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/api-gotchas.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:9edfe6752103983efc50fd218bbedfcf99adb66e6c0dbb6a7fa27b93aead28a3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/cross-browser.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:27582cdbfc48696457cd0f53e9adc580542188ec8f2852c8a4d312a395dc1bcd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/debugging.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:b76eb01816d954c152f140c4b746fd48fe31e684574f9eb6b7bcf76996b11f06
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/project-structure.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:f00ce83261bcf8b79fabaa55e43a7a2b134dc79e3edcfac8cf166c7d52ebc546
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/publishing.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:db3ed5119351a3748d12d3362973be39113efab122ba03b38db7559a656561e1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/store-md.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:0dbbd29959e4fc45b5533e7e26dc6095e68bb7f064832adcf5c33a25b62de674
+- kind: project-relative
+  target: claude
+  value: .claude/skills/extension-dev/references/templates.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:2352e954565e480f3378521be9b7845fcf697f6eec3f43db0110a976922a635c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/frontend-design
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/frontend-design/LICENSE.txt
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594
+- kind: project-relative
+  target: claude
+  value: .claude/skills/frontend-design/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: sha256:d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/frontend-ui-engineering
+  runtime: null
+  scope: project
+  owners:
+  - addyosmani/agent-skills/skills/frontend-ui-engineering
+  active_owner: addyosmani/agent-skills/skills/frontend-ui-engineering
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/frontend-ui-engineering/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - addyosmani/agent-skills/skills/frontend-ui-engineering
+  active_owner: addyosmani/agent-skills/skills/frontend-ui-engineering
+  content_hash: sha256:2b74ac4862be3902ec918dceac9366a6fe83b9e003601c0deaf6be09c1766aca
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:20b5c4d3c0f447f618a3317deb3283191d246ffb5597d72eb8f2bb41a62fc15e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/agents/impeccable_asset_producer.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:4a200cdc0bbe2ae0ee91d88d1f97dd0cfdc828bc32685eea14e86f5ebc82d966
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/agents/impeccable_documenter.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:d5922228b571900e21a47855d7de9e081c2246fc9cec6c6235b1a6da31098896
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/agents/impeccable_finish_reviewer.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:869fa5390b84bfd00d072f5280a9002ea3e3936edf5985241be641a87f03ff7b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/agents/impeccable_manual_edit_applier.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6c9ce3e27ec4520ead001da3aad2a2ebba481c4e5cd22873db8890259ee579fe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:cbd8bd68fa00935dd0f179adb169252629cf7ee443ea9dc7db77e7ef2cf77446
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/adapt.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bead87679caad7c537dd7c04c3bb78be56ac7eec279ad6aad7322f48ff2df2d9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/adapt.native.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6acc0bf221a4ddc6e5c6438348920b2ca2393b29c4314dbde2cdc23f2b1a9639
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/android.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/animate.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/audit.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:910461b1c1f8216155165955c860a884a1e2f557cb38f21ef512ea90ef6503c2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/audit.native.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:960cb922bc934adbf9192e9428ff6bec1f382038166f02a785939c93b7391067
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/bolder.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:f964506c0fae87b3c2c1db7016ddc9be9ef970bbcf5548d684b997b5d5991586
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/clarify.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/colorize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/craft-floor.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:e802e4f7bdc89050a9c0f2ca506e1d493a2316e6e810c0336c57aa073717ef3e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/craft.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/critique.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:cb8caddbb3919e5bf7f252143b519fb16db28a244642d937b186cb89962d9201
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/degraded/asset-producer.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:fadd4a57ec67175230191b4a6d7415580ca24caf2fbfb359496ffec0f6442f50
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/degraded/documenter.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:97a09e350c383cb2f6bba027b83bedffd12a23b1b439ad4a045a48953eb19365
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/degraded/finish-reviewer.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:5f24c5a97b4ffcabc7c432b064cfdd04c7a2ad52f52e765be648dc0aadab8f38
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/degraded/manual-edit-applier.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/delight.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/distill.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ea8432c90c30ecb0426662a681ead5c0941113079704e1a766cda09e85b15b4f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/doctor.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a98b397cedeeaa1da57f3395b3d9b6c1fc477f4247fb9dc13e4da3da588283ff
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/document.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:3673248740bcdd1122ccc610093ba2fe52f3943a61ce0b7170b74dc49e5b6098
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/extract.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:31b90048c0b540daec46762a10c2b6b6434737a89af005054d8b848d829d003b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/harden.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:b31ff29c7a1ea979c6d039f7e8d17007410697ab49536690dca109f0af3f20f8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/hooks.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:12fefe52d80d25014e5f7e2f9b278275a675653d3d99ae8f0ecf344cdb9abbe6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/init.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bb069b43c09109d7031b0374e31955749fec657b252d39782f11e8985aca2b51
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/ios.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/layout.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/live-setup.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6e20b51661edfae5a035ec10f532e63420591e0d13834ec93b4a1e196bc3aa45
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/live.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:69e767b667cff142683d11613ab1e30294dae48deca2653c2e65e6af3c8a9e97
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/new-work.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0e26bc3f24067ccb5c08bce4a673fab96164c81b8794206dfdd124e566b2c45d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/onboard.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ef2dde00030580ed2765cbf7be9b2ea4a6f64cb915b804fd6f6abcf38051c7b9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/operate.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/optimize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:f672ef8251a3ed4051a053d30819664951b17540b2899acd27d20e500c234abc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/overdrive.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:fce6688138d2ceb1e3d2cde5231f54b1d8dc8748b4c95a7919aa83b6f924cf96
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/polish.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/quieter.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:190a4e642ca362d7499f3c3ab123e21f18f75457d11f072b545a183f296e6495
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/routing.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ef0b8eca20e1321cf7216fd0bda41ce54b0cca197cfd1b075eb51f3436f59059
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/shape.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/typeset.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:442749aed338f51c1a3ccfb182c6ade9b74b90590b67984062ac94a5b100e914
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/reference/visualize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:2806ada0ec5b488409e57bdbf639626b77661aba6cfde9899df7291fdb7abfcc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/VERSION
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:297b50f08386d3521f8fdaf2f78eb8d9d0acdf452d2e61596905fba37208c792
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/command-metadata.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6bdbc3f745ceee15e10b050f109ce42bbeb53ab3c3b5239257de1d596654dee7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/data/font-index-failures.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/data/font-index.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/impeccable
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0a88d2c7d7b40789758ae42f78437587fb05893454f64f9271e49378b6235a7d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/impeccable.cmd
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:c29367992504a8da13697443672641317de6a92adef537adbad2e64143b9ec89
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/live-browser-dom.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:de1b7404f4cdfd7b515196afb17b74b1980f0bc88cb8681ae93a76ca48ec7bdb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/live-browser-ignores.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/live-browser-session.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:edddeb3fad88adec9a055b1bf9d5c75418cbe97a13b1a7f6765e73249e482563
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/live-browser.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:7af0a8665057c83b39bca2c8c7427ef2343734f70d4128c377113a6726a1e3b1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/impeccable/scripts/modern-screenshot.umd.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/AGENTS.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:fc93e7421177bbf869cce892bc60a6c83a4517d974bc3bf65c4e2c1e58a6ccf6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/README.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9eafb2123d3b8b2aef41fba0db2648a3f4f49996f8c7c8bb2c86263befd8b48a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/metadata.json
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:c4e18bac3290fbe1b471a605867d4df68b03144ea26b8befdbe8f9d8fd124354
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/_sections.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:01c59969e4e867f0708c8f8ef9c6d87fab9a07d0586244f429ff84013db8a115
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/_template.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:99df2a3ea088c6c22de2484ddc7e964d0e9923846f44c63380343ecc64455442
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/advanced-effect-event-deps.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:55ed8f9f27a1bff803d6fa55828176207714b02123cbb97ddb8a90d88024a723
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/advanced-event-handler-refs.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a3097edeecfb2ff6851cd66ed8cdf0617c3c88180504bee824aa6e75a215bbbc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/advanced-init-once.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3e4dc22173eb0e2b6dcf583e3babd862b8696328f8f59aee7c4d746c5bc05f6c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/advanced-use-latest.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8a3f64dfe5a77d1564248faf17fe662ae75b55d497a243cb30b38eb07ccbbf9a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-api-routes.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:523338540d73427dc14c0cbb19f2741ebccdf8b105a7b2c1b33d2905cf237a42
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-cheap-condition-before-await.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:03107c1f70a293cd58a8abc5474c5548e20ea4efdf01b6d45aae7ad0ac1cb32c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-defer-await.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f3c142d090615abdcc99d31c123be37b31f0f1ed8d9ec9f7789a3bc6883ae0fb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-dependencies.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:16ef469f877e30c6b8e1e1b4bc3e527312fa3c6318cb785a4eca186ea236131a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-parallel.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:6d2f841896279e976dfcdc1ac89e70771ac188baadfd43c096b5706cb838b961
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/async-suspense-boundaries.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:de05fedac2eb7ae563b887b5a424464ec3dfaf84e5b7797467ebe2a796ac8afc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-analyzable-paths.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:62090b5c815fd71bf1133dce754f51abc16a9456d0ccd025fd627de27726e92a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-barrel-imports.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:e648f6d54525f07a691357040ca5bff6ea3424788a91ff63812adb29622a671b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-conditional.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:09c8259c3efb04fc0abb8e412ccbda217c222ae8118516283e571c995fe3a7d4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-defer-third-party.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3719fb47b191e8db4fe22686ec88448ad5af9e6838585425abbe103d0b642e37
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-dynamic-imports.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:401817a7369f315fc5a68a1095742ff7d53d0461906880dc9d64a41495ee1986
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/bundle-preload.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d1f7cc28da7cd5ab249acd287edc5b761afcfb194e9cb62cd44c5f3543db2de2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/client-event-listeners.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:242a873349febc1ce685e85617994784dbab92c2eaa68aed7fed5a83e7680e93
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/client-localstorage-schema.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:0fb7cdf9dc93fdf22f87e3669f953fb9d4ac9b0be42eec4a29fe9a2560610b88
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/client-passive-event-listeners.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1f35016f9053de69e884ee9be00654e37979c2ca85f5e57764dc2626ff7acb4b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/client-swr-dedup.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:644652c39c6cc00de8d1c77a7273612e868dc3f7edda30764164c12ec0f764a3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-batch-dom-css.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:480b891b9eaf96e929dc1e964274a4828e3a78009b7d00ccd965a0d425215959
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-cache-function-results.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3daaa11d24f4295cb6be8bc6f407f2ce83cc7b5bd1f0e68891ea8ab835721dc7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-cache-property-access.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:73e47431e74878a927061bf0ddc7cd91a7556cb35d2573f3421e82300d9ae311
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-cache-storage.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:11b826b0433898c1ece2d3547010d8e77db9fb240185748c45db91493de9b6cc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-combine-iterations.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:71add08aeeb43091d4ff4c0b2842cce8b4bdef8ad3e732cc034bb5a84827e746
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-early-exit.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:925ce5ce87f3347186ca62212f29cc6baa2b8c85a96d2720ad07c3d0abf781c0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-flatmap-filter.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9e5b166a41914d975bef7635467f8fb32cd98b5c3126c0bc6f163490812fb5f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-hoist-regexp.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f9e9aef2f7c2307dd7310f283df85dcada45fc43e9bb941b0c3aa414dec21ec4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-index-maps.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5df1bdc2cfabb2c98abd55d26762e5c18189535c2e686184f426082e62920391
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-length-check-first.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8b54a311c826b299272f29187fc58bc55772a04c4a72eeb29456ee96dc9fc624
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-min-max-loop.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:87dfb67e2f39df6ad8bcfb5b78c5fb364d3c07554ad188a202408d99f3763421
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-request-idle-callback.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ee08f83905b4011abbc33d594033157d77561b5bbd9b36b04f0f409581ffec32
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-set-map-lookups.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a7fd781a6ba9ad49065961b6f9a90ef486bf6b648390e1a08704025f98e1642b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/js-tosorted-immutable.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d0a5e1b0fec48a0a81397957e2f068e224329f7c42cb5feeed8aae6fa64025e8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-activity.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1e5e7eaf3555e61d6a2e900089c676527d26259501db5594f59544b6c664f85a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9c6ae0ca7a51434e803887c64cded760956579a1452ccb80a461a03f9c937c77
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-conditional-render.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:2ec2fa23c4148285144687050c52369adba3da2fbe3d486f8d3e0aad8f06f2bc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-content-visibility.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:64eee6d5b916fe74df33363994b27fc7f71bea3bcedc7ee04bda23107ca3e6e4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-hoist-jsx.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:93b229560fae92005ed9a2a829064607b39b2e984e92d221d05b2d41df2b7c0e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-hydration-no-flicker.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:dc7ab358c67c177bca6e6f360fbc935ebe4efa928c0ba3ebd3f9f3d9e2000ca3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:915bacb934e2927d84b37a3f3d225a47b309ac8f9e494ed2bcb66ce07c5676a2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-resource-hints.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:351b1095d641717b930f1b2253282b7120af3023bc74e06c17675168d4286864
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-script-defer-async.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4cea07b7875ba7fc2c7465ff23b63a2bb334f90aaf2d9293d38d67b05fdb32ab
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-svg-precision.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ed468533f6e95f622859c884b122cf21f9f593ed6bb3d500a54de4b9f9bcb9fb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rendering-usetransition-loading.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3a1249c3f13026b6f54ab5712c388df219d6af01b12aa542749acd99a46f4bc1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-defer-reads.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:234050a77faf50cb306be10a9e15bd4421134ab5907e75f13e6d78e2bd262dc9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-dependencies.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:17eb5830956fb56486fd3cfc7431f5849d39751730c05ad9e77dd4f0c27169c5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-derived-state-no-effect.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:cb11ec76f50aa7b6847269f02d79b120c889a30d9ecd2c1d578f75144419c77a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-derived-state.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1c326bb67b01fb084eb00c8911b0a7cff54681c2315b629f88e49b64eaa6481d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-functional-setstate.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5e68df6b2ae8058e67f476ff1ac67bde159f5a9d18df439e46eabcdeb7b52e58
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-lazy-state-init.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4ae844740f266fc8cbf050701230286624a2440ec5be67b9a63d9edc3c580573
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-memo-with-default-value.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:81c47476564ad8a79fc68fc442734255ca7d6829424359464503fda0a9f9a0dd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-memo.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1f258990c2f27ff6256b3cc5c43300631bb3f0d81f749aed08d07fcdcc131dd1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-move-effect-to-event.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:abc2cbf167bee056743023351e96806a411d3398da8802093620aecf0721f029
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-no-inline-components.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1cc32907a770272524ba682eef9e7efdd8ad4533b6f89b718a1fcd7d1d0eb6a3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5bdcf2d1558ba5204e643c887b7b4060f89630969425651eb68e96427d97f800
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-split-combined-hooks.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:6f45d703343484ef9acef9388397f3642966ae6a5a258899a0cf1f9977cfbf6c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-transitions.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:60f4033909a62df5e5b8c601494f9e50a562e2f8c1c2d81eac24f38142265f1c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-use-deferred-value.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8c3579576a61a949884167745dcfaf1d5426ba305cc61fd0a79602d70fda4909
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/rerender-use-ref-transient-values.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f1a649af9d1d0b5c762f6c9c4c1c70c90d7df82aa10296ee87aadb78c1b76c54
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-after-nonblocking.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d0b8d24a3db9f0f65f9e2bddbf230b0e03a5f60e1229d93a4a18f5e7a991c7c2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-auth-actions.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a2ca8aa102839251c7971ec784560fab943c20b36fe6f80365d4110c13260c23
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-cache-lru.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1924b64561841923b88a657085097a0aeba3e0ba2d5470b9f5c15cc10d6ae70f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-cache-react.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:fddeea6c870bb3da4134b61d54b7d09b83d2603f929b7547cd3dc1dc269edd5c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-dedup-props.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:c2747424cdac46be62f835f245a0aa887b0090b416d28e2ac8676702645eeb37
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-hoist-static-io.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5abea4dd882b13661bd5f7dfb93f9e547d5f08176c61c448ade91b210ed5d49f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-no-shared-module-state.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4d869bf1cd2f1632e5ca4c0e64b1cf0e71c5f5a0f940bc8a22174d205e735ed7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-parallel-fetching.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:569a2e9fc04f9606686cd75c5894ef8781b502786a7fffe241396846c7733472
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-parallel-nested-fetching.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ad5d9656984d4a959997a2367bf59cc6632297b4634a1dd13a087939d83f30b3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/react-best-practices/rules/server-serialization.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f4c7d68b29c82381baad059c4a7f09e868e71ec9c3115a26ad3ae7d24c0dfe1f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/agents/openai.yml
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:35db91b1eef58b2abe01da9b88577de5a44e233b740cd93d692ddeeadd2afe4d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/assets/shadcn-small.png
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/assets/shadcn.png
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/cli.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:a381e35bf36fe7bb851952c13707e01e82434fd7a4a4e53f6df26c6370838904
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/customization.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:84c1d47168c4b8adb5840e4af30a4e373ae3377c1110478c8974f398dd63f5ba
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/evals/evals.json
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:58aca2760b0cc5265bb575f76cd8eed344b88544314b8cb2cd53e0b8007dc936
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/mcp.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:8d696b4e45b7d0e337367248513bd9acebe8f3bcfd7b748c775e5a337c8f38c8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/registry.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:4f239be36bd2b58e17047db1ca80ab7da00e15a8b73242e5e4d50d113c4caa05
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/base-vs-radix.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:2b2deb47d004285220c1fc6b38bb2edc2d0ccbcdafd031b0b189d5d8ed0d1ba8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/chat.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:de29c12524a27578a59ecf8c95ea939278c1a3572a3706bfc99f6f92cb770b7b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/composition.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:f282df828d83a91132a846ddb62eea149a7c7c94822e9ca88cfddf85af01aa41
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/forms.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:29593e14381e34626f8e0e9c15c59f3394b92a0623af6a6ec94585400123853c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/icons.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:d4a58266648872d9ee07d0c2368843a1cb88b8253b7f528dd7bda9d68b6c2535
+- kind: project-relative
+  target: claude
+  value: .claude/skills/shadcn/rules/styling.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:f88fbd72dff862805b786dc7d7e4c74c83030fc278c5b97c993e4e665001798c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tailwind-design-system
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tailwind-design-system/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tailwind-design-system/references/advanced-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tailwind-design-system/references/details.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:22e5e4500edc1f11c32871d6aad013b10e34724f29d486f080faea46a95bd6e7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tonic-feature
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/tonic-feature/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3d7cfe5a21ef3653d100d905436edd3b75a7fc6bbb6f0c0fe79d9d6cbcd39874
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:38c5e3f9b4d5fc46eb7560b8ba7773ade8c2b0af974ba471b3e0bf50bf373627
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/api-gotchas.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:9edfe6752103983efc50fd218bbedfcf99adb66e6c0dbb6a7fa27b93aead28a3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/cross-browser.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:27582cdbfc48696457cd0f53e9adc580542188ec8f2852c8a4d312a395dc1bcd
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/debugging.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:b76eb01816d954c152f140c4b746fd48fe31e684574f9eb6b7bcf76996b11f06
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/project-structure.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:f00ce83261bcf8b79fabaa55e43a7a2b134dc79e3edcfac8cf166c7d52ebc546
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/publishing.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:db3ed5119351a3748d12d3362973be39113efab122ba03b38db7559a656561e1
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/store-md.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:0dbbd29959e4fc45b5533e7e26dc6095e68bb7f064832adcf5c33a25b62de674
+- kind: project-relative
+  target: codex
+  value: .agents/skills/extension-dev/references/templates.md
+  runtime: null
+  scope: project
+  owners:
+  - extensiondev/skill/skills/extension-dev
+  active_owner: extensiondev/skill/skills/extension-dev
+  content_hash: sha256:2352e954565e480f3378521be9b7845fcf697f6eec3f43db0110a976922a635c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/frontend-design
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/frontend-design/LICENSE.txt
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594
+- kind: project-relative
+  target: codex
+  value: .agents/skills/frontend-design/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - anthropics/skills/skills/frontend-design
+  active_owner: anthropics/skills/skills/frontend-design
+  content_hash: sha256:d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/frontend-ui-engineering
+  runtime: null
+  scope: project
+  owners:
+  - addyosmani/agent-skills/skills/frontend-ui-engineering
+  active_owner: addyosmani/agent-skills/skills/frontend-ui-engineering
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/frontend-ui-engineering/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - addyosmani/agent-skills/skills/frontend-ui-engineering
+  active_owner: addyosmani/agent-skills/skills/frontend-ui-engineering
+  content_hash: sha256:2b74ac4862be3902ec918dceac9366a6fe83b9e003601c0deaf6be09c1766aca
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:20b5c4d3c0f447f618a3317deb3283191d246ffb5597d72eb8f2bb41a62fc15e
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/agents/impeccable_asset_producer.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:4a200cdc0bbe2ae0ee91d88d1f97dd0cfdc828bc32685eea14e86f5ebc82d966
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/agents/impeccable_documenter.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:d5922228b571900e21a47855d7de9e081c2246fc9cec6c6235b1a6da31098896
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/agents/impeccable_finish_reviewer.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:869fa5390b84bfd00d072f5280a9002ea3e3936edf5985241be641a87f03ff7b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/agents/impeccable_manual_edit_applier.toml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6c9ce3e27ec4520ead001da3aad2a2ebba481c4e5cd22873db8890259ee579fe
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:cbd8bd68fa00935dd0f179adb169252629cf7ee443ea9dc7db77e7ef2cf77446
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/adapt.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bead87679caad7c537dd7c04c3bb78be56ac7eec279ad6aad7322f48ff2df2d9
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/adapt.native.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6acc0bf221a4ddc6e5c6438348920b2ca2393b29c4314dbde2cdc23f2b1a9639
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/android.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/animate.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/audit.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:910461b1c1f8216155165955c860a884a1e2f557cb38f21ef512ea90ef6503c2
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/audit.native.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:960cb922bc934adbf9192e9428ff6bec1f382038166f02a785939c93b7391067
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/bolder.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:f964506c0fae87b3c2c1db7016ddc9be9ef970bbcf5548d684b997b5d5991586
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/clarify.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/colorize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/craft-floor.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:e802e4f7bdc89050a9c0f2ca506e1d493a2316e6e810c0336c57aa073717ef3e
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/craft.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/critique.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:cb8caddbb3919e5bf7f252143b519fb16db28a244642d937b186cb89962d9201
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/degraded/asset-producer.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:fadd4a57ec67175230191b4a6d7415580ca24caf2fbfb359496ffec0f6442f50
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/degraded/documenter.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:97a09e350c383cb2f6bba027b83bedffd12a23b1b439ad4a045a48953eb19365
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/degraded/finish-reviewer.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:5f24c5a97b4ffcabc7c432b064cfdd04c7a2ad52f52e765be648dc0aadab8f38
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/degraded/manual-edit-applier.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/delight.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/distill.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ea8432c90c30ecb0426662a681ead5c0941113079704e1a766cda09e85b15b4f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/doctor.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a98b397cedeeaa1da57f3395b3d9b6c1fc477f4247fb9dc13e4da3da588283ff
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/document.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:3673248740bcdd1122ccc610093ba2fe52f3943a61ce0b7170b74dc49e5b6098
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/extract.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:31b90048c0b540daec46762a10c2b6b6434737a89af005054d8b848d829d003b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/harden.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:b31ff29c7a1ea979c6d039f7e8d17007410697ab49536690dca109f0af3f20f8
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/hooks.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:12fefe52d80d25014e5f7e2f9b278275a675653d3d99ae8f0ecf344cdb9abbe6
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/init.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bb069b43c09109d7031b0374e31955749fec657b252d39782f11e8985aca2b51
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/ios.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/layout.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/live-setup.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6e20b51661edfae5a035ec10f532e63420591e0d13834ec93b4a1e196bc3aa45
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/live.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:69e767b667cff142683d11613ab1e30294dae48deca2653c2e65e6af3c8a9e97
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/new-work.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0e26bc3f24067ccb5c08bce4a673fab96164c81b8794206dfdd124e566b2c45d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/onboard.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ef2dde00030580ed2765cbf7be9b2ea4a6f64cb915b804fd6f6abcf38051c7b9
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/operate.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/optimize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:f672ef8251a3ed4051a053d30819664951b17540b2899acd27d20e500c234abc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/overdrive.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:fce6688138d2ceb1e3d2cde5231f54b1d8dc8748b4c95a7919aa83b6f924cf96
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/polish.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/quieter.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:190a4e642ca362d7499f3c3ab123e21f18f75457d11f072b545a183f296e6495
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/routing.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:ef0b8eca20e1321cf7216fd0bda41ce54b0cca197cfd1b075eb51f3436f59059
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/shape.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/typeset.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:442749aed338f51c1a3ccfb182c6ade9b74b90590b67984062ac94a5b100e914
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/reference/visualize.md
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:2806ada0ec5b488409e57bdbf639626b77661aba6cfde9899df7291fdb7abfcc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/VERSION
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:297b50f08386d3521f8fdaf2f78eb8d9d0acdf452d2e61596905fba37208c792
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/command-metadata.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:6bdbc3f745ceee15e10b050f109ce42bbeb53ab3c3b5239257de1d596654dee7
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/data/font-index-failures.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/data/font-index.json
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/impeccable
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:0a88d2c7d7b40789758ae42f78437587fb05893454f64f9271e49378b6235a7d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/impeccable.cmd
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:c29367992504a8da13697443672641317de6a92adef537adbad2e64143b9ec89
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/live-browser-dom.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:de1b7404f4cdfd7b515196afb17b74b1980f0bc88cb8681ae93a76ca48ec7bdb
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/live-browser-ignores.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/live-browser-session.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:edddeb3fad88adec9a055b1bf9d5c75418cbe97a13b1a7f6765e73249e482563
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/live-browser.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:7af0a8665057c83b39bca2c8c7427ef2343734f70d4128c377113a6726a1e3b1
+- kind: project-relative
+  target: codex
+  value: .agents/skills/impeccable/scripts/modern-screenshot.umd.js
+  runtime: null
+  scope: project
+  owners:
+  - pbakaus/impeccable/.agents/skills/impeccable
+  active_owner: pbakaus/impeccable/.agents/skills/impeccable
+  content_hash: sha256:bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/AGENTS.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:fc93e7421177bbf869cce892bc60a6c83a4517d974bc3bf65c4e2c1e58a6ccf6
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/README.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9eafb2123d3b8b2aef41fba0db2648a3f4f49996f8c7c8bb2c86263befd8b48a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/metadata.json
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:c4e18bac3290fbe1b471a605867d4df68b03144ea26b8befdbe8f9d8fd124354
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/_sections.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:01c59969e4e867f0708c8f8ef9c6d87fab9a07d0586244f429ff84013db8a115
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/_template.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:99df2a3ea088c6c22de2484ddc7e964d0e9923846f44c63380343ecc64455442
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/advanced-effect-event-deps.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:55ed8f9f27a1bff803d6fa55828176207714b02123cbb97ddb8a90d88024a723
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/advanced-event-handler-refs.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a3097edeecfb2ff6851cd66ed8cdf0617c3c88180504bee824aa6e75a215bbbc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/advanced-init-once.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3e4dc22173eb0e2b6dcf583e3babd862b8696328f8f59aee7c4d746c5bc05f6c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/advanced-use-latest.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8a3f64dfe5a77d1564248faf17fe662ae75b55d497a243cb30b38eb07ccbbf9a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-api-routes.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:523338540d73427dc14c0cbb19f2741ebccdf8b105a7b2c1b33d2905cf237a42
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-cheap-condition-before-await.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:03107c1f70a293cd58a8abc5474c5548e20ea4efdf01b6d45aae7ad0ac1cb32c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-defer-await.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f3c142d090615abdcc99d31c123be37b31f0f1ed8d9ec9f7789a3bc6883ae0fb
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-dependencies.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:16ef469f877e30c6b8e1e1b4bc3e527312fa3c6318cb785a4eca186ea236131a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-parallel.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:6d2f841896279e976dfcdc1ac89e70771ac188baadfd43c096b5706cb838b961
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/async-suspense-boundaries.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:de05fedac2eb7ae563b887b5a424464ec3dfaf84e5b7797467ebe2a796ac8afc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-analyzable-paths.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:62090b5c815fd71bf1133dce754f51abc16a9456d0ccd025fd627de27726e92a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-barrel-imports.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:e648f6d54525f07a691357040ca5bff6ea3424788a91ff63812adb29622a671b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-conditional.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:09c8259c3efb04fc0abb8e412ccbda217c222ae8118516283e571c995fe3a7d4
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-defer-third-party.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3719fb47b191e8db4fe22686ec88448ad5af9e6838585425abbe103d0b642e37
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-dynamic-imports.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:401817a7369f315fc5a68a1095742ff7d53d0461906880dc9d64a41495ee1986
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/bundle-preload.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d1f7cc28da7cd5ab249acd287edc5b761afcfb194e9cb62cd44c5f3543db2de2
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/client-event-listeners.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:242a873349febc1ce685e85617994784dbab92c2eaa68aed7fed5a83e7680e93
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/client-localstorage-schema.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:0fb7cdf9dc93fdf22f87e3669f953fb9d4ac9b0be42eec4a29fe9a2560610b88
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/client-passive-event-listeners.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1f35016f9053de69e884ee9be00654e37979c2ca85f5e57764dc2626ff7acb4b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/client-swr-dedup.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:644652c39c6cc00de8d1c77a7273612e868dc3f7edda30764164c12ec0f764a3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-batch-dom-css.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:480b891b9eaf96e929dc1e964274a4828e3a78009b7d00ccd965a0d425215959
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-cache-function-results.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3daaa11d24f4295cb6be8bc6f407f2ce83cc7b5bd1f0e68891ea8ab835721dc7
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-cache-property-access.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:73e47431e74878a927061bf0ddc7cd91a7556cb35d2573f3421e82300d9ae311
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-cache-storage.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:11b826b0433898c1ece2d3547010d8e77db9fb240185748c45db91493de9b6cc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-combine-iterations.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:71add08aeeb43091d4ff4c0b2842cce8b4bdef8ad3e732cc034bb5a84827e746
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-early-exit.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:925ce5ce87f3347186ca62212f29cc6baa2b8c85a96d2720ad07c3d0abf781c0
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-flatmap-filter.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9e5b166a41914d975bef7635467f8fb32cd98b5c3126c0bc6f163490812fb5f0
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-hoist-regexp.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f9e9aef2f7c2307dd7310f283df85dcada45fc43e9bb941b0c3aa414dec21ec4
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-index-maps.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5df1bdc2cfabb2c98abd55d26762e5c18189535c2e686184f426082e62920391
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-length-check-first.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8b54a311c826b299272f29187fc58bc55772a04c4a72eeb29456ee96dc9fc624
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-min-max-loop.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:87dfb67e2f39df6ad8bcfb5b78c5fb364d3c07554ad188a202408d99f3763421
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-request-idle-callback.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ee08f83905b4011abbc33d594033157d77561b5bbd9b36b04f0f409581ffec32
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-set-map-lookups.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a7fd781a6ba9ad49065961b6f9a90ef486bf6b648390e1a08704025f98e1642b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/js-tosorted-immutable.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d0a5e1b0fec48a0a81397957e2f068e224329f7c42cb5feeed8aae6fa64025e8
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-activity.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1e5e7eaf3555e61d6a2e900089c676527d26259501db5594f59544b6c664f85a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:9c6ae0ca7a51434e803887c64cded760956579a1452ccb80a461a03f9c937c77
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-conditional-render.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:2ec2fa23c4148285144687050c52369adba3da2fbe3d486f8d3e0aad8f06f2bc
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-content-visibility.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:64eee6d5b916fe74df33363994b27fc7f71bea3bcedc7ee04bda23107ca3e6e4
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-hoist-jsx.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:93b229560fae92005ed9a2a829064607b39b2e984e92d221d05b2d41df2b7c0e
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-hydration-no-flicker.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:dc7ab358c67c177bca6e6f360fbc935ebe4efa928c0ba3ebd3f9f3d9e2000ca3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:915bacb934e2927d84b37a3f3d225a47b309ac8f9e494ed2bcb66ce07c5676a2
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-resource-hints.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:351b1095d641717b930f1b2253282b7120af3023bc74e06c17675168d4286864
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-script-defer-async.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4cea07b7875ba7fc2c7465ff23b63a2bb334f90aaf2d9293d38d67b05fdb32ab
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-svg-precision.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ed468533f6e95f622859c884b122cf21f9f593ed6bb3d500a54de4b9f9bcb9fb
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rendering-usetransition-loading.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:3a1249c3f13026b6f54ab5712c388df219d6af01b12aa542749acd99a46f4bc1
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-defer-reads.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:234050a77faf50cb306be10a9e15bd4421134ab5907e75f13e6d78e2bd262dc9
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-dependencies.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:17eb5830956fb56486fd3cfc7431f5849d39751730c05ad9e77dd4f0c27169c5
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-derived-state-no-effect.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:cb11ec76f50aa7b6847269f02d79b120c889a30d9ecd2c1d578f75144419c77a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-derived-state.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1c326bb67b01fb084eb00c8911b0a7cff54681c2315b629f88e49b64eaa6481d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-functional-setstate.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5e68df6b2ae8058e67f476ff1ac67bde159f5a9d18df439e46eabcdeb7b52e58
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-lazy-state-init.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4ae844740f266fc8cbf050701230286624a2440ec5be67b9a63d9edc3c580573
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-memo-with-default-value.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:81c47476564ad8a79fc68fc442734255ca7d6829424359464503fda0a9f9a0dd
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-memo.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1f258990c2f27ff6256b3cc5c43300631bb3f0d81f749aed08d07fcdcc131dd1
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-move-effect-to-event.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:abc2cbf167bee056743023351e96806a411d3398da8802093620aecf0721f029
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-no-inline-components.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1cc32907a770272524ba682eef9e7efdd8ad4533b6f89b718a1fcd7d1d0eb6a3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5bdcf2d1558ba5204e643c887b7b4060f89630969425651eb68e96427d97f800
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-split-combined-hooks.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:6f45d703343484ef9acef9388397f3642966ae6a5a258899a0cf1f9977cfbf6c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-transitions.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:60f4033909a62df5e5b8c601494f9e50a562e2f8c1c2d81eac24f38142265f1c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-use-deferred-value.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:8c3579576a61a949884167745dcfaf1d5426ba305cc61fd0a79602d70fda4909
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/rerender-use-ref-transient-values.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f1a649af9d1d0b5c762f6c9c4c1c70c90d7df82aa10296ee87aadb78c1b76c54
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-after-nonblocking.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:d0b8d24a3db9f0f65f9e2bddbf230b0e03a5f60e1229d93a4a18f5e7a991c7c2
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-auth-actions.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:a2ca8aa102839251c7971ec784560fab943c20b36fe6f80365d4110c13260c23
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-cache-lru.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:1924b64561841923b88a657085097a0aeba3e0ba2d5470b9f5c15cc10d6ae70f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-cache-react.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:fddeea6c870bb3da4134b61d54b7d09b83d2603f929b7547cd3dc1dc269edd5c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-dedup-props.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:c2747424cdac46be62f835f245a0aa887b0090b416d28e2ac8676702645eeb37
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-hoist-static-io.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:5abea4dd882b13661bd5f7dfb93f9e547d5f08176c61c448ade91b210ed5d49f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-no-shared-module-state.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:4d869bf1cd2f1632e5ca4c0e64b1cf0e71c5f5a0f940bc8a22174d205e735ed7
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-parallel-fetching.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:569a2e9fc04f9606686cd75c5894ef8781b502786a7fffe241396846c7733472
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-parallel-nested-fetching.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:ad5d9656984d4a959997a2367bf59cc6632297b4634a1dd13a087939d83f30b3
+- kind: project-relative
+  target: codex
+  value: .agents/skills/react-best-practices/rules/server-serialization.md
+  runtime: null
+  scope: project
+  owners:
+  - vercel-labs/agent-skills/skills/react-best-practices
+  active_owner: vercel-labs/agent-skills/skills/react-best-practices
+  content_hash: sha256:f4c7d68b29c82381baad059c4a7f09e868e71ec9c3115a26ad3ae7d24c0dfe1f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/agents/openai.yml
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:35db91b1eef58b2abe01da9b88577de5a44e233b740cd93d692ddeeadd2afe4d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/assets/shadcn-small.png
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/assets/shadcn.png
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/cli.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:a381e35bf36fe7bb851952c13707e01e82434fd7a4a4e53f6df26c6370838904
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/customization.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:84c1d47168c4b8adb5840e4af30a4e373ae3377c1110478c8974f398dd63f5ba
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/evals/evals.json
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:58aca2760b0cc5265bb575f76cd8eed344b88544314b8cb2cd53e0b8007dc936
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/mcp.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:8d696b4e45b7d0e337367248513bd9acebe8f3bcfd7b748c775e5a337c8f38c8
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/registry.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:4f239be36bd2b58e17047db1ca80ab7da00e15a8b73242e5e4d50d113c4caa05
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/base-vs-radix.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:2b2deb47d004285220c1fc6b38bb2edc2d0ccbcdafd031b0b189d5d8ed0d1ba8
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/chat.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:de29c12524a27578a59ecf8c95ea939278c1a3572a3706bfc99f6f92cb770b7b
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/composition.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:f282df828d83a91132a846ddb62eea149a7c7c94822e9ca88cfddf85af01aa41
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/forms.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:29593e14381e34626f8e0e9c15c59f3394b92a0623af6a6ec94585400123853c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/icons.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:d4a58266648872d9ee07d0c2368843a1cb88b8253b7f528dd7bda9d68b6c2535
+- kind: project-relative
+  target: codex
+  value: .agents/skills/shadcn/rules/styling.md
+  runtime: null
+  scope: project
+  owners:
+  - shadcn-ui/ui/skills/shadcn
+  active_owner: shadcn-ui/ui/skills/shadcn
+  content_hash: sha256:f88fbd72dff862805b786dc7d7e4c74c83030fc278c5b97c993e4e665001798c
+- kind: project-relative
+  target: codex
+  value: .agents/skills/tailwind-design-system
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/tailwind-design-system/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83
+- kind: project-relative
+  target: codex
+  value: .agents/skills/tailwind-design-system/references/advanced-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2
+- kind: project-relative
+  target: codex
+  value: .agents/skills/tailwind-design-system/references/details.md
+  runtime: null
+  scope: project
+  owners:
+  - wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  active_owner: wshobson/agents/plugins/frontend-mobile-development/skills/tailwind-design-system
+  content_hash: sha256:22e5e4500edc1f11c32871d6aad013b10e34724f29d486f080faea46a95bd6e7
+- kind: uri
+  target: mcp
+  value: chrome-devtools
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extension-dev
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extensionjs
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: playwright
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: shadcn
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: chrome-devtools
+  runtime: codex
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extension-dev
+  runtime: codex
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extensionjs
+  runtime: codex
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: playwright
+  runtime: codex
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: shadcn
+  runtime: codex
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: chrome-devtools
+  runtime: cursor
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extension-dev
+  runtime: cursor
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extensionjs
+  runtime: cursor
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: playwright
+  runtime: cursor
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: shadcn
+  runtime: cursor
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: chrome-devtools
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extension-dev
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extensionjs
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: playwright
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: shadcn
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: chrome-devtools
+  runtime: vscode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extension-dev
+  runtime: vscode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: extensionjs
+  runtime: vscode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: playwright
+  runtime: vscode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: uri
+  target: mcp
+  value: shadcn
+  runtime: vscode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+mcp_servers:
+- chrome-devtools
+- extension-dev
+- extensionjs
+- playwright
+- shadcn
+mcp_configs:
+  chrome-devtools:
+    name: chrome-devtools
+    transport: stdio
+    env:
+      npm_config_cache: /tmp/gitlab-tonic-npm-cache
+    args:
+    - chrome-devtools-mcp@latest
+    - --category-extensions=true
+    - --isolated=true
+    - --viewport=1280x800
+    - --screenshot-max-width=1600
+    - --no-usage-statistics
+    registry: false
+    command: bunx
+  extension-dev:
+    name: extension-dev
+    transport: stdio
+    env:
+      EXTENSION_HEADLESS: '0'
+      EXTENSION_BROWSER_FLAGS: ''
+    args:
+    - '@extension.dev/mcp@latest'
+    registry: false
+    command: bunx
+  extensionjs:
+    name: extensionjs
+    transport: http
+    registry: false
+    url: https://extensionjs.mintlify.app/mcp
+  playwright:
+    name: playwright
+    transport: stdio
+    args:
+    - '@playwright/mcp@latest'
+    - --browser=chrome
+    - --viewport-size=1280x800
+    - --caps=pdf,devtools
+    registry: false
+    command: bunx
+  shadcn:
+    name: shadcn
+    transport: stdio
+    env:
+      TMPDIR: /tmp
+      BUN_INSTALL_CACHE_DIR: .cache/bun
+    args:
+    - --bun
+    - shadcn@latest
+    - mcp
+    registry: false
+    command: bunx
+mcp_target_servers:
+  claude:
+  - chrome-devtools
+  - extension-dev
+  - extensionjs
+  - playwright
+  - shadcn
+  codex:
+  - chrome-devtools
+  - extension-dev
+  - extensionjs
+  - playwright
+  - shadcn
+  cursor:
+  - chrome-devtools
+  - extension-dev
+  - extensionjs
+  - playwright
+  - shadcn
+  opencode:
+  - chrome-devtools
+  - extension-dev
+  - extensionjs
+  - playwright
+  - shadcn
+  vscode:
+  - chrome-devtools
+  - extension-dev
+  - extensionjs
+  - playwright
+  - shadcn
+local_deployed_files:
+- .agents/skills/tonic-feature
+- .agents/skills/tonic-feature/SKILL.md
+- .claude/skills/tonic-feature
+- .claude/skills/tonic-feature/SKILL.md
+local_deployed_file_hashes:
+  .agents/skills/tonic-feature/SKILL.md: sha256:3d7cfe5a21ef3653d100d905436edd3b75a7fc6bbb6f0c0fe79d9d6cbcd39874
+  .claude/skills/tonic-feature/SKILL.md: sha256:3d7cfe5a21ef3653d100d905436edd3b75a7fc6bbb6f0c0fe79d9d6cbcd39874

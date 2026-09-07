@@ -1,0 +1,32 @@
+<!--
+GitLab version: 18.11.9-ce.0
+Page: authenticated merge request detail, merge-train actions
+Page identifier: projects:merge_requests:show
+Reconstruction date: 2026-08-28
+Source type: minimal markup reconstructed from official GitLab 18-11-stable-ee source
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/assets/javascripts/vue_merge_request_widget/components/states/ready_to_merge.vue
+Sanitization: synthetic namespace; Vue directives, layout-only classes, merge options, status copy,
+and unrelated controls removed; no executable scripts. The retained test IDs and button structure
+are GitLab-owned hooks emitted by the source component.
+-->
+<div data-testid="ready_to_merge_state">
+	<button type="button" data-testid="merge-button">
+		<span>Set to auto-merge</span>
+	</button>
+	<div data-testid="merge-immediately-dropdown">
+		<ul>
+			<li data-testid="mt-merge-now-restart-button">
+				<button type="button">
+					<strong>Merge now and restart train</strong>
+					<span>Restart merge train pipelines with the merged changes.</span>
+				</button>
+			</li>
+			<li data-testid="mt-merge-now-skip-restart-button">
+				<button type="button">
+					<strong>Merge now and don't restart train</strong>
+					<span>Merge train pipelines continue without the merged changes.</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>

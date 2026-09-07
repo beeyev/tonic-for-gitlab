@@ -1,0 +1,94 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+/*
+ * `source(none)` disables Tailwind's automatic source detection, which
+ * otherwise roots at the repository and harvests class names out of markdown
+ * and skill files into the stylesheet shipped inside every GitLab page. The
+ * two explicit sources below are the only consumers of these utilities.
+ */
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "./tokens.css";
+
+@source "./components";
+@source "../content/control-panel";
+
+@custom-variant dark (:host([data-tonic-theme="dark"]) &);
+
+@layer base {
+	*,
+	::before,
+	::after {
+		border-color: var(--border);
+		outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+	}
+
+	button,
+	[role="switch"] {
+		font: inherit;
+	}
+
+	/*
+	 * The host carries an inline `all: initial !important` guard so GitLab's
+	 * inherited typography cannot cross the shadow boundary. Inline important
+	 * declarations outrank stylesheet rules, so re-establish inherited
+	 * typography on the shadow tree's own roots instead of on `:host`.
+	 */
+	:host > * {
+		color: var(--foreground);
+		font-family:
+			ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			sans-serif;
+		font-size: var(--text-sm);
+		line-height: var(--text-sm--line-height);
+	}
+}
+
+@layer components {
+	/*
+	 * The settings list is the only part of the panel that scrolls, and the
+	 * panel is expected to outgrow its height clamp as features are added. A
+	 * clipped list with no visible cue reads as a complete list, so mark the
+	 * clipped edges.
+	 *
+	 * The cue is pure CSS on purpose: the two `local` gradients are painted in
+	 * the scrolling content's coordinate space and cover the shadows at the
+	 * extremes, while the two `scroll` gradients stay pinned to the box. No
+	 * scroll listener, no extra element, and nothing to keep in sync with the
+	 * number of rows.
+	 *
+	 * The cue is painted on this container, so it sits behind the settings
+	 * groups. It stays visible because a group surface is translucent; an opaque
+	 * one would hide it, and the cue would have to move onto the group or onto a
+	 * wrapper of its own.
+	 */
+	.tonic-scroll-region {
+		/*
+		 * Chrome on Linux and Windows paints a classic 15px scrollbar, which lands
+		 * inside the list padding and cuts through the group card's edge. A thin,
+		 * token-coloured bar keeps the clipped-content cue without that.
+		 */
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in oklab, var(--foreground) 30%, transparent)
+			transparent;
+		background:
+			linear-gradient(var(--popover) 30%, transparent) local top / 100% 1.25rem
+			no-repeat,
+			linear-gradient(transparent, var(--popover) 70%) local bottom / 100%
+			1.25rem no-repeat,
+			radial-gradient(
+				farthest-side at 50% 0,
+				color-mix(in oklab, var(--foreground) 14%, transparent),
+				transparent
+			)
+			scroll top / 100% 0.5rem no-repeat,
+			radial-gradient(
+				farthest-side at 50% 100%,
+				color-mix(in oklab, var(--foreground) 14%, transparent),
+				transparent
+			)
+			scroll bottom / 100% 0.5rem no-repeat;
+		background-color: var(--popover);
+	}
+}

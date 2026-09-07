@@ -1,0 +1,62 @@
+<!--
+GitLab version: 18.11.9-ce.0
+Page: authenticated merge request detail header after Vue hydration
+Page identifier: projects:merge_requests:show
+Capture date: 2026-09-04
+Source type: independently minimized live local-lab DOM, checked against official GitLab 18-11-stable-ee source
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/views/projects/merge_requests/_mr_title.html.haml
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/assets/javascripts/vue_shared/components/mr_more_dropdown.vue
+Sanitization: synthetic namespace, title, branch, and reference; generated IDs, dropdown contents,
+and unrelated controls removed; no executable scripts. Retained classes, test IDs, button structure,
+and SVG sprite URL are GitLab-owned values observed after hydration.
+-->
+<div class="detail-page-header gl-flex gl-pt-5 gl-gap-3 gl-flex-wrap gl-mb-3 @sm/panel:gl-flex-nowrap @sm/panel:gl-mb-0 is-merge-request">
+	<h1 class="title gl-heading-1" data-testid="title-content">Improve project presentation</h1>
+	<div class="gl-flex gl-flex-row gl-gap-3 gl-w-full js-issuable-actions @sm/panel:gl-w-auto">
+		<div class="dropdown gl-dropdown gl-flex-1">
+			<button
+				class="gl-button btn btn-md btn-default gl-flex gl-self-start gl-w-full @sm/panel:gl-w-auto !gl-pr-3"
+				data-toggle="dropdown"
+				data-testid="mr-code-dropdown"
+				type="button"
+			>
+				<span class="gl-button-text">Code</span>
+			</button>
+		</div>
+		<div data-testid="merge-request-actions" class="gl-self-start">
+			<div
+				class="gl-disclosure-dropdown gl-w-full gl-new-dropdown !gl-block"
+				title="Merge request actions"
+				data-testid="dropdown-toggle"
+			>
+				<button
+					data-testid="base-dropdown-toggle"
+					aria-expanded="false"
+					type="button"
+					class="btn gl-button btn-default btn-md btn-default-tertiary btn-block gl-flex gl-new-dropdown-toggle gl-new-dropdown-icon-only btn-icon gl-new-dropdown-toggle-no-caret"
+				>
+					<svg data-testid="ellipsis_v-icon" aria-hidden="true" class="gl-button-icon gl-icon s16">
+						<use href="/assets/icons-41229992eca580608aadaaa9b83b717650b2863442574d0ebb87f859c42a3b6c.svg#ellipsis_v"></use>
+					</svg>
+					<span class="gl-sr-only">Merge request actions</span>
+				</button>
+				<div class="gl-new-dropdown-container">
+					<ul>
+						<li
+							data-testid="copy-reference"
+							class="js-copy-reference gl-new-dropdown-item"
+							data-clipboard-text="example/project!7"
+						>
+							<button type="button">
+								<svg data-testid="copy-to-clipboard-icon" aria-hidden="true" class="gl-icon s16">
+									<use href="/assets/icons-41229992eca580608aadaaa9b83b717650b2863442574d0ebb87f859c42a3b6c.svg#copy-to-clipboard"></use>
+								</svg>
+								<span>Copy reference</span>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
