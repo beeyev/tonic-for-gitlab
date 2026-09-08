@@ -22,3 +22,9 @@ opencode.json
 
 # APM dependencies
 apm_modules/
+
+# APM generated agent context files, source of truth is .apm/instructions/
+# Regenerate with `apm compile`
+/AGENTS.md
+/CLAUDE.md
+/.github/copilot-instructions.md
