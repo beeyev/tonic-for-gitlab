@@ -88,7 +88,7 @@ describe("local-lab extension project", () => {
 		 * to register for a self-managed origin by this exact pattern, so drift
 		 * here would leave every added instance on `registration-failed`.
 		 */
-		expect(matches).toEqual(["https://gitlab.com:443/*"]);
+		expect(matches).toEqual(["https://gitlab.com/*"]);
 		expect(findFixedLabOriginReferences(manifest, origins)).toEqual([]);
 		expect(() =>
 			assertNoFixedLabOrigins(
@@ -158,11 +158,8 @@ describe("local-lab extension project", () => {
 
 		// Injection stays dynamic, so the lab origins reach Chrome as granted
 		// host permissions and never as extra static matches.
-		expect(generatedMatches).toEqual(["https://gitlab.com:443/*"]);
-		expect(generatedManifest.host_permissions).toEqual([
-			"http://localhost:10018/*",
-			"http://localhost:10019/*",
-		]);
+		expect(generatedMatches).toEqual(["https://gitlab.com/*"]);
+		expect(generatedManifest.host_permissions).toEqual(["http://localhost/*"]);
 		expect(generatedManifest.name).toBe("Tonic for GitLab (local lab)");
 
 		generatedManifest.name = sourceManifest.name;

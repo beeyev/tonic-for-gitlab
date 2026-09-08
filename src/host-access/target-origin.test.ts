@@ -144,6 +144,13 @@ describe("target origin normalization", () => {
 			status: "rejected",
 			reason: "built-in",
 		});
+		expect(resolveTargetOrigin("https://gitlab.com:8443", [])).toEqual({
+			status: "rejected",
+			reason: "built-in",
+		});
+		expect(resolveTargetOrigin("http://gitlab.com", []).status).toBe(
+			"accepted",
+		);
 		expect(
 			resolveTargetOrigin("https://gitlab.example.com/group", [
 				"https://gitlab.example.com",
@@ -163,20 +170,17 @@ describe("target origin normalization", () => {
 });
 
 describe("derived identifiers", () => {
-	test("preserves a non-default port in an exact-origin pattern", () => {
+	test("uses one browser permission scope for every port on a hostname", () => {
 		expect(toOriginPattern("http://localhost:10019")).toBe(
-			"http://localhost:10019/*",
+			"http://localhost/*",
 		);
-	});
-
-	test("restores default ports that URL normalization removes", () => {
 		expect(toOriginPattern("http://gitlab.example.com")).toBe(
-			"http://gitlab.example.com:80/*",
+			"http://gitlab.example.com/*",
 		);
 		expect(toOriginPattern("https://gitlab.example.com")).toBe(
-			"https://gitlab.example.com:443/*",
+			"https://gitlab.example.com/*",
 		);
-		expect(toOriginPattern("http://[::1]")).toBe("http://[::1]:80/*");
+		expect(toOriginPattern("http://[::1]:8080")).toBe("http://[::1]/*");
 	});
 
 	test("is stable for one origin and distinct for origins a substitution would merge", () => {
@@ -185,6 +189,12 @@ describe("derived identifiers", () => {
 		);
 		expect(toContentScriptId("https://a.b")).not.toBe(
 			toContentScriptId("https://a-b"),
+		);
+		expect(toContentScriptId("https://a.b:8443")).toBe(
+			toContentScriptId("https://a.b"),
+		);
+		expect(toContentScriptId("http://a.b")).not.toBe(
+			toContentScriptId("https://a.b"),
 		);
 	});
 

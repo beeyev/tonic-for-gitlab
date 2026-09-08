@@ -1,6 +1,6 @@
 # Tonic for GitLab
 
-Tonic for GitLab is a Chrome extension for small, configurable improvements to
+Tonic for GitLab is a browser extension for small, configurable improvements to
 the GitLab interface. It works on `GitLab.com` and on self-managed instances you
 add yourself. Everything runs in the browser.
 
@@ -23,32 +23,48 @@ add yourself. Everything runs in the browser.
 > is approved, this section will link to the listing and Chrome will handle
 > updates.
 
-## Install manually
+## Install manually in a Chromium browser
 
 Until then, or if you prefer release builds from GitHub:
 
 1. Download the Chrome ZIP from the [latest release](https://github.com/beeyev/tonic-for-gitlab/releases/latest).
 2. Extract it somewhere permanent.
-3. Open `chrome://extensions` in Chrome and enable Developer mode.
+3. Open the browser's extensions page and enable Developer mode:
+   `chrome://extensions`, `edge://extensions`, `brave://extensions`, or
+   `vivaldi://extensions`.
 4. Click "Load unpacked" and select the extracted directory that contains
    `manifest.json`.
-5. Pin the extension from Chrome's extensions menu, then open GitLab.
+5. Pin the extension from the browser's extensions menu, then open GitLab.
 
 Chrome documents the same unpacked-install flow in its [extension guide](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked).
+Microsoft documents [sideloading in Edge](https://learn.microsoft.com/en-us/microsoft-edge/extensions/getting-started/extension-sideloading),
+and Vivaldi documents its [Chromium extension support](https://help.vivaldi.com/desktop/appearance-customization/extensions/).
+
+## Install temporarily in Firefox
+
+Firefox requires Mozilla signing for ordinary permanent installation. To test
+an unsigned local build:
+
+1. Run `bun run build`.
+2. Open `about:debugging#/runtime/this-firefox` in Firefox.
+3. Click "Load Temporary Add-on" and select `dist/firefox/manifest.json`.
+
+Firefox removes temporary add-ons when it restarts. Mozilla documents this flow
+in its [temporary installation guide](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
 
 ## Add a self-managed GitLab instance
 
 `GitLab.com` works immediately. To add your own GitLab instance:
 
-1. Open the extension from the Chrome toolbar.
-2. Under `GitLab instances`, enter the address and click `Add`
-3. Approve Chrome access request, then reload any open tab for that instance.
-4. If access was denied, open the extension again and click "Grant access"
-   beside the saved address.
+1. Open the extension from the browser toolbar.
+2. Under `GitLab instances`, enter the address and click `Add`.
+3. If the row says "Access needed", click "Grant access" and approve the browser request.
+4. Reload any open tab for that instance.
 
 You can paste either the GitLab address or a full link to a page in that
-instance. This extension keeps only the scheme, host and port. Chrome grants
-access to the whole instance, not separate project or merge request paths.
+instance. This extension keeps only the scheme, host and port. The browser
+grants access to that scheme and hostname on every port, not to another scheme,
+hostname, subdomain, or to separate project and merge request paths.
 
 | You enter | Saved address |
 | --- | --- |

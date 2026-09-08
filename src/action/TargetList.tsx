@@ -1,13 +1,10 @@
 import { type FormEvent, useId, useState } from "react";
 import type { TargetAccess, TargetState } from "../host-access/registration";
-import {
-	BUILT_IN_ORIGIN,
-	type TargetOriginRejection,
-} from "../host-access/target-origin";
+import { BUILT_IN_ORIGIN } from "../host-access/target-origin";
 import { Button } from "../ui/components/button";
 import { PlusIcon, TrashIcon } from "../ui/components/icons";
 import { Input } from "../ui/components/input";
-import type { HostAccessFailure } from "./use-host-access";
+import type { AddOriginRejection, HostAccessFailure } from "./use-host-access";
 
 const ACCESS_LABELS: Record<TargetAccess, string> = {
 	active: "Enabled",
@@ -17,7 +14,7 @@ const ACCESS_LABELS: Record<TargetAccess, string> = {
 
 // Total maps: a new rejection or failure fails to compile rather than
 // silently reusing another message.
-const REJECTION_MESSAGES: Record<TargetOriginRejection, string> = {
+const REJECTION_MESSAGES: Record<AddOriginRejection, string> = {
 	empty: "Enter a GitLab address.",
 	"invalid-url": "That is not a valid address.",
 	"unsupported-protocol": "Only http:// and https:// addresses work.",
@@ -25,6 +22,7 @@ const REJECTION_MESSAGES: Record<TargetOriginRejection, string> = {
 		"Remove the username and password from the address.",
 	"built-in": "GitLab.com is built in and always enabled.",
 	duplicate: "That instance is already in the list.",
+	busy: "Finish the current access change, then try again.",
 };
 
 const FAILURE_MESSAGES: Record<HostAccessFailure, string> = {
@@ -46,7 +44,7 @@ export interface TargetListProps {
 	isAdding: boolean;
 	failure: HostAccessFailure | undefined;
 	hasStaleTabs: boolean;
-	onAdd(input: string): TargetOriginRejection | undefined;
+	onAdd(input: string): AddOriginRejection | undefined;
 	onGrant(origin: string): void;
 	onRemove(origin: string): void;
 }
@@ -66,7 +64,8 @@ export function TargetList({
 	const inputId = useId();
 	const messageId = useId();
 	const [draft, setDraft] = useState("");
-	const [rejection, setRejection] = useState<TargetOriginRejection>();
+	const [rejection, setRejection] = useState<AddOriginRejection>();
+	const isMutating = isAdding || busyOrigin !== undefined;
 
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
@@ -101,7 +100,7 @@ export function TargetList({
 				{targets.map((target) => (
 					<TargetRow
 						access={target.access}
-						isBusy={busyOrigin === target.origin}
+						isBusy={isMutating}
 						isCurrent={currentOrigin === target.origin}
 						key={target.origin}
 						onGrant={onGrant}
@@ -140,7 +139,7 @@ export function TargetList({
 				<div className="flex items-start gap-1.5">
 					<Input
 						aria-describedby={message ? messageId : undefined}
-						aria-invalid={rejection !== undefined}
+						aria-invalid={rejection !== undefined && rejection !== "busy"}
 						autoComplete="off"
 						id={inputId}
 						onValueChange={(value) => {
@@ -158,7 +157,7 @@ export function TargetList({
 					 * without the "already in the list" message. Storage still
 					 * deduplicates, so nothing was corrupted, only confusing.
 					 */}
-					<Button disabled={isAdding || isLoading} type="submit">
+					<Button disabled={isMutating || isLoading} type="submit">
 						<PlusIcon data-icon="inline-start" />
 						Add
 					</Button>
@@ -171,7 +170,7 @@ export function TargetList({
 					role={message ? "alert" : undefined}
 				>
 					{message ??
-						"https:// is assumed. Use http:// for an instance without TLS."}
+						"HTTPS is assumed. For HTTP, include http://. Add the address, then grant access if needed; access covers every port on that hostname."}
 				</p>
 			</form>
 		</section>

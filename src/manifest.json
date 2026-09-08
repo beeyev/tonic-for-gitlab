@@ -19,7 +19,7 @@
 	"optional_host_permissions": ["http://*/*", "https://*/*"],
 	"content_scripts": [
 		{
-			"matches": ["https://gitlab.com:443/*"],
+			"matches": ["https://gitlab.com/*"],
 			"js": ["content/index.ts"],
 			"css": [
 				"content/runtime/merge-request-list-actions.css",
@@ -35,7 +35,17 @@
 		}
 	],
 	"background": {
-		"service_worker": "background/index.ts"
+		"chromium:service_worker": "background/index.ts",
+		"firefox:scripts": ["background/index.ts"]
+	},
+	"firefox:browser_specific_settings": {
+		"gecko": {
+			"id": "tonic-for-gitlab@beeyev.github.io",
+			"strict_min_version": "140.0",
+			"data_collection_permissions": {
+				"required": ["none"]
+			}
+		}
 	},
 	"action": {
 		"default_icon": {

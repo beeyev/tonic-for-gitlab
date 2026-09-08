@@ -4,7 +4,11 @@ import {
 	isRecord,
 	type StorageArea,
 } from "../storage/storage-key";
-import { BUILT_IN_ORIGIN, isTargetOrigin } from "./target-origin";
+import {
+	BUILT_IN_ORIGIN,
+	isTargetOrigin,
+	toOriginPattern,
+} from "./target-origin";
 
 /**
  * User-configured self-managed origins live under their own storage key rather
@@ -108,15 +112,14 @@ export function resolveTargets(value: unknown): TargetsResolution {
 
 	for (const entry of value.origins) {
 		/*
-		 * A duplicate would register the same script twice under one ID, and the
-		 * built-in origin would register a second script alongside the manifest's
-		 * static one. Adding either is already refused; dropping them here too
-		 * means storage written by another build, or by hand, cannot reintroduce
-		 * them.
+		 * A duplicate would create two UI rows. Any origin in GitLab.com's built-in
+		 * scheme-and-host scope would also overlap its static content script. Adding
+		 * either is refused; dropping them here means older or hand-edited storage
+		 * cannot reintroduce them.
 		 */
 		if (
 			isTargetOrigin(entry) &&
-			entry !== BUILT_IN_ORIGIN &&
+			toOriginPattern(entry) !== toOriginPattern(BUILT_IN_ORIGIN) &&
 			!origins.includes(entry)
 		) {
 			origins.push(entry);

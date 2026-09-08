@@ -25,6 +25,8 @@ export type HostAccessFailure =
 	| "grant-failed"
 	| "remove-failed";
 
+export type AddOriginRejection = TargetOriginRejection | "busy";
+
 export interface HostAccess {
 	isLoading: boolean;
 	targets: TargetState[];
@@ -42,11 +44,10 @@ export interface HostAccess {
 	/**
 	 * Validates and starts the add. Returns the rejection when the input was
 	 * refused before anything was persisted, so the caller can keep the text the
-	 * user typed and show why. Resolving is synchronous on purpose: the
-	 * permission request that follows has to stay inside the click's user
-	 * activation.
+	 * user typed and show why. Permission is requested by a separate Grant click
+	 * because Firefox loses user activation after the asynchronous storage write.
 	 */
-	addOrigin(input: string): TargetOriginRejection | undefined;
+	addOrigin(input: string): AddOriginRejection | undefined;
 	grantOrigin(origin: string): void;
 	removeOrigin(origin: string): void;
 }
@@ -83,6 +84,7 @@ export function useHostAccess(
 	const [isAdding, setIsAdding] = useState(false);
 	const [failure, setFailure] = useState<HostAccessFailure>();
 	const [hasStaleTabs, setHasStaleTabs] = useState(false);
+	const accessMutationInFlight = useRef(false);
 
 	// The popup can be dismissed mid-request; nothing may set state after that.
 	const isMounted = useRef(true);
@@ -160,7 +162,7 @@ export function useHostAccess(
 	}, [repository, applyOrigins]);
 
 	const addOrigin = useCallback(
-		(input: string): TargetOriginRejection | undefined => {
+		(input: string): AddOriginRejection | undefined => {
 			const resolved = resolveTargetOrigin(
 				input,
 				targets.map((target) => target.origin),
@@ -169,81 +171,66 @@ export function useHostAccess(
 			if (resolved.status === "rejected") {
 				return resolved.reason;
 			}
+			if (accessMutationInFlight.current) {
+				return "busy";
+			}
+			accessMutationInFlight.current = true;
 
 			setFailure(undefined);
 			setIsAdding(true);
 
 			void (async () => {
-				let persisted: readonly string[] | undefined;
-
 				try {
 					/*
-					 * Persisted before the permission is requested, and awaited.
-					 *
-					 * Chrome closes the toolbar popup when it raises the permission
-					 * prompt, which destroys this document and every promise still
-					 * running in it. Requesting first and persisting "in parallel"
-					 * therefore lost the origin outright: the write is a read then a
-					 * write, and the popup died before the write was dispatched. The
-					 * user saw the prompt, granted it, and found an empty list.
-					 *
-					 * The cost is one storage round trip between the click and the
-					 * request. Transient user activation lasts about five seconds and
-					 * survives an await, so the gesture is still valid. If it ever is
-					 * not, the request rejects and the origin stays visible as
-					 * `permission-required` with a Grant control, which is a far
-					 * better failure than silently discarding it.
+					 * This is deliberately a separate step from Grant. Firefox loses
+					 * extension user activation after an await, while Chrome may close
+					 * the popup as soon as a permission prompt opens. Persisting here
+					 * and requesting synchronously from Grant satisfies both contracts.
 					 */
-					persisted = (await repository.add(resolved.origin)).origins;
+					const persisted = await repository.add(resolved.origin);
 
-					await requestTargetAccess(resolved.origin, apis);
-				} catch (error) {
-					console.error(
-						persisted
-							? "Tonic could not request GitLab instance access"
-							: "Tonic could not add a GitLab instance",
-						error,
-					);
+					try {
+						await applyOrigins(persisted.origins);
+					} catch (error) {
+						console.error("Tonic could not refresh the instance list", error);
 
-					if (isMounted.current) {
-						setFailure(persisted === undefined ? "add-failed" : "grant-failed");
-					}
-				} finally {
-					/*
-					 * Reconciled even when the request failed. The origin is already
-					 * stored by then, and reporting a failure while the list still
-					 * shows no trace of it tells the user the opposite of the truth.
-					 * Only reached at all when the popup survived the prompt.
-					 */
-					if (persisted && isMounted.current) {
-						try {
-							await applyOrigins(persisted);
-						} catch (error) {
-							console.error("Tonic could not refresh the instance list", error);
+						if (isMounted.current) {
+							setFailure("reconcile-failed");
 						}
 					}
+				} catch (error) {
+					console.error("Tonic could not add a GitLab instance", error);
 
+					if (isMounted.current) {
+						setFailure("add-failed");
+					}
+				} finally {
 					if (isMounted.current) {
 						setIsAdding(false);
 					}
+					accessMutationInFlight.current = false;
 				}
 			})();
 
 			return undefined;
 		},
-		[apis, repository, applyOrigins, targets],
+		[repository, applyOrigins, targets],
 	);
 
 	const grantOrigin = useCallback(
 		(origin: string) => {
+			if (accessMutationInFlight.current) {
+				return;
+			}
+			accessMutationInFlight.current = true;
 			setFailure(undefined);
 			setBusyOrigin(origin);
 
-			const permissionRequest = requestTargetAccess(origin, apis);
-
 			void (async () => {
 				try {
-					await permissionRequest;
+					/* Keep this as the first operation: Firefox requires the API call
+					 * itself to run in the Grant click's synchronous event stack. */
+					await requestTargetAccess(origin, apis);
 					const resolution = await repository.read();
 
 					/*
@@ -272,6 +259,7 @@ export function useHostAccess(
 					if (isMounted.current) {
 						setBusyOrigin(undefined);
 					}
+					accessMutationInFlight.current = false;
 				}
 			})();
 		},
@@ -280,13 +268,31 @@ export function useHostAccess(
 
 	const removeOrigin = useCallback(
 		(origin: string) => {
+			if (accessMutationInFlight.current) {
+				return;
+			}
+			accessMutationInFlight.current = true;
 			setFailure(undefined);
 			setBusyOrigin(origin);
 
 			void (async () => {
 				try {
+					const resolution = await repository.read();
+
+					if (isUntrustedTargets(resolution.outcome)) {
+						if (isMounted.current) {
+							setFailure("untrusted-targets");
+						}
+
+						return;
+					}
+
 					// Unregister and revoke first: see `releaseTargetAccess`.
-					await releaseTargetAccess(origin, apis);
+					await releaseTargetAccess(
+						origin,
+						resolution.targets.origins.filter((entry) => entry !== origin),
+						apis,
+					);
 					const stored = await repository.remove(origin);
 					await applyOrigins(stored.origins);
 
@@ -303,6 +309,7 @@ export function useHostAccess(
 					if (isMounted.current) {
 						setBusyOrigin(undefined);
 					}
+					accessMutationInFlight.current = false;
 				}
 			})();
 		},

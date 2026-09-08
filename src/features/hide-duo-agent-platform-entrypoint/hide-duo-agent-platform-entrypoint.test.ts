@@ -424,7 +424,7 @@ describe("hide-duo-agent-platform-entrypoint", () => {
 		).json();
 		const gitLabContentScript = manifest.content_scripts.find(
 			(script: { matches?: string[] }) =>
-				script.matches?.includes("https://gitlab.com:443/*"),
+				script.matches?.includes("https://gitlab.com/*"),
 		);
 
 		expect(gitLabContentScript?.css).toContain(

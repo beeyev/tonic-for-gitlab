@@ -26,7 +26,7 @@ This processing occurs locally in the browser. No GitLab page content, usernames
 Tonic uses browser-managed extension storage for:
 
 - Feature preferences.
-- Exact self-managed GitLab origins added by the user.
+- Self-managed GitLab origins added by the user.
 - Merge request list paths and filter query parameters the user chooses to remember.
 - A timestamp used to manage remembered filter entries.
 - A SHA-256 fingerprint and dismissal state for the latest broadcast banner on an origin. Raw banner text is not stored.
@@ -48,15 +48,15 @@ The extension operates inside GitLab pages. GitLab's own collection and processi
 
 ## Permissions
 
-- **Host access:** Allows Tonic to run on GitLab.com and on exact self-managed GitLab origins explicitly added and approved by the user.
-- **Scripting:** Registers or removes Tonic's content script for those user-approved self-managed GitLab origins.
+- **Host access:** Allows Tonic to run on GitLab.com and on self-managed GitLab schemes and hostnames explicitly added and approved by the user.
+- **Scripting:** Registers or removes Tonic's content script for those user-approved self-managed GitLab host scopes.
 - **Storage:** Saves the local settings and feature state described above.
 
 Tonic does not load or execute remote JavaScript or WebAssembly. All executable code is included in the reviewed extension package.
 
 ## Retention and deletion
 
-Stored data remains in browser-managed extension storage until the user replaces or removes it, clears the extension's data, or uninstalls the extension. Removing a self-managed GitLab instance revokes Tonic's registered content script for that origin and removes the origin from Tonic's saved list.
+Stored data remains in browser-managed extension storage until the user replaces or removes it, clears the extension's data, or uninstalls the extension. Removing the last saved instance for a scheme and hostname unregisters Tonic's content script and asks the browser to revoke host access for that scope. A broader grant managed by the browser may remain. Removing one saved port keeps shared access while another saved port still uses it.
 
 ## Chrome Web Store Limited Use
 

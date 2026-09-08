@@ -1,9 +1,9 @@
 /**
  * A Tonic host target is a normalized `http` or `https` origin and nothing
- * else. Chrome host permissions are origin-scoped, so a path component would
- * never be a permission boundary; a relative-root GitLab such as
- * `https://intranet.example/gitlab` is reached by granting its whole origin and
- * letting the feature contract decide where Tonic actually activates.
+ * else. Browser host permissions are scoped to scheme and hostname here, so a
+ * path component would never be a permission boundary. A relative-root GitLab
+ * such as `https://intranet.example/gitlab` is reached by granting its scheme
+ * and hostname, then letting the feature contract decide where Tonic activates.
  *
  * `http` is deliberately supported. Self-managed GitLab on a private network is
  * routinely served without TLS, and the local verification lab in `lab/` is
@@ -115,7 +115,7 @@ export function resolveTargetOrigin(
 		return parsed;
 	}
 
-	if (parsed.origin === BUILT_IN_ORIGIN) {
+	if (toOriginPattern(parsed.origin) === toOriginPattern(BUILT_IN_ORIGIN)) {
 		return { status: "rejected", reason: "built-in" };
 	}
 
@@ -142,32 +142,29 @@ export function isTargetOrigin(value: unknown): value is string {
 }
 
 /**
- * The exact-origin pattern used for permission requests and script matches.
+ * The scheme-and-host pattern used for permission requests and script matches.
  *
- * `URL.origin` omits default ports, but Chrome treats an omitted match-pattern
- * port as `:*`. Put the default back so a normalized origin still matches only
- * its own port.
+ * Firefox does not accept ports in match patterns. Omitting the port also gives
+ * Chrome the same behavior: one configured hostname covers GitLab on every
+ * port for that scheme, but never another hostname, subdomain, or scheme.
  */
 export function toOriginPattern(origin: string): string {
 	const url = new URL(origin);
-	const port = url.port || (url.protocol === "http:" ? "80" : "443");
 
-	return `${url.protocol}//${url.hostname}:${port}/*`;
+	return `${url.protocol}//${url.hostname}/*`;
 }
 
 export const CONTENT_SCRIPT_ID_PREFIX = "tonic-origin-";
 
 /**
- * Deterministic registration ID for an origin.
+ * Deterministic registration ID for a browser host-access scope.
  *
- * Base64url rather than something readable: the ID has to be injective, and
- * substituting non-alphanumeric characters is not. `https://a.b` and
- * `https://a-b` are different origins that a naive substitution collapses onto
- * one ID, which would silently drop a registration. `URL.origin` is ASCII (IDN
- * hosts come back punycoded), so `btoa` is safe here.
+ * Origins on different ports intentionally share one registration because the
+ * browser permission and content-script match cover every port. Base64url keeps
+ * distinct schemes and hostnames injective without relying on substitutions.
  */
 export function toContentScriptId(origin: string): string {
-	const encoded = btoa(origin)
+	const encoded = btoa(toOriginPattern(origin))
 		.replace(/\+/g, "-")
 		.replace(/\//g, "_")
 		.replace(/=+$/, "");

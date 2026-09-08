@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import type { HostAccessApis } from "../host-access/registration";
+import { toContentScriptId } from "../host-access/target-origin";
 import type {
 	TargetsRepository,
 	TonicTargets,
@@ -77,7 +78,7 @@ function createCountingDependencies(origins: string[] = []) {
 		runtime: {
 			getManifest: () => ({
 				content_scripts: [
-					{ matches: ["https://gitlab.com:443/*"], js: ["content.js"] },
+					{ matches: ["https://gitlab.com/*"], js: ["content.js"] },
 				],
 			}),
 		},
@@ -140,7 +141,7 @@ describe("host access hook", () => {
 			runtime: {
 				getManifest: () => ({
 					content_scripts: [
-						{ matches: ["https://gitlab.com:443/*"], js: ["content.js"] },
+						{ matches: ["https://gitlab.com/*"], js: ["content.js"] },
 					],
 				}),
 			},
@@ -185,20 +186,7 @@ describe("host access hook", () => {
 		expect(counts.reads).toBe(1);
 	});
 
-	/*
-	 * Regression guard for a defect that only appears in a real toolbar popup.
-	 *
-	 * Chrome closes the popup when it raises the permission prompt, destroying
-	 * the document and every promise still running in it. The add flow used to
-	 * request first and persist "in parallel", so the storage write (a read then
-	 * a write) was still in flight when the popup died: the user saw the prompt,
-	 * granted it, and found an empty list. Driving a popup rendered as a tab did
-	 * not reproduce it, because a tab does not close.
-	 *
-	 * The permission request here never settles, standing in for a prompt that
-	 * outlives the document.
-	 */
-	test("persists the origin before the permission prompt can close the popup", async () => {
+	test("persists an origin without spending the add click's user activation", async () => {
 		const order: string[] = [];
 		const stored: string[] = [];
 		installSessionStorage();
@@ -209,9 +197,9 @@ describe("host access hook", () => {
 			stored.push(origin);
 			return { schemaVersion: 1, origins: [...stored] };
 		};
-		apis.permissions.request = () => {
+		apis.permissions.request = async () => {
 			order.push("request");
-			return new Promise<boolean>(() => {});
+			return true;
 		};
 
 		const view = renderHook(() => useHostAccess(repository, apis));
@@ -222,17 +210,16 @@ describe("host access hook", () => {
 
 		expect(view.result.current.addOrigin("gitlab.example.com")).toBeUndefined();
 		await waitFor(() => {
-			expect(order).toEqual(["persist", "request"]);
+			expect(view.result.current.targets).toEqual([
+				{ origin: "https://gitlab.example.com", access: "permission-required" },
+			]);
 		});
 
+		expect(order).toEqual(["persist"]);
 		expect(stored).toEqual(["https://gitlab.example.com"]);
 	});
 
-	/*
-	 * A denial must leave the origin visible and grantable rather than half-added
-	 * or gone, because it is already persisted before the prompt is answered.
-	 */
-	test("keeps a denied origin visible as permission-required", async () => {
+	test("keeps a new origin visible as permission-required", async () => {
 		installSessionStorage();
 		const { apis, repository } = createCountingDependencies();
 		const origins: string[] = [];
@@ -241,9 +228,6 @@ describe("host access hook", () => {
 			origins.push(origin);
 			return { schemaVersion: 1, origins: [...origins] };
 		};
-		// Denial resolves false; it does not throw.
-		apis.permissions.request = async () => false;
-
 		const view = renderHook(() => useHostAccess(repository, apis));
 		await waitFor(() => {
 			expect(view.result.current.isLoading).toBe(false);
@@ -259,17 +243,34 @@ describe("host access hook", () => {
 		expect(view.result.current.failure).toBeUndefined();
 	});
 
-	test("still shows the origin when the permission request rejects", async () => {
+	test("requests permission immediately from the separate Grant click", async () => {
 		installSessionStorage();
 		const { apis, repository } = createCountingDependencies();
 		const origins: string[] = [];
+		const order: string[] = [];
 
 		repository.add = async (origin: string) => {
 			origins.push(origin);
 			return { schemaVersion: 1, origins: [...origins] };
 		};
-		apis.permissions.request = async () => {
-			throw new Error("This function must be called during a user gesture");
+		let requestAttempts = 0;
+		apis.permissions.request = () => {
+			requestAttempts++;
+			order.push("request");
+
+			if (requestAttempts === 1) {
+				throw new Error("This function must be called during a user gesture");
+			}
+
+			return Promise.resolve(false);
+		};
+		repository.read = async () => {
+			order.push("read");
+			return {
+				outcome: "stored",
+				targets: { schemaVersion: 1, origins: [...origins] },
+				droppedOrigins: [],
+			};
 		};
 
 		const view = renderHook(() => useHostAccess(repository, apis));
@@ -278,17 +279,23 @@ describe("host access hook", () => {
 		});
 
 		view.result.current.addOrigin("gitlab.example.com");
+		await waitFor(() => {
+			expect(view.result.current.targets).toHaveLength(1);
+		});
+		order.length = 0;
+
+		view.result.current.grantOrigin("https://gitlab.example.com");
+		expect(order).toEqual(["request"]);
 
 		await waitFor(() => {
 			expect(view.result.current.failure).toBe("grant-failed");
 		});
-		/*
-		 * Reporting a failure while the list shows no trace of the origin would
-		 * tell the user the opposite of what storage holds.
-		 */
 		expect(view.result.current.targets).toEqual([
 			{ origin: "https://gitlab.example.com", access: "permission-required" },
 		]);
+
+		view.result.current.grantOrigin("https://gitlab.example.com");
+		expect(requestAttempts).toBe(2);
 	});
 
 	test("reports add-failed when the origin could not be persisted", async () => {
@@ -309,6 +316,37 @@ describe("host access hook", () => {
 			expect(view.result.current.failure).toBe("add-failed");
 		});
 		expect(view.result.current.targets).toEqual([]);
+	});
+
+	test("rejects an add that races an access mutation without persisting it", async () => {
+		installSessionStorage();
+		const origin = "https://gitlab.example.com";
+		const { apis, repository } = createCountingDependencies([origin]);
+		let finishRequest: ((granted: boolean) => void) | undefined;
+		let adds = 0;
+
+		apis.permissions.request = () =>
+			new Promise<boolean>((resolve) => {
+				finishRequest = resolve;
+			});
+		repository.add = async () => {
+			adds++;
+			return { schemaVersion: 1, origins: [origin] };
+		};
+
+		const view = renderHook(() => useHostAccess(repository, apis));
+		await waitFor(() => {
+			expect(view.result.current.isLoading).toBe(false);
+		});
+
+		act(() => view.result.current.grantOrigin(origin));
+		expect(view.result.current.addOrigin("new.example.com")).toBe("busy");
+		expect(adds).toBe(0);
+
+		await act(async () => finishRequest?.(false));
+		await waitFor(() => {
+			expect(view.result.current.busyOrigin).toBeUndefined();
+		});
 	});
 
 	test("surfaces the worker's stale-tab flag on open", async () => {
@@ -389,5 +427,201 @@ describe("host access hook", () => {
 			expect(view.result.current.failure).toBe("untrusted-targets");
 		});
 		expect(unregistered).toEqual([]);
+	});
+
+	test("reads current stored siblings before releasing shared access", async () => {
+		installSessionStorage();
+		const first = "https://gitlab.example.com:8443";
+		const second = "https://gitlab.example.com:9443";
+		let origins = [first];
+		let unregisters = 0;
+		let permissionRemovals = 0;
+		const { apis, repository } = createCountingDependencies();
+
+		repository.read = async () => ({
+			outcome: "stored",
+			targets: { schemaVersion: 1, origins: [...origins] },
+			droppedOrigins: [],
+		});
+		repository.remove = async (origin: string) => {
+			origins = origins.filter((entry) => entry !== origin);
+			return { schemaVersion: 1, origins: [...origins] };
+		};
+		apis.permissions.contains = async () => true;
+		apis.permissions.remove = async () => {
+			permissionRemovals++;
+			return true;
+		};
+		apis.scripting.getRegisteredContentScripts = async () => [
+			{
+				id: toContentScriptId(first),
+				matches: ["https://gitlab.example.com/*"],
+			},
+		];
+		apis.scripting.unregisterContentScripts = async () => {
+			unregisters++;
+		};
+
+		const view = renderHook(() => useHostAccess(repository, apis));
+		await waitFor(() => {
+			expect(view.result.current.targets).toHaveLength(1);
+		});
+
+		origins = [first, second];
+		act(() => view.result.current.removeOrigin(first));
+
+		await waitFor(() => {
+			expect(
+				view.result.current.targets.map((target) => target.origin),
+			).toEqual([second]);
+		});
+		expect(unregisters).toBe(0);
+		expect(permissionRemovals).toBe(0);
+	});
+
+	test("does not release or remove when current stored targets are untrusted", async () => {
+		installSessionStorage();
+		const origin = "https://gitlab.example.com";
+		let outcome: "stored" | "newer-schema" = "stored";
+		let removals = 0;
+		let releases = 0;
+		const { apis, repository } = createCountingDependencies();
+
+		repository.read = async () => ({
+			outcome,
+			targets: { schemaVersion: 1, origins: [origin] },
+			droppedOrigins: [],
+		});
+		repository.remove = async () => {
+			removals++;
+			return { schemaVersion: 1, origins: [] };
+		};
+		apis.scripting.unregisterContentScripts = async () => {
+			releases++;
+		};
+		apis.permissions.remove = async () => {
+			releases++;
+			return true;
+		};
+
+		const view = renderHook(() => useHostAccess(repository, apis));
+		await waitFor(() => {
+			expect(view.result.current.isLoading).toBe(false);
+		});
+
+		outcome = "newer-schema";
+		act(() => view.result.current.removeOrigin(origin));
+
+		await waitFor(() => {
+			expect(view.result.current.failure).toBe("untrusted-targets");
+		});
+		expect(removals).toBe(0);
+		expect(releases).toBe(0);
+	});
+
+	test("does not release or remove when current stored targets cannot be read", async () => {
+		installSessionStorage();
+		const origin = "https://gitlab.example.com";
+		let failRead = false;
+		let removals = 0;
+		let releases = 0;
+		const { apis, repository } = createCountingDependencies();
+
+		repository.read = async () => {
+			if (failRead) {
+				throw new Error("storage unavailable");
+			}
+
+			return {
+				outcome: "stored",
+				targets: { schemaVersion: 1, origins: [origin] },
+				droppedOrigins: [],
+			};
+		};
+		repository.remove = async () => {
+			removals++;
+			return { schemaVersion: 1, origins: [] };
+		};
+		apis.scripting.unregisterContentScripts = async () => {
+			releases++;
+		};
+		apis.permissions.remove = async () => {
+			releases++;
+			return true;
+		};
+
+		const view = renderHook(() => useHostAccess(repository, apis));
+		await waitFor(() => {
+			expect(view.result.current.isLoading).toBe(false);
+		});
+
+		failRead = true;
+		act(() => view.result.current.removeOrigin(origin));
+
+		await waitFor(() => {
+			expect(view.result.current.failure).toBe("remove-failed");
+		});
+		expect(removals).toBe(0);
+		expect(releases).toBe(0);
+	});
+
+	test("blocks concurrent sibling-port removals so their shared permission is revoked", async () => {
+		installSessionStorage();
+		const first = "https://gitlab.example.com:8443";
+		const second = "https://gitlab.example.com:9443";
+		let origins = [first, second];
+		const registered = new Set([toContentScriptId(first)]);
+		let permissionRemovals = 0;
+		const { apis, repository } = createCountingDependencies(origins);
+
+		repository.read = async () => ({
+			outcome: "stored",
+			targets: { schemaVersion: 1, origins: [...origins] },
+			droppedOrigins: [],
+		});
+		repository.remove = async (origin: string) => {
+			origins = origins.filter((entry) => entry !== origin);
+			return { schemaVersion: 1, origins: [...origins] };
+		};
+		apis.permissions.contains = async () => true;
+		apis.permissions.remove = async () => {
+			permissionRemovals++;
+			return true;
+		};
+		apis.scripting.getRegisteredContentScripts = async () =>
+			[...registered].map((id) => ({
+				id,
+				matches: ["https://gitlab.example.com/*"],
+			}));
+		apis.scripting.unregisterContentScripts = async ({ ids }) => {
+			for (const id of ids) {
+				registered.delete(id);
+			}
+		};
+
+		const view = renderHook(() => useHostAccess(repository, apis));
+		await waitFor(() => {
+			expect(view.result.current.targets).toHaveLength(2);
+		});
+
+		act(() => {
+			view.result.current.removeOrigin(first);
+			view.result.current.removeOrigin(second);
+		});
+
+		await waitFor(() => {
+			expect(
+				view.result.current.targets.map((target) => target.origin),
+			).toEqual([second]);
+		});
+		expect(permissionRemovals).toBe(0);
+		expect(registered).toEqual(new Set([toContentScriptId(first)]));
+
+		act(() => view.result.current.removeOrigin(second));
+		await waitFor(() => {
+			expect(view.result.current.targets).toEqual([]);
+		});
+		expect(permissionRemovals).toBe(1);
+		expect(registered).toEqual(new Set());
 	});
 });

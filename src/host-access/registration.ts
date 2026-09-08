@@ -57,51 +57,6 @@ function registrationMatchesOrigin(
 	);
 }
 
-/** The pre-fix pattern that gave every port access when the port was omitted. */
-function toLegacyPortWildcardPattern(origin: string): string | undefined {
-	return new URL(origin).port === "" ? `${origin}/*` : undefined;
-}
-
-/*
- * Remove wildcard-port grants created before explicit default ports. `contains`
- * cannot distinguish them, and revoking one may also revoke sibling ports.
- */
-async function removeLegacyPortWildcardPermissions(
-	origins: readonly string[],
-	apis: HostAccessApis,
-): Promise<boolean> {
-	let grantedOrigins: readonly string[];
-
-	try {
-		grantedOrigins = (await apis.permissions.getAll()).origins ?? [];
-	} catch (error) {
-		console.error("Tonic could not inspect its host permissions", error);
-		return false;
-	}
-
-	const legacyPatterns = [
-		...new Set(
-			origins
-				.map(toLegacyPortWildcardPattern)
-				.filter(
-					(pattern): pattern is string =>
-						pattern !== undefined && grantedOrigins.includes(pattern),
-				),
-		),
-	];
-
-	if (legacyPatterns.length === 0) {
-		return false;
-	}
-
-	try {
-		return await apis.permissions.remove({ origins: legacyPatterns });
-	} catch (error) {
-		console.error("Tonic could not revoke a legacy host permission", error);
-		return false;
-	}
-}
-
 export function createHostAccessApis(): HostAccessApis {
 	return {
 		permissions: chrome.permissions,
@@ -165,7 +120,7 @@ export async function reconcileTargets(
 	origins: readonly string[],
 	apis: HostAccessApis,
 ): Promise<TargetReconciliation> {
-	let changed = await removeLegacyPortWildcardPermissions(origins, apis);
+	let changed = false;
 	const desired = new Map(
 		origins.map((origin) => [toContentScriptId(origin), origin]),
 	);
@@ -197,7 +152,7 @@ export async function reconcileTargets(
 	const obsoleteIds = [...owned].flatMap(([id, script]) => {
 		const origin = desired.get(id);
 
-		// Wrong matches include registrations left by the wildcard-port defect.
+		// Wrong matches include exact-port registrations from earlier builds.
 		return origin === undefined ||
 			!permitted.has(origin) ||
 			!registrationMatchesOrigin(script, origin)
@@ -266,16 +221,16 @@ export async function reconcileTargets(
 		}
 
 		try {
-			await apis.scripting.registerContentScripts([
-				{
-					id,
-					matches: [toOriginPattern(origin)],
-					js: injected.js,
-					css: injected.css,
-					runAt: injected.runAt,
-					persistAcrossSessions: true,
-				},
-			]);
+			const registration = {
+				id,
+				matches: [toOriginPattern(origin)],
+				js: injected.js,
+				css: injected.css,
+				runAt: injected.runAt,
+				persistAcrossSessions: true,
+			};
+			await apis.scripting.registerContentScripts([registration]);
+			owned.set(id, registration);
 			changed = true;
 			states.push({ origin, access: "active" });
 		} catch (error) {
@@ -300,7 +255,7 @@ export async function reconcileTargets(
 	return { targets: states, changed };
 }
 
-/** Requests the exact origin. Must be called from a user gesture. */
+/** Requests the origin's scheme and hostname on every port. Must follow a user gesture. */
 export function requestTargetAccess(
 	origin: string,
 	apis: HostAccessApis,
@@ -317,8 +272,14 @@ export function requestTargetAccess(
  */
 export async function releaseTargetAccess(
 	origin: string,
+	retainedOrigins: readonly string[],
 	apis: HostAccessApis,
 ): Promise<void> {
+	const pattern = toOriginPattern(origin);
+	if (retainedOrigins.some((entry) => toOriginPattern(entry) === pattern)) {
+		return;
+	}
+
 	try {
 		await apis.scripting.unregisterContentScripts({
 			ids: [toContentScriptId(origin)],
@@ -336,7 +297,7 @@ export async function releaseTargetAccess(
 	 * origin regardless of what the browser still grants. Removal continues.
 	 */
 	const removed = await apis.permissions.remove({
-		origins: [toOriginPattern(origin)],
+		origins: [pattern],
 	});
 
 	if (!removed) {

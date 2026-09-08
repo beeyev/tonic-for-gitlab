@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import type { HostAccessApis } from "../host-access/registration";
+import { toContentScriptId } from "../host-access/target-origin";
 import type { TargetsRepository } from "../host-access/targets-repository";
 import { registerHostAccessReconciliation } from "./host-access-reconciliation";
 
@@ -78,7 +79,7 @@ function createDependencies(
 				return true;
 			},
 			async getAll() {
-				return { origins: ["https://gl.example:443/*"] };
+				return { origins: ["https://gl.example/*"] };
 			},
 			async request() {
 				return true;
@@ -109,7 +110,7 @@ function createDependencies(
 		runtime: {
 			getManifest: () => ({
 				content_scripts: [
-					{ matches: ["https://gitlab.com:443/*"], js: ["content.js"] },
+					{ matches: ["https://gitlab.com/*"], js: ["content.js"] },
 				],
 			}),
 		},
@@ -166,8 +167,8 @@ describe("background reconciliation", () => {
 		const { session } = installSessionStorage();
 		const { apis, repository } = createDependencies("stored", [
 			{
-				id: "tonic-origin-aHR0cHM6Ly9nbC5leGFtcGxl",
-				matches: ["https://gl.example:443/*"],
+				id: toContentScriptId("https://gl.example"),
+				matches: ["https://gl.example/*"],
 			},
 		]);
 		const harness = createEvents();
@@ -206,7 +207,7 @@ describe("background reconciliation", () => {
 		registerHostAccessReconciliation(harness.events, repository, apis);
 		await settle();
 
-		expect(registered).toEqual([["tonic-origin-aHR0cHM6Ly9nbC5leGFtcGxl"]]);
+		expect(registered).toEqual([[toContentScriptId("https://gl.example")]]);
 	});
 
 	/*
@@ -226,7 +227,7 @@ describe("background reconciliation", () => {
 		harness.fire("onAdded");
 		await settle();
 
-		expect(registered).toEqual([["tonic-origin-aHR0cHM6Ly9nbC5leGFtcGxl"]]);
+		expect(registered).toEqual([[toContentScriptId("https://gl.example")]]);
 	});
 
 	test("reconciles again when a permission event arrives during a pass", async () => {
@@ -252,7 +253,7 @@ describe("background reconciliation", () => {
 		await settle();
 
 		expect(permissionReads).toBe(2);
-		expect(registered).toEqual([["tonic-origin-aHR0cHM6Ly9nbC5leGFtcGxl"]]);
+		expect(registered).toEqual([[toContentScriptId("https://gl.example")]]);
 	});
 
 	test("leaves an unusable stored list alone", async () => {

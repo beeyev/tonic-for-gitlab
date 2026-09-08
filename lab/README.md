@@ -33,15 +33,15 @@ deleting all lab data. Ask before running `cleanup`.
 make -C lab extension-project
 ```
 
-This copies the current extension into `.ignore/lab-extension` and grants both lab origins through
-required host permissions. Regenerate after source edits. Never copy its manifest into `src/` or
+This copies the current extension into `.ignore/lab-extension` and grants the shared localhost scope
+through a required host permission. Regenerate after source edits. Never copy its manifest into `src/` or
 `dist/`.
 
 1. Use Extension.js MCP tools with the repository's `.ignore/lab-extension` as `projectPath`.
    Start headed Chrome and wait for readiness. For an attended run, use
    `make -C lab verify-extension`.
 2. Add the instance URL through Tonic's toolbar, then reload the tab. Permission is already granted,
-   but this step persists the target and registers the content script.
+   so this step persists the target and registers the content script without a Grant step.
 3. Sign in at `/users/sign_in`. Wait for the visible Username and Password fields; the initial
    `#user_login` and `#user_password` inputs are hidden and populated by Vue.
 4. Check the relevant project and group pages on both versions. Use a fresh session per version:

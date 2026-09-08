@@ -42,9 +42,9 @@ logs: ## Print the last 200 log lines per instance, without following
 token: ## Print the admin API token of each instance
 	@for i in $(INSTANCES); do printf '%s ' "$$i"; $(COMPOSE) exec -T $$i cat /lab/token-$${i#gitlab-}; echo; done
 
-# Lab origins arrive as required host permissions, which Chrome grants without a
+# The lab host scope arrives as a required host permission, which Chrome grants without a
 # prompt. Add one through Tonic's toolbar to register its content script.
-extension-project: ## Generate the ignored extension project with granted lab origins
+extension-project: ## Generate the ignored extension project with the granted lab host scope
 	bun "$(LAB_DIR)/extension/prepare-test-extension.ts"
 
 # Use a fresh Extension.js session for each GitLab version. Cross-origin navigation

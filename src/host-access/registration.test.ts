@@ -19,6 +19,20 @@ function registeredScript(origin: string): FakeRegisteredScript {
 	};
 }
 
+function legacyExactPortScript(origin: string): FakeRegisteredScript {
+	const encoded = btoa(origin)
+		.replace(/\+/g, "-")
+		.replace(/\//g, "_")
+		.replace(/=+$/, "");
+
+	return {
+		id: `tonic-origin-${encoded}`,
+		matches: [
+			origin.includes("://localhost:") ? `${origin}/*` : `${origin}:443/*`,
+		],
+	};
+}
+
 interface FakeApis extends HostAccessApis {
 	calls: {
 		registered: Array<{
@@ -40,7 +54,7 @@ function createFakeApis({
 	registered = [],
 	contentScripts = [
 		{
-			matches: ["https://gitlab.com:443/*"],
+			matches: ["https://gitlab.com/*"],
 			js: ["content/index.js"],
 			css: ["features/dim-draft-merge-requests/styles.css"],
 		},
@@ -136,7 +150,7 @@ describe("target reconciliation", () => {
 	 * stops a self-managed origin running a different bundle from GitLab.com.
 	 */
 	test("registers a permitted origin with the files the built manifest declares", async () => {
-		const apis = createFakeApis({ granted: ["http://localhost:10019/*"] });
+		const apis = createFakeApis({ granted: ["http://localhost/*"] });
 		const { targets: states, changed } = await reconcileTargets(
 			["http://localhost:10019"],
 			apis,
@@ -149,7 +163,7 @@ describe("target reconciliation", () => {
 		expect(apis.calls.registered).toEqual([
 			{
 				id: toContentScriptId("http://localhost:10019"),
-				matches: ["http://localhost:10019/*"],
+				matches: ["http://localhost/*"],
 				js: ["content/index.js"],
 				css: ["features/dim-draft-merge-requests/styles.css"],
 				runAt: "document_idle",
@@ -173,8 +187,8 @@ describe("target reconciliation", () => {
 
 	test("treats an unreadable permission as missing, never as granted", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
-			containsThrowsFor: "https://gitlab.example.com:443/*",
+			granted: ["https://gitlab.example.com/*"],
+			containsThrowsFor: "https://gitlab.example.com/*",
 		});
 		const { targets: states } = await reconcileTargets(
 			["https://gitlab.example.com"],
@@ -188,7 +202,7 @@ describe("target reconciliation", () => {
 
 	test("leaves an already registered origin alone", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 			registered: [registeredScript("https://gitlab.example.com")],
 		});
 		const { targets: states, changed } = await reconcileTargets(
@@ -205,80 +219,63 @@ describe("target reconciliation", () => {
 		expect(apis.calls.unregistered).toEqual([]);
 	});
 
-	test("replaces a legacy wildcard-port registration under its existing ID", async () => {
+	test("replaces a legacy exact-port registration with the shared host scope", async () => {
 		const origin = "https://gitlab.example.com";
-		const id = toContentScriptId(origin);
+		const legacy = legacyExactPortScript(origin);
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
-			registered: [{ id, matches: ["https://gitlab.example.com/*"] }],
+			granted: ["https://gitlab.example.com/*"],
+			registered: [legacy],
 		});
 
 		expect(await reconcileTargets([origin], apis)).toEqual({
 			targets: [{ origin, access: "active" }],
 			changed: true,
 		});
-		expect(apis.calls.unregistered).toEqual([[id]]);
+		expect(apis.calls.unregistered).toEqual([[legacy.id]]);
 		expect(apis.calls.registered[0]?.matches).toEqual([
-			"https://gitlab.example.com:443/*",
+			"https://gitlab.example.com/*",
 		]);
 	});
 
-	test("revokes a legacy wildcard-port grant and keeps its configured row", async () => {
-		const origin = "http://localhost";
-		const id = toContentScriptId(origin);
+	test("does not treat an existing exact-port grant as broader host access", async () => {
+		const origin = "http://localhost:10019";
+		const legacy = legacyExactPortScript(origin);
 		const apis = createFakeApis({
-			granted: ["http://localhost/*"],
-			registered: [{ id, matches: ["http://localhost/*"] }],
+			granted: ["http://localhost:10019/*"],
+			registered: [legacy],
 		});
 
 		expect(await reconcileTargets([origin], apis)).toEqual({
 			targets: [{ origin, access: "permission-required" }],
 			changed: true,
 		});
-		expect(apis.calls.removed).toEqual([["http://localhost/*"]]);
-		expect(apis.calls.unregistered).toEqual([[id]]);
+		expect(apis.calls.removed).toEqual([]);
+		expect(apis.calls.unregistered).toEqual([[legacy.id]]);
 		expect(apis.calls.registered).toEqual([]);
 	});
 
-	test("keeps sibling-port rows when Chrome revokes their grants with the legacy wildcard", async () => {
+	test("shares one registration across configured ports on the same host", async () => {
 		const origins = ["http://localhost", "http://localhost:10019"];
 		const apis = createFakeApis({
-			granted: ["http://localhost/*", "http://localhost:10019/*"],
-			registered: [
-				{
-					id: toContentScriptId(origins[0]),
-					matches: ["http://localhost/*"],
-				},
-				registeredScript(origins[1]),
-			],
+			granted: ["http://localhost/*"],
 		});
-		let legacyGrantRemoved = false;
-		const { remove } = apis.permissions;
-		apis.permissions.remove = async (permissions) => {
-			legacyGrantRemoved = true;
-			return remove(permissions);
-		};
-		apis.permissions.contains = async () => !legacyGrantRemoved;
 
 		expect(await reconcileTargets(origins, apis)).toEqual({
 			targets: origins.map((origin) => ({
 				origin,
-				access: "permission-required",
+				access: "active",
 			})),
 			changed: true,
 		});
-		expect(apis.calls.removed).toEqual([["http://localhost/*"]]);
-		expect(apis.calls.unregistered).toEqual([origins.map(toContentScriptId)]);
+		expect(apis.calls.registered).toHaveLength(1);
+		expect(apis.calls.registered[0]?.matches).toEqual(["http://localhost/*"]);
 	});
 
-	test("never accepts a stale wildcard registration after losing an unregister race", async () => {
+	test("never accepts a stale exact-port registration after losing an unregister race", async () => {
 		const origin = "https://gitlab.example.com";
-		const stale = {
-			id: toContentScriptId(origin),
-			matches: ["https://gitlab.example.com/*"],
-		};
+		const stale = legacyExactPortScript(origin);
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 			registered: [stale],
 		});
 		apis.scripting.unregisterContentScripts = async () => {
@@ -297,7 +294,7 @@ describe("target reconciliation", () => {
 
 	test("unregisters a removed origin and one whose permission is gone", async () => {
 		const apis = createFakeApis({
-			granted: ["https://kept.example.com:443/*"],
+			granted: ["https://kept.example.com/*"],
 			registered: [
 				registeredScript("https://kept.example.com"),
 				registeredScript("https://removed.example.com"),
@@ -329,7 +326,7 @@ describe("target reconciliation", () => {
 	 */
 	test("survives the other reconciler having already unregistered", async () => {
 		const apis = createFakeApis({
-			granted: ["https://kept.example.com:443/*"],
+			granted: ["https://kept.example.com/*"],
 			registered: [
 				registeredScript("https://kept.example.com"),
 				registeredScript("https://removed.example.com"),
@@ -370,11 +367,8 @@ describe("target reconciliation", () => {
 	 */
 	test("reports a failed registration without losing the other rows", async () => {
 		const apis = createFakeApis({
-			granted: [
-				"https://broken.example.com:443/*",
-				"https://fine.example.com:443/*",
-			],
-			failRegisterFor: "https://broken.example.com:443/*",
+			granted: ["https://broken.example.com/*", "https://fine.example.com/*"],
+			failRegisterFor: "https://broken.example.com/*",
 		});
 		const { targets: states } = await reconcileTargets(
 			["https://broken.example.com", "https://fine.example.com"],
@@ -400,10 +394,10 @@ describe("target reconciliation", () => {
 	 */
 	test("takes run_at from the same manifest entry as the files", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 			contentScripts: [
 				{
-					matches: ["https://gitlab.com:443/*"],
+					matches: ["https://gitlab.com/*"],
 					js: ["content/index.js"],
 					css: ["content/index.css"],
 					run_at: "document_start",
@@ -418,11 +412,11 @@ describe("target reconciliation", () => {
 
 	test("finds the GitLab.com entry whatever its position in the manifest", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 			contentScripts: [
 				{ matches: ["https://example.com/*"], js: ["other/entry.js"] },
 				{
-					matches: ["https://gitlab.com:443/*"],
+					matches: ["https://gitlab.com/*"],
 					js: ["content/index.js"],
 					css: ["features/dim-draft-merge-requests/styles.css"],
 				},
@@ -440,7 +434,7 @@ describe("target reconciliation", () => {
 	 */
 	test("treats a lost registration race as active, not as a failure", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 		});
 		const id = toContentScriptId("https://gitlab.example.com");
 		let registeredElsewhere = false;
@@ -467,7 +461,7 @@ describe("target reconciliation", () => {
 
 	test("reports a build with no content script instead of claiming success", async () => {
 		const apis = createFakeApis({
-			granted: ["https://gitlab.example.com:443/*"],
+			granted: ["https://gitlab.example.com/*"],
 			contentScripts: [],
 		});
 		const { targets: states } = await reconcileTargets(
@@ -482,7 +476,7 @@ describe("target reconciliation", () => {
 });
 
 describe("granting and releasing access", () => {
-	test("requests the exact origin, never a broader pattern", async () => {
+	test("requests one scheme-and-host scope for every port", async () => {
 		const apis = createFakeApis();
 
 		expect(await requestTargetAccess("http://localhost", apis)).toBe(true);
@@ -493,9 +487,9 @@ describe("granting and releasing access", () => {
 			true,
 		);
 		expect(apis.calls.requested).toEqual([
-			["http://localhost:80/*"],
-			["https://gitlab.example.com:443/*"],
-			["http://localhost:10019/*"],
+			["http://localhost/*"],
+			["https://gitlab.example.com/*"],
+			["http://localhost/*"],
 		]);
 	});
 
@@ -519,10 +513,10 @@ describe("granting and releasing access", () => {
 			return remove(permissions);
 		};
 
-		await releaseTargetAccess("https://gitlab.example.com", apis);
+		await releaseTargetAccess("https://gitlab.example.com", [], apis);
 
 		expect(order).toEqual(["unregister", "revoke"]);
-		expect(apis.calls.removed).toEqual([["https://gitlab.example.com:443/*"]]);
+		expect(apis.calls.removed).toEqual([["https://gitlab.example.com/*"]]);
 	});
 
 	/*
@@ -537,7 +531,7 @@ describe("granting and releasing access", () => {
 		});
 		apis.permissions.remove = async () => false;
 
-		await releaseTargetAccess("https://gitlab.example.com", apis);
+		await releaseTargetAccess("https://gitlab.example.com", [], apis);
 
 		expect(apis.calls.unregistered).toEqual([
 			[toContentScriptId("https://gitlab.example.com")],
@@ -547,8 +541,24 @@ describe("granting and releasing access", () => {
 	test("still revokes when there was no registration to remove", async () => {
 		const apis = createFakeApis();
 
-		await releaseTargetAccess("https://gitlab.example.com", apis);
+		await releaseTargetAccess("https://gitlab.example.com", [], apis);
 
-		expect(apis.calls.removed).toEqual([["https://gitlab.example.com:443/*"]]);
+		expect(apis.calls.removed).toEqual([["https://gitlab.example.com/*"]]);
+	});
+
+	test("keeps shared access while another configured port still uses it", async () => {
+		const apis = createFakeApis({
+			granted: ["http://localhost/*"],
+			registered: [registeredScript("http://localhost:10018")],
+		});
+
+		await releaseTargetAccess(
+			"http://localhost:10018",
+			["http://localhost:10019"],
+			apis,
+		);
+
+		expect(apis.calls.unregistered).toEqual([]);
+		expect(apis.calls.removed).toEqual([]);
 	});
 });

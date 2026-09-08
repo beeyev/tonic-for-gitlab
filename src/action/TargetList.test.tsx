@@ -146,6 +146,12 @@ describe("GitLab instance list", () => {
 });
 
 describe("adding an instance", () => {
+	test("explains the browser permission scope", () => {
+		renderList();
+
+		expect(screen.getByText(/access covers every port/i)).toBeTruthy();
+	});
+
 	test("passes the raw input through and clears the field once accepted", async () => {
 		const submitted: string[] = [];
 		renderList({
@@ -180,6 +186,22 @@ describe("adding an instance", () => {
 			"Only http:// and https:// addresses work.",
 		);
 		expect(field.getAttribute("aria-invalid")).toBe("true");
+	});
+
+	test("keeps the typed text when another access change starts first", async () => {
+		renderList({ onAdd: () => "busy" });
+		const field = screen.getByLabelText(
+			/self-managed gitlab address/i,
+		) as HTMLInputElement;
+
+		await userEvent.type(field, "gitlab.example.com");
+		await userEvent.click(screen.getByRole("button", { name: /add/i }));
+
+		expect(field.value).toBe("gitlab.example.com");
+		expect(screen.getByRole("alert").textContent).toContain(
+			"Finish the current access change",
+		);
+		expect(field.getAttribute("aria-invalid")).toBe("false");
 	});
 
 	test("clears the refusal as soon as the address is edited", async () => {

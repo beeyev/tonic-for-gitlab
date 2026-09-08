@@ -33,16 +33,14 @@ export const LAB_EXTENSION_PROJECT_PATH = resolve(
 	".ignore/lab-extension",
 );
 /**
- * The lab origins, as exact Chrome match patterns.
+ * The lab instances share one browser match pattern because ports are outside
+ * Tonic's cross-browser permission boundary.
  *
  * The ports are the published ones in `../compose.yaml`; change both together.
  * `check-shipping-manifests.ts` reads this list to prove no shipping manifest
  * carries a lab origin.
  */
-export const LAB_HOST_PERMISSIONS = [
-	"http://localhost:10018/*",
-	"http://localhost:10019/*",
-] as const;
+export const LAB_HOST_PERMISSIONS = ["http://localhost/*"] as const;
 
 const ROOT_FILES = [
 	"components.json",

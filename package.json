@@ -7,13 +7,16 @@
 	"packageManager": "bun@1.4.2",
 	"scripts": {
 		"dev:chrome": "extension dev --browser chrome",
-		"browsers:install": "TMPDIR=/tmp BUN_INSTALL_CACHE_DIR=.cache/bun extension install --browser chrome",
-		"browsers:where": "extension install --browser chrome --where --output json",
+		"dev:firefox": "extension dev --browser firefox",
+		"preview:chrome": "extension preview --browser chrome",
+		"preview:firefox": "extension preview --browser firefox",
+		"browsers:install": "TMPDIR=/tmp BUN_INSTALL_CACHE_DIR=.cache/bun extension install --browser chrome,firefox",
+		"browsers:where": "extension install --browser chrome,firefox --where --output json",
 		"format": "biome format --write .",
 		"fix": "biome check --write .",
 		"check": "biome check --error-on-warnings . && tsc --noEmit",
 		"test": "bun test --preload @happy-dom/global-registrator/register",
-		"build": "extension build --browser chrome && bun lab/extension/check-shipping-manifests.ts",
+		"build": "extension build --browser chrome,firefox && bun lab/extension/check-shipping-manifests.ts",
 		"verify": "bun run check && bun run test && bun run build"
 	},
 	"dependencies": {

@@ -66,20 +66,27 @@ describe("targets resolution", () => {
 	});
 
 	/*
-	 * The built-in origin already has the manifest's static content script.
-	 * Registering a second one for it is the one duplicate the ID scheme cannot
-	 * catch, because the two registrations are not both ours.
+	 * The built-in host scope already has the manifest's static content script.
+	 * Registering a second one for another HTTPS port would run both copies.
 	 */
-	test("drops the built-in origin so it cannot be registered twice", () => {
+	test("drops every origin covered by the built-in GitLab.com scope", () => {
 		expect(
 			resolveTargets({
 				schemaVersion: 1,
-				origins: ["https://gitlab.com", "https://gitlab.example.com"],
+				origins: [
+					"https://gitlab.com",
+					"https://gitlab.com:8443",
+					"http://gitlab.com",
+					"https://gitlab.example.com",
+				],
 			}),
 		).toEqual({
 			outcome: "stored",
-			targets: { schemaVersion: 1, origins: ["https://gitlab.example.com"] },
-			droppedOrigins: ["https://gitlab.com"],
+			targets: {
+				schemaVersion: 1,
+				origins: ["http://gitlab.com", "https://gitlab.example.com"],
+			},
+			droppedOrigins: ["https://gitlab.com", "https://gitlab.com:8443"],
 		});
 	});
 
