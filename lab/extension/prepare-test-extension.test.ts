@@ -80,6 +80,8 @@ async function writeShippingManifestFixtures(
 	const common = {
 		manifest_version: 3,
 		content_scripts: [{ matches: ["https://gitlab.com/*"] }],
+		permissions: ["storage", "scripting"],
+		optional_host_permissions: ["http://*/*", "https://*/*"],
 	};
 	const chromeManifest = {
 		...common,
@@ -136,6 +138,46 @@ describe("local-lab extension project", () => {
 
 		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
 			"must have the same version",
+		);
+	});
+
+	test("rejects a generated manifest that gains a permission", async () => {
+		const repositoryPath = await createFixtureRepository();
+		await writeShippingManifestFixtures(repositoryPath, "1.2.3", "1.2.3");
+		const chromeManifestPath = resolve(
+			repositoryPath,
+			"dist/chrome/manifest.json",
+		);
+		const chromeManifest = JSON.parse(
+			await readFile(chromeManifestPath, "utf8"),
+		) as Record<string, unknown>;
+		chromeManifest.permissions = ["storage", "scripting", "tabs"];
+		await writeFile(chromeManifestPath, JSON.stringify(chromeManifest), "utf8");
+
+		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
+			"must declare permissions as exactly [scripting, storage], got [scripting, storage, tabs]",
+		);
+	});
+
+	test("rejects a generated manifest that gains host permissions", async () => {
+		const repositoryPath = await createFixtureRepository();
+		await writeShippingManifestFixtures(repositoryPath, "1.2.3", "1.2.3");
+		const firefoxManifestPath = resolve(
+			repositoryPath,
+			"dist/firefox/manifest.json",
+		);
+		const firefoxManifest = JSON.parse(
+			await readFile(firefoxManifestPath, "utf8"),
+		) as Record<string, unknown>;
+		firefoxManifest.host_permissions = ["<all_urls>"];
+		await writeFile(
+			firefoxManifestPath,
+			JSON.stringify(firefoxManifest),
+			"utf8",
+		);
+
+		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
+			"must not declare host_permissions",
 		);
 	});
 

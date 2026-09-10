@@ -1,0 +1,93 @@
+name: Security
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  schedule:
+    # Advisories land without a code change, so re-run against a quiet tree.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+env:
+  EXTENSION_TELEMETRY_DISABLED: "1"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' }}
+
+jobs:
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+          # The content scripts read GitLab DOM, URLs, stored values, and
+          # captured console output, all untrusted. security-extended carries
+          # the taint queries that cover that path.
+          queries: security-extended
+
+      - name: Analyse
+        uses: github/codeql-action/analyze@v4
+
+  audit:
+    name: Dependency audit
+    # Not on pull requests: advisories arrive on their own schedule, so a PR is
+    # the wrong place to learn about one, and a check that cannot be fixed in
+    # the PR only teaches people to ignore it.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - name: Restore the Bun install cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # This gates rather than reports, so a broken audit binary is also a
+      # failure. The ignored advisories all sit inside the Extension.js build
+      # toolchain and none of them reach the shipped bundle; `bun audit` cannot
+      # scope a run to production dependencies, so they are listed by id and
+      # drop off when Extension.js updates. Anything new turns the job red.
+      - name: Audit dependencies
+        run: |
+          bun audit --audit-level=high \
+            --ignore=GHSA-5jgf-p345-68v8 \
+            --ignore=GHSA-f65p-4m7j-42xc \
+            --ignore=GHSA-fph4-wmhf-6fwf \
+            --ignore=GHSA-jqff-g426-hqxp \
+            --ignore=GHSA-w3rx-r6r6-pgpr \
+            --ignore=GHSA-5p2g-fcmc-qvqq \
+            --ignore=GHSA-2883-xcg3-v3hh

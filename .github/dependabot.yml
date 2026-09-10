@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  # Pull request CI and the release job both run on floating major action tags,
+  # so tag drift is invisible until something breaks. These PRs make it visible.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # `bun`, not `npm`: the npm updater rewrites package.json without touching
+  # bun.lock, and `bun install --frozen-lockfile` would then reject every PR.
+  # Bun ships version updates only, so security alerts still need a manual bump.
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # Runtime dependencies ship inside the extension, so they are reviewed one
+      # at a time. Everything else is build tooling and can land together.
+      development:
+        dependency-type: development
+        patterns: ["*"]

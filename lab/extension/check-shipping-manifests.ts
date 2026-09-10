@@ -26,9 +26,28 @@ interface ShippingManifest {
 		};
 	};
 	content_scripts?: Array<{ matches?: unknown }>;
+	permissions?: unknown;
+	host_permissions?: unknown;
+	optional_permissions?: unknown;
+	optional_host_permissions?: unknown;
 }
 
 const SOURCE_VERSION_PLACEHOLDER = "$EXTENSION_PUBLIC_VERSION";
+
+// Widening the extension's reach must be a deliberate edit to this list,
+// reviewed next to the manifest change. Users cannot audit permission creep
+// after installing, so a silent addition is the worst regression available.
+// `optional_host_permissions` stays broad on purpose: the user grants their own
+// self-hosted origin at runtime instead of the extension demanding every host
+// up front. Required `host_permissions` would be the regression.
+const PINNED_PERMISSION_LISTS = {
+	permissions: ["scripting", "storage"],
+	optional_host_permissions: ["http://*/*", "https://*/*"],
+} as const;
+const FORBIDDEN_PERMISSION_KEYS = [
+	"host_permissions",
+	"optional_permissions",
+] as const;
 
 async function readJson(path: string): Promise<unknown> {
 	return JSON.parse(await readFile(path, "utf8"));
@@ -52,6 +71,37 @@ function assertCommonManifest(manifest: ShippingManifest, label: string): void {
 	);
 	if (!matches?.includes("https://gitlab.com/*")) {
 		throw new TypeError(`${label} must inject on the GitLab.com host scope`);
+	}
+
+	assertDeclaredPermissions(manifest, label);
+}
+
+function assertDeclaredPermissions(
+	manifest: ShippingManifest,
+	label: string,
+): void {
+	for (const [key, expected] of Object.entries(PINNED_PERMISSION_LISTS)) {
+		const declared = manifest[key as keyof typeof PINNED_PERMISSION_LISTS];
+
+		if (
+			!Array.isArray(declared) ||
+			declared.some((entry) => typeof entry !== "string")
+		) {
+			throw new TypeError(`${label} must declare ${key} as a string array`);
+		}
+
+		const sorted = [...(declared as string[])].sort();
+		if (sorted.join(",") !== [...expected].sort().join(",")) {
+			throw new TypeError(
+				`${label} must declare ${key} as exactly [${[...expected].sort().join(", ")}], got [${sorted.join(", ")}]`,
+			);
+		}
+	}
+
+	for (const key of FORBIDDEN_PERMISSION_KEYS) {
+		if (manifest[key] !== undefined) {
+			throw new TypeError(`${label} must not declare ${key}`);
+		}
 	}
 }
 

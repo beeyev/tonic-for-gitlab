@@ -1,7 +1,10 @@
-name: Pull request validation
+name: Validate
 
 on:
   pull_request:
+    branches:
+      - master
+  push:
     branches:
       - master
 
@@ -12,7 +15,7 @@ env:
   EXTENSION_TELEMETRY_DISABLED: "1"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:

@@ -21,7 +21,7 @@ concurrency:
 jobs:
   build:
     name: Verify and package
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     outputs:
       artifact_id: ${{ steps.upload.outputs.artifact-id }}
@@ -89,65 +89,10 @@ jobs:
       - name: Test
         run: bun run test
 
-      - name: Build release archives
+      - name: Build and pack release archives
         env:
-          EXTENSION_PUBLIC_VERSION: ${{ steps.release.outputs.version }}
           RELEASE_VERSION: ${{ steps.release.outputs.version }}
-        run: |
-          set -Eeuo pipefail
-
-          chromium_archive="tonic-for-gitlab-${RELEASE_VERSION}-chromium.zip"
-          firefox_archive="tonic-for-gitlab-${RELEASE_VERSION}-firefox.zip"
-
-          bunx --no-install extension build --browser=chrome --zip --zip-filename="$chromium_archive"
-          bunx --no-install extension build --browser=firefox --zip --zip-filename="$firefox_archive"
-          bun lab/extension/check-shipping-manifests.ts
-
-          jq -e -s --arg version "$RELEASE_VERSION" '
-            length == 2 and all(.[]; .version == $version)
-          ' dist/chrome/manifest.json dist/firefox/manifest.json >/dev/null
-
-          validate_archive() {
-            local -r archive="$1"
-            local -r expected_manifest="$2"
-            local -i manifest_count=0
-            local entry
-
-            [[ -f "$archive" ]] || {
-              printf 'Missing release archive: %s\n' "$archive" >&2
-              return 1
-            }
-            unzip -tqq "$archive"
-
-            while IFS= read -r entry; do
-              if [[ "$entry" == "manifest.json" ]]; then
-                manifest_count+=1
-              fi
-              if [[ "$entry" == /* || "$entry" == ../* || "$entry" == */../* || "$entry" == */.. ]]; then
-                printf 'Unsafe ZIP entry in %s: %s\n' "$archive" "$entry" >&2
-                return 1
-              fi
-            done < <(unzip -Z1 "$archive")
-
-            if (( manifest_count != 1 )); then
-              printf '%s must contain one manifest.json at the archive root\n' "$archive" >&2
-              return 1
-            fi
-
-            unzip -p "$archive" manifest.json | cmp --silent - "$expected_manifest"
-          }
-
-          validate_archive "dist/chrome/$chromium_archive" dist/chrome/manifest.json
-          validate_archive "dist/firefox/$firefox_archive" dist/firefox/manifest.json
-
-          mkdir -p release-assets
-          cp "dist/chrome/$chromium_archive" "release-assets/$chromium_archive"
-          cp "dist/firefox/$firefox_archive" "release-assets/$firefox_archive"
-          (
-            cd release-assets
-            sha256sum -- "$chromium_archive" "$firefox_archive" > SHA256SUMS
-            sha256sum --check SHA256SUMS
-          )
+        run: bun run release:pack
 
       - name: Upload verified release assets
         id: upload
@@ -159,10 +104,43 @@ jobs:
           compression-level: 0
           retention-days: 7
 
+  attest:
+    name: Attest provenance
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    # Isolated from `build` on purpose: that job installs and executes
+    # third-party code, and must never hold a token that can mint a Sigstore
+    # signing identity.
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - name: Download verified release assets
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
+          path: release-assets
+
+      - name: Verify downloaded checksums
+        working-directory: release-assets
+        run: sha256sum --check SHA256SUMS
+
+      # SHA256SUMS is attested alongside the archives because it is what people
+      # read first. Verify any of them with:
+      #   gh attestation verify <file> --repo ${{ github.repository }}
+      - name: Attest release asset provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: |
+            release-assets/tonic-for-gitlab-*.zip
+            release-assets/SHA256SUMS
+
   release:
     name: Create draft release
-    needs: build
-    runs-on: ubuntu-latest
+    needs: [build, attest]
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: write
