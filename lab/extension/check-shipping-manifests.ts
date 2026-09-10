@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseReleaseVersion } from "../../tooling/release/version";
 import { LAB_HOST_PERMISSIONS } from "./prepare-test-extension";
 
 const SCRIPT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
@@ -14,6 +15,7 @@ interface FixedOriginReference {
 
 interface ShippingManifest {
 	manifest_version?: unknown;
+	version?: unknown;
 	background?: Record<string, unknown>;
 	"firefox:browser_specific_settings"?: ShippingManifest["browser_specific_settings"];
 	browser_specific_settings?: {
@@ -25,6 +27,8 @@ interface ShippingManifest {
 	};
 	content_scripts?: Array<{ matches?: unknown }>;
 }
+
+const SOURCE_VERSION_PLACEHOLDER = "$EXTENSION_PUBLIC_VERSION";
 
 async function readJson(path: string): Promise<unknown> {
 	return JSON.parse(await readFile(path, "utf8"));
@@ -48,6 +52,23 @@ function assertCommonManifest(manifest: ShippingManifest, label: string): void {
 	);
 	if (!matches?.includes("https://gitlab.com/*")) {
 		throw new TypeError(`${label} must inject on the GitLab.com host scope`);
+	}
+}
+
+function readGeneratedVersion(
+	manifest: ShippingManifest,
+	label: string,
+): string {
+	if (typeof manifest.version !== "string") {
+		throw new TypeError(`${label} must declare a string version`);
+	}
+
+	try {
+		return parseReleaseVersion(manifest.version).version;
+	} catch (error) {
+		throw new TypeError(`${label} must contain a stable release version`, {
+			cause: error,
+		});
 	}
 }
 
@@ -147,6 +168,13 @@ export async function checkShippingManifests(
 	);
 	const expectedFirefoxSettings =
 		sourceManifest["firefox:browser_specific_settings"];
+	if (sourceManifest.version !== SOURCE_VERSION_PLACEHOLDER) {
+		throw new TypeError(
+			`Source manifest version must be ${SOURCE_VERSION_PLACEHOLDER}`,
+		);
+	}
+
+	const generatedVersions: string[] = [];
 	const manifests = [
 		{
 			label: "Source manifest",
@@ -171,10 +199,18 @@ export async function checkShippingManifests(
 		assertCommonManifest(manifest, entry.label);
 
 		if (entry.browser === "chrome") {
+			generatedVersions.push(readGeneratedVersion(manifest, entry.label));
 			assertChromeManifest(manifest);
 		} else if (entry.browser === "firefox") {
+			generatedVersions.push(readGeneratedVersion(manifest, entry.label));
 			assertFirefoxManifest(manifest, expectedFirefoxSettings);
 		}
+	}
+
+	if (new Set(generatedVersions).size !== 1) {
+		throw new TypeError(
+			"Generated Chrome and Firefox manifests must have the same version",
+		);
 	}
 }
 

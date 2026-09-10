@@ -13,6 +13,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import {
 	assertNoFixedLabOrigins,
+	checkShippingManifests,
 	findFixedLabOriginReferences,
 } from "./check-shipping-manifests";
 import {
@@ -50,6 +51,7 @@ async function createFixtureRepository(): Promise<string> {
 		resolve(repositoryPath, "src/manifest.json"),
 	);
 	for (const file of [
+		".env.defaults",
 		"components.json",
 		"extension-env.d.ts",
 		"package.json",
@@ -67,6 +69,45 @@ async function createFixtureRepository(): Promise<string> {
 	return repositoryPath;
 }
 
+async function writeShippingManifestFixtures(
+	repositoryPath: string,
+	chromeVersion: string,
+	firefoxVersion: string,
+): Promise<void> {
+	const sourceManifest = JSON.parse(
+		await readFile(resolve(repositoryPath, "src/manifest.json"), "utf8"),
+	) as Record<string, unknown>;
+	const common = {
+		manifest_version: 3,
+		content_scripts: [{ matches: ["https://gitlab.com/*"] }],
+	};
+	const chromeManifest = {
+		...common,
+		version: chromeVersion,
+		background: { service_worker: "background/service_worker.js" },
+	};
+	const firefoxManifest = {
+		...common,
+		version: firefoxVersion,
+		background: { scripts: ["background/scripts.js"] },
+		browser_specific_settings:
+			sourceManifest["firefox:browser_specific_settings"],
+	};
+
+	await mkdir(resolve(repositoryPath, "dist/chrome"), { recursive: true });
+	await mkdir(resolve(repositoryPath, "dist/firefox"), { recursive: true });
+	await writeFile(
+		resolve(repositoryPath, "dist/chrome/manifest.json"),
+		JSON.stringify(chromeManifest),
+		"utf8",
+	);
+	await writeFile(
+		resolve(repositoryPath, "dist/firefox/manifest.json"),
+		JSON.stringify(firefoxManifest),
+		"utf8",
+	);
+}
+
 afterEach(async () => {
 	await Promise.all(
 		temporaryDirectories
@@ -76,6 +117,43 @@ afterEach(async () => {
 });
 
 describe("local-lab extension project", () => {
+	test("rejects an unresolved generated release version", async () => {
+		const repositoryPath = await createFixtureRepository();
+		await writeShippingManifestFixtures(
+			repositoryPath,
+			"$EXTENSION_PUBLIC_VERSION",
+			"$EXTENSION_PUBLIC_VERSION",
+		);
+
+		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
+			"must contain a stable release version",
+		);
+	});
+
+	test("rejects different generated browser versions", async () => {
+		const repositoryPath = await createFixtureRepository();
+		await writeShippingManifestFixtures(repositoryPath, "1.2.3", "1.2.4");
+
+		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
+			"must have the same version",
+		);
+	});
+
+	test("rejects a source version that bypasses environment substitution", async () => {
+		const repositoryPath = await createFixtureRepository();
+		const sourceManifestPath = resolve(repositoryPath, "src/manifest.json");
+		const sourceManifest = JSON.parse(
+			await readFile(sourceManifestPath, "utf8"),
+		) as Record<string, unknown>;
+		sourceManifest.version = "1.2.3";
+		await writeFile(sourceManifestPath, JSON.stringify(sourceManifest), "utf8");
+		await writeShippingManifestFixtures(repositoryPath, "1.2.3", "1.2.3");
+
+		await expect(checkShippingManifests(repositoryPath)).rejects.toThrow(
+			"Source manifest version must be $EXTENSION_PUBLIC_VERSION",
+		);
+	});
+
 	test("keeps every shipping manifest field free of fixed lab origins", async () => {
 		const manifest = await readManifest(
 			resolve(REPOSITORY_PATH, "src/manifest.json"),
@@ -166,6 +244,9 @@ describe("local-lab extension project", () => {
 		delete generatedManifest.host_permissions;
 		expect(generatedManifest).toEqual(sourceManifest);
 		expect(await readFile(sourceManifestPath, "utf8")).toBe(sourceBefore);
+		expect(
+			await readFile(resolve(prepared.projectPath, ".env.defaults"), "utf8"),
+		).toBe(await readFile(resolve(repositoryPath, ".env.defaults"), "utf8"));
 		expect(
 			await readFile(resolve(prepared.projectPath, "package.json"), "utf8"),
 		).toBe(await readFile(resolve(repositoryPath, "package.json"), "utf8"));

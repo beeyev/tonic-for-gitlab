@@ -43,6 +43,7 @@ export const LAB_EXTENSION_PROJECT_PATH = resolve(
 export const LAB_HOST_PERMISSIONS = ["http://localhost/*"] as const;
 
 const ROOT_FILES = [
+	".env.defaults",
 	"components.json",
 	"extension-env.d.ts",
 	"package.json",

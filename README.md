@@ -27,7 +27,7 @@ add yourself. Everything runs in the browser.
 
 Until then, or if you prefer release builds from GitHub:
 
-1. Download the Chrome ZIP from the [latest release](https://github.com/beeyev/tonic-for-gitlab/releases/latest).
+1. Download the Chromium ZIP from the [latest release](https://github.com/beeyev/tonic-for-gitlab/releases/latest).
 2. Extract it somewhere permanent.
 3. Open the browser's extensions page and enable Developer mode:
    `chrome://extensions`, `edge://extensions`, `brave://extensions`, or
@@ -42,12 +42,14 @@ and Vivaldi documents its [Chromium extension support](https://help.vivaldi.com/
 
 ## Install temporarily in Firefox
 
-Firefox requires Mozilla signing for ordinary permanent installation. To test
-an unsigned local build:
+Firefox requires Mozilla signing for ordinary permanent installation. The
+Firefox release ZIP is unsigned. To install it temporarily:
 
-1. Run `bun run build`.
+1. Download and extract the Firefox ZIP from the [latest release](https://github.com/beeyev/tonic-for-gitlab/releases/latest),
+   or run `bun run build` for a local build.
 2. Open `about:debugging#/runtime/this-firefox` in Firefox.
-3. Click "Load Temporary Add-on" and select `dist/firefox/manifest.json`.
+3. Click "Load Temporary Add-on" and select `manifest.json` in the extracted
+   directory, or `dist/firefox/manifest.json` for a local build.
 
 Firefox removes temporary add-ons when it restarts. Mozilla documents this flow
 in its [temporary installation guide](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
@@ -99,6 +101,9 @@ bun run verify
 ```
 
 The local GitLab lab is documented in [lab/README.md](lab/README.md).
+Extension.js reads the local manifest version from `EXTENSION_PUBLIC_VERSION`
+in the tracked `.env.defaults`; an environment variable with the same name
+overrides that default for release builds.
 
 ## License
 

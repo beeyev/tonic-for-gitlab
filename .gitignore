@@ -6,6 +6,8 @@
 /.cache
 /dist
 /extensions
+/.env*
+!/.env.defaults
 /.playwright-mcp
 /.serena
 /.agents

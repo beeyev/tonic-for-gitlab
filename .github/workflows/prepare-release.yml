@@ -1,0 +1,215 @@
+name: Prepare release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable extension version (MAJOR.MINOR.PATCH)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  EXTENSION_TELEMETRY_DISABLED: "1"
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Verify and package
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      commit_sha: ${{ steps.release.outputs.commit_sha }}
+      tag: ${{ steps.release.outputs.tag }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - name: Require a master dispatch
+        env:
+          DISPATCH_REF: ${{ github.ref }}
+        run: |
+          set -Eeuo pipefail
+          if [[ "$DISPATCH_REF" != "refs/heads/master" ]]; then
+            printf 'Prepare release must be dispatched from master, got %s\n' "$DISPATCH_REF" >&2
+            exit 1
+          fi
+
+      - name: Check out dispatch commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Validate workflows
+        uses: raven-actions/actionlint@v2
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - name: Restore the Bun install cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - name: Validate release version
+        id: release
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          set -Eeuo pipefail
+          bun run release:validate-version >> "$GITHUB_OUTPUT"
+          printf 'commit_sha=%s\n' "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Refuse an existing tag or published release
+        uses: ./.github/actions/refuse-existing-release
+        with:
+          tag: ${{ steps.release.outputs.tag }}
+          token: ${{ github.token }}
+          # This job only has read access, so drafts stay invisible here and are
+          # rechecked by the release job.
+          release-label: published release
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # `bun run verify` also builds, but the release archives are built below
+      # from the dispatched version, so the extra build would be thrown away.
+      - name: Check
+        run: bun run check
+
+      - name: Test
+        run: bun run test
+
+      - name: Build release archives
+        env:
+          EXTENSION_PUBLIC_VERSION: ${{ steps.release.outputs.version }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -Eeuo pipefail
+
+          chromium_archive="tonic-for-gitlab-${RELEASE_VERSION}-chromium.zip"
+          firefox_archive="tonic-for-gitlab-${RELEASE_VERSION}-firefox.zip"
+
+          bunx --no-install extension build --browser=chrome --zip --zip-filename="$chromium_archive"
+          bunx --no-install extension build --browser=firefox --zip --zip-filename="$firefox_archive"
+          bun lab/extension/check-shipping-manifests.ts
+
+          jq -e -s --arg version "$RELEASE_VERSION" '
+            length == 2 and all(.[]; .version == $version)
+          ' dist/chrome/manifest.json dist/firefox/manifest.json >/dev/null
+
+          validate_archive() {
+            local -r archive="$1"
+            local -r expected_manifest="$2"
+            local -i manifest_count=0
+            local entry
+
+            [[ -f "$archive" ]] || {
+              printf 'Missing release archive: %s\n' "$archive" >&2
+              return 1
+            }
+            unzip -tqq "$archive"
+
+            while IFS= read -r entry; do
+              if [[ "$entry" == "manifest.json" ]]; then
+                manifest_count+=1
+              fi
+              if [[ "$entry" == /* || "$entry" == ../* || "$entry" == */../* || "$entry" == */.. ]]; then
+                printf 'Unsafe ZIP entry in %s: %s\n' "$archive" "$entry" >&2
+                return 1
+              fi
+            done < <(unzip -Z1 "$archive")
+
+            if (( manifest_count != 1 )); then
+              printf '%s must contain one manifest.json at the archive root\n' "$archive" >&2
+              return 1
+            fi
+
+            unzip -p "$archive" manifest.json | cmp --silent - "$expected_manifest"
+          }
+
+          validate_archive "dist/chrome/$chromium_archive" dist/chrome/manifest.json
+          validate_archive "dist/firefox/$firefox_archive" dist/firefox/manifest.json
+
+          mkdir -p release-assets
+          cp "dist/chrome/$chromium_archive" "release-assets/$chromium_archive"
+          cp "dist/firefox/$firefox_archive" "release-assets/$firefox_archive"
+          (
+            cd release-assets
+            sha256sum -- "$chromium_archive" "$firefox_archive" > SHA256SUMS
+            sha256sum --check SHA256SUMS
+          )
+
+      - name: Upload verified release assets
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-assets-${{ github.run_id }}-${{ github.run_attempt }}
+          path: release-assets/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+  release:
+    name: Create draft release
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the release actions
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          sparse-checkout: .github/actions
+          persist-credentials: false
+
+      - name: Download verified release assets
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
+          path: release-assets
+
+      - name: Verify downloaded checksums
+        working-directory: release-assets
+        run: sha256sum --check SHA256SUMS
+
+      - name: Refuse an existing tag or release
+        uses: ./.github/actions/refuse-existing-release
+        with:
+          tag: ${{ needs.build.outputs.tag }}
+          token: ${{ github.token }}
+          release-label: release or draft
+
+      - name: Create draft release
+        uses: ncipollo/release-action@v1
+        with:
+          name: Tonic for GitLab ${{ needs.build.outputs.version }}
+          tag: ${{ needs.build.outputs.tag }}
+          commit: ${{ needs.build.outputs.commit_sha }}
+          draft: true
+          prerelease: false
+          generateReleaseNotes: true
+          allowUpdates: false
+          replacesArtifacts: false
+          artifactErrorsFailBuild: true
+          artifacts: |
+            release-assets/tonic-for-gitlab-${{ needs.build.outputs.version }}-chromium.zip
+            release-assets/tonic-for-gitlab-${{ needs.build.outputs.version }}-firefox.zip
+            release-assets/SHA256SUMS
+          body: |
+            Prepared from commit [`${{ needs.build.outputs.commit_sha }}`](https://github.com/${{ github.repository }}/commit/${{ needs.build.outputs.commit_sha }}).
+
+            GitHub Actions run [#${{ github.run_number }}, attempt ${{ github.run_attempt }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+
+            The Chromium archive supports Chrome, Edge, Brave, and Vivaldi. The Firefox archive is unsigned and is intended for temporary installation until it is signed by Mozilla.

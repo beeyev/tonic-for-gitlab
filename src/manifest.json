@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/chrome-manifest.json",
 	"manifest_version": 3,
-	"version": "0.1.0",
+	"version": "$EXTENSION_PUBLIC_VERSION",
 	"name": "Tonic for GitLab",
 	"description": "Focused, configurable improvements for GitLab.",
 	"homepage_url": "https://github.com/beeyev/tonic-for-gitlab",

@@ -1,0 +1,50 @@
+name: Refuse an existing tag or release
+description: Fail when the release tag already exists as a Git ref or as a release.
+
+inputs:
+  tag:
+    description: Release tag to check.
+    required: true
+  token:
+    description: Token used to read refs and releases. Drafts are only visible to a token with push access.
+    required: true
+  release-label:
+    description: How to name a release conflict, so the message reflects what the token can actually see.
+    required: false
+    default: release
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@v9
+      env:
+        RELEASE_LABEL: ${{ inputs.release-label }}
+        TAG_NAME: ${{ inputs.tag }}
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const { owner, repo } = context.repo;
+          const tag = process.env.TAG_NAME;
+          const releaseLabel = process.env.RELEASE_LABEL;
+          const conflicts = [];
+
+          try {
+            await github.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
+            conflicts.push(`tag ${tag}`);
+          } catch (error) {
+            if (error?.status !== 404) throw error;
+          }
+
+          for await (const response of github.paginate.iterator(
+            github.rest.repos.listReleases,
+            { owner, repo, per_page: 100 },
+          )) {
+            if (response.data.some((release) => release.tag_name === tag)) {
+              conflicts.push(`${releaseLabel} ${tag}`);
+              break;
+            }
+          }
+
+          if (conflicts.length > 0) {
+            throw new Error(`Refusing to overwrite existing ${conflicts.join(" and ")}`);
+          }

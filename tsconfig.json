@@ -20,5 +20,5 @@
 		"jsx": "react-jsx",
 		"types": ["bun", "chrome"]
 	},
-	"include": ["src", "tests", "lab/extension", "extension-env.d.ts"]
+	"include": ["src", "tests", "lab/extension", "tooling", "extension-env.d.ts"]
 }

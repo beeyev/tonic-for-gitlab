@@ -16,6 +16,7 @@
 		"fix": "biome check --write .",
 		"check": "biome check --error-on-warnings . && tsc --noEmit",
 		"test": "bun test --preload @happy-dom/global-registrator/register",
+		"release:validate-version": "bun tooling/release/version.ts",
 		"build": "extension build --browser chrome,firefox && bun lab/extension/check-shipping-manifests.ts",
 		"verify": "bun run check && bun run test && bun run build"
 	},
