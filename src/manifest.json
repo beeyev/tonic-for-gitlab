@@ -23,6 +23,7 @@
 			"js": ["content/index.ts"],
 			"css": [
 				"content/runtime/merge-request-list-actions.css",
+				"features/approve-merge-request-from-tabs/styles.css",
 				"features/confirm-merge-request/styles.css",
 				"features/dim-draft-merge-requests/styles.css",
 				"features/dismiss-broadcast-banner/styles.css",

@@ -12,10 +12,12 @@ import {
 	readMergeRequestHeaderFixture,
 	readMergeRequestListFixture,
 	readMergeRequestMergeWidgetFixture,
+	readMergeRequestTabBarFixture,
 	readTopBarFixture,
 	settleGitLabDom,
 } from "../../tests/helpers/gitlab-dom";
 import type { ControlSurfaceStatus } from "../control-surface/status-protocol";
+import { APPROVE_MERGE_REQUEST_FROM_TABS_ATTRIBUTE } from "../features/approve-merge-request-from-tabs/selectors";
 import {
 	CONFIRM_MERGE_REQUEST_CANCEL_ATTRIBUTE,
 	CONFIRM_MERGE_REQUEST_DIALOG_ATTRIBUTE,
@@ -189,6 +191,12 @@ function countMyMergeRequestActions(testWindow: Window): number {
 function countThreadDefaultForms(testWindow: Window): number {
 	return testWindow.document.querySelectorAll(
 		`[${THREAD_DEFAULT_FORM_ATTRIBUTE}]`,
+	).length;
+}
+
+function countMirroredApproveButtons(testWindow: Window): number {
+	return testWindow.document.querySelectorAll(
+		`[${APPROVE_MERGE_REQUEST_FROM_TABS_ATTRIBUTE}]`,
 	).length;
 }
 
@@ -581,6 +589,39 @@ describe("content runtime bootstrap", () => {
 		expect(countCopyMergeRequestLinkButtons(asBrowserWindow(testWindow))).toBe(
 			0,
 		);
+	});
+
+	test("gates the mirrored approve button on its own setting", async () => {
+		const testWindow = createGitLabTestWindow(
+			await readMergeRequestTabBarFixture(),
+			"https://gitlab.com/example/project/-/merge_requests/7/diffs",
+			"projects:merge_requests:show",
+		);
+		const { repository, resolveRead, emit } = createDeferredRepository();
+		const stop = startContentRuntime({
+			runtimeWindow: asBrowserWindow(testWindow),
+			repository,
+			listFilters: createEmptyListFilterStore(),
+			stylesheet: undefined,
+			registerStatusResponder: () => {},
+		});
+
+		// Adding a button changes nothing until it is pressed, so the default paints.
+		expect(countMirroredApproveButtons(asBrowserWindow(testWindow))).toBe(1);
+
+		resolveRead({
+			...DEFAULT_SETTINGS,
+			approveMergeRequestFromTabsEnabled: false,
+		});
+		await settleGitLabDom(testWindow);
+		expect(countMirroredApproveButtons(asBrowserWindow(testWindow))).toBe(0);
+
+		emit(DEFAULT_SETTINGS);
+		await settleGitLabDom(testWindow);
+		expect(countMirroredApproveButtons(asBrowserWindow(testWindow))).toBe(1);
+
+		stop();
+		expect(countMirroredApproveButtons(asBrowserWindow(testWindow))).toBe(0);
 	});
 
 	test("gates the job log section toggle on its own setting", async () => {

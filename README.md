@@ -9,6 +9,8 @@ add yourself. Everything runs in the browser.
   requests you authored.
 - Remember filters for merge request lists.
 - Copy the canonical link for a merge request from any detail tab.
+- Keep GitLab's Approve button in the merge request tab bar, so it stays
+  reachable from Commits, Pipelines, and Changes.
 - Confirm merge and auto-merge actions before they run.
 - Start new merge request comments as threads by default.
 - Expand or collapse all job-log sections, and optionally open logs collapsed.

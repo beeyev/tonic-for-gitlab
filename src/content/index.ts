@@ -1,5 +1,9 @@
 import type { ControlSurfaceStatus } from "../control-surface/status-protocol";
 import {
+	approveMergeRequestFromTabs,
+	getApproveMergeRequestFromTabsCompatibility,
+} from "../features/approve-merge-request-from-tabs/approve-merge-request-from-tabs";
+import {
 	confirmMergeRequest,
 	getConfirmMergeRequestCompatibility,
 } from "../features/confirm-merge-request/confirm-merge-request";
@@ -126,6 +130,16 @@ export function startContentRuntime({
 		},
 	};
 
+	const configuredApproveMergeRequestFromTabs: Feature = {
+		...approveMergeRequestFromTabs,
+		matches(context) {
+			return (
+				settings.approveMergeRequestFromTabsEnabled &&
+				approveMergeRequestFromTabs.matches(context)
+			);
+		},
+	};
+
 	const configuredConfirmMergeRequest: Feature = {
 		...confirmMergeRequest,
 		matches(context) {
@@ -234,6 +248,8 @@ export function startContentRuntime({
 			: createInPageControlPanelFeature(
 					settings,
 					{
+						onApproveMergeRequestFromTabsEnabledChange: (enabled) =>
+							writeSetting({ approveMergeRequestFromTabsEnabled: enabled }),
 						onCollapseJobLogSectionsByDefaultEnabledChange: (enabled) =>
 							writeSetting({
 								collapseJobLogSectionsByDefaultEnabled: enabled,
@@ -267,6 +283,8 @@ export function startContentRuntime({
 					},
 					stylesheet,
 					(context) => ({
+						approveMergeRequestFromTabs:
+							getApproveMergeRequestFromTabsCompatibility(context),
 						confirmMergeRequest: getConfirmMergeRequestCompatibility(context),
 						copyMergeRequestLink: getCopyMergeRequestLinkCompatibility(context),
 						dimDraftMergeRequests:
@@ -306,6 +324,7 @@ export function startContentRuntime({
 			configuredHideFileTreeBrowserFeedbackButton,
 			configuredHighlightAuthoredMergeRequests,
 			configuredRememberMergeRequestListFilters,
+			configuredApproveMergeRequestFromTabs,
 			configuredConfirmMergeRequest,
 			configuredCopyMergeRequestLink,
 			configuredStartThreadsByDefault,

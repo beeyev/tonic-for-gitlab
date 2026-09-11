@@ -41,6 +41,7 @@ function compatibilityIsEqual(
 	right: InPageFeatureCompatibility,
 ): boolean {
 	return (
+		left.approveMergeRequestFromTabs === right.approveMergeRequestFromTabs &&
 		left.confirmMergeRequest === right.confirmMergeRequest &&
 		left.copyMergeRequestLink === right.copyMergeRequestLink &&
 		left.dimDraftMergeRequests === right.dimDraftMergeRequests &&

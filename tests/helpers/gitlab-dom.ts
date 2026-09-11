@@ -84,6 +84,21 @@ export async function readMergeRequestMergeWidgetFixture(
 	).text();
 }
 
+/**
+ * The merge request detail tab bar with the approvals widget section. There is
+ * one baseline because 18.11 and 19.2 render the same tab container, action
+ * cluster, and approve control; a version-specific fixture waits for an
+ * observed difference.
+ */
+export async function readMergeRequestTabBarFixture(): Promise<string> {
+	return Bun.file(
+		new URL(
+			"18/merge-request-tab-bar/tabs-and-approvals.html",
+			fixtureDirectory,
+		),
+	).text();
+}
+
 export async function readMergeRequestHeaderFixture(
 	version: "18" | "19" | "gitlab-com-public",
 ): Promise<string> {
