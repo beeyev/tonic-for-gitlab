@@ -1,0 +1,10 @@
+/*
+ * The tab bar is `justify-between`. Without the auto margin the mirrored button
+ * lands mid-row whenever the tab list does not absorb the free space, instead of
+ * beside the action cluster it belongs to.
+ */
+[data-tonic-for-gitlab-approve-merge-request-from-tabs] {
+	flex: none;
+	align-self: center;
+	margin-left: auto;
+}

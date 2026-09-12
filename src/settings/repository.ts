@@ -8,10 +8,11 @@ import {
 } from "../storage/storage-key";
 
 export const SETTINGS_STORAGE_KEY = "tonic.settings";
-export const SETTINGS_SCHEMA_VERSION = 11;
+export const SETTINGS_SCHEMA_VERSION = 12;
 
 export interface TonicSettings {
 	schemaVersion: typeof SETTINGS_SCHEMA_VERSION;
+	approveMergeRequestFromTabsEnabled: boolean;
 	collapseJobLogSectionsByDefaultEnabled: boolean;
 	confirmMergeRequestEnabled: boolean;
 	copyMergeRequestLinkEnabled: boolean;
@@ -27,6 +28,7 @@ export interface TonicSettings {
 
 export const DEFAULT_SETTINGS: TonicSettings = {
 	schemaVersion: SETTINGS_SCHEMA_VERSION,
+	approveMergeRequestFromTabsEnabled: true,
 	collapseJobLogSectionsByDefaultEnabled: false,
 	confirmMergeRequestEnabled: false,
 	copyMergeRequestLinkEnabled: true,
@@ -60,6 +62,7 @@ export function parseSettings(value: unknown): TonicSettings {
 	if (
 		!isRecord(value) ||
 		value.schemaVersion !== SETTINGS_SCHEMA_VERSION ||
+		typeof value.approveMergeRequestFromTabsEnabled !== "boolean" ||
 		typeof value.collapseJobLogSectionsByDefaultEnabled !== "boolean" ||
 		typeof value.confirmMergeRequestEnabled !== "boolean" ||
 		typeof value.copyMergeRequestLinkEnabled !== "boolean" ||
@@ -77,6 +80,8 @@ export function parseSettings(value: unknown): TonicSettings {
 
 	return {
 		schemaVersion: SETTINGS_SCHEMA_VERSION,
+		approveMergeRequestFromTabsEnabled:
+			value.approveMergeRequestFromTabsEnabled,
 		collapseJobLogSectionsByDefaultEnabled:
 			value.collapseJobLogSectionsByDefaultEnabled,
 		confirmMergeRequestEnabled: value.confirmMergeRequestEnabled,
@@ -354,9 +359,51 @@ function migrateSettingsFromV10(
 		return undefined;
 	}
 
+	return migrateSettingsFromV11({
+		collapseJobLogSectionsByDefaultEnabled: false,
+		confirmMergeRequestEnabled: value.confirmMergeRequestEnabled,
+		copyMergeRequestLinkEnabled: value.copyMergeRequestLinkEnabled,
+		dimDraftMergeRequestsEnabled: value.dimDraftMergeRequestsEnabled,
+		filterMyAuthoredMergeRequestsEnabled:
+			value.filterMyAuthoredMergeRequestsEnabled,
+		hideDuoAgentPlatformEntrypointEnabled:
+			value.hideDuoAgentPlatformEntrypointEnabled,
+		hideFileTreeBrowserFeedbackButtonEnabled:
+			value.hideFileTreeBrowserFeedbackButtonEnabled,
+		highlightAuthoredMergeRequestsEnabled:
+			value.highlightAuthoredMergeRequestsEnabled,
+		rememberMergeRequestListFiltersEnabled:
+			value.rememberMergeRequestListFiltersEnabled,
+		startThreadsByDefaultEnabled: value.startThreadsByDefaultEnabled,
+		toggleJobLogSectionsEnabled: value.toggleJobLogSectionsEnabled,
+	});
+}
+
+// Mirroring GitLab's own Approve control adds a control without changing one.
+function migrateSettingsFromV11(
+	value: Record<string, unknown>,
+): TonicSettings | undefined {
+	if (
+		typeof value.collapseJobLogSectionsByDefaultEnabled !== "boolean" ||
+		typeof value.confirmMergeRequestEnabled !== "boolean" ||
+		typeof value.copyMergeRequestLinkEnabled !== "boolean" ||
+		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
+		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
+		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
+		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
+		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
+		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
+		typeof value.startThreadsByDefaultEnabled !== "boolean" ||
+		typeof value.toggleJobLogSectionsEnabled !== "boolean"
+	) {
+		return undefined;
+	}
+
 	return {
 		schemaVersion: SETTINGS_SCHEMA_VERSION,
-		collapseJobLogSectionsByDefaultEnabled: false,
+		approveMergeRequestFromTabsEnabled: true,
+		collapseJobLogSectionsByDefaultEnabled:
+			value.collapseJobLogSectionsByDefaultEnabled,
 		confirmMergeRequestEnabled: value.confirmMergeRequestEnabled,
 		copyMergeRequestLinkEnabled: value.copyMergeRequestLinkEnabled,
 		dimDraftMergeRequestsEnabled: value.dimDraftMergeRequestsEnabled,
@@ -425,7 +472,9 @@ export function resolveSettings(value: unknown): SettingsResolution {
 												? migrateSettingsFromV9(value)
 												: value.schemaVersion === 10
 													? migrateSettingsFromV10(value)
-													: undefined;
+													: value.schemaVersion === 11
+														? migrateSettingsFromV11(value)
+														: undefined;
 
 		if (migrated) {
 			return { outcome: "migrated", settings: migrated };

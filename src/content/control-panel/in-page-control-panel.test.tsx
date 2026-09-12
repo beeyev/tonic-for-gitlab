@@ -31,6 +31,7 @@ import { resolveTopBarAnchor } from "./top-bar-anchor";
 const TEST_STYLESHEET = ":host { color: CanvasText; }";
 
 const NOOP_HANDLERS: SettingChangeHandlers = {
+	onApproveMergeRequestFromTabsEnabledChange: async () => {},
 	onCollapseJobLogSectionsByDefaultEnabledChange: async () => {},
 	onConfirmMergeRequestEnabledChange: async () => {},
 	onCopyMergeRequestLinkEnabledChange: async () => {},
@@ -76,6 +77,7 @@ describe("in-page control panel", () => {
 		render(
 			<InPageControlPanelView
 				compatibility={{
+					approveMergeRequestFromTabs: "unsupported",
 					confirmMergeRequest: "unsupported",
 					copyMergeRequestLink: "unsupported",
 					dimDraftMergeRequests: "unsupported",
@@ -101,10 +103,11 @@ describe("in-page control panel", () => {
 		) as HTMLElement;
 		const statuses = within(dialog).getAllByRole("status");
 
-		expect(statuses).toHaveLength(10);
+		expect(statuses).toHaveLength(11);
 		expect(statuses.map(({ textContent }) => textContent)).toEqual([
 			"Hide unavailable GitLab Duo entry point: Inactive on this page. The GitLab Duo entry point uses an unsupported page structure.",
 			"Hide file tree feedback link: Inactive on this page. The file tree browser uses an unsupported page structure.",
+			"Approve from the tab bar: Inactive on this page. This feature does not support the current GitLab merge request tab bar.",
 			"Copy merge request link: Inactive on this page. This feature does not support the current GitLab merge request header.",
 			"Confirm main merge action: Inactive on this page. This feature does not support the current GitLab merge widget.",
 			"Dim draft merge requests: Inactive on this page. This feature does not support the current GitLab merge request list.",
@@ -119,18 +122,18 @@ describe("in-page control panel", () => {
 			name: "Dim draft merge requests",
 		});
 		const describedBy = dimSwitch.getAttribute("aria-describedby")?.split(" ");
-		expect(describedBy).toContain(statuses[4]?.id);
+		expect(describedBy).toContain(statuses[5]?.id);
 		expect(
 			within(dialog)
 				.getByRole("switch", { name: "Filter to my merge requests" })
 				.getAttribute("aria-describedby")
 				?.split(" "),
-		).toContain(statuses[5]?.id);
+		).toContain(statuses[6]?.id);
 		expect(
 			within(dialog)
 				.getByRole("switch", { name: "Remember list filters" })
 				.getAttribute("aria-describedby"),
-		).not.toContain(statuses[4]?.id);
+		).not.toContain(statuses[5]?.id);
 	});
 
 	test("says which setting the collapsed job log default depends on", async () => {
@@ -829,6 +832,7 @@ describe("top-bar control-surface lifecycle", () => {
 			NOOP_HANDLERS,
 			TEST_STYLESHEET,
 			(context) => ({
+				approveMergeRequestFromTabs: "not-applicable",
 				confirmMergeRequest: "not-applicable",
 				copyMergeRequestLink: "not-applicable",
 				dimDraftMergeRequests: getDimDraftMergeRequestsCompatibility(context),
@@ -903,6 +907,7 @@ describe("top-bar control-surface lifecycle", () => {
 		const user = userEvent.setup({ document });
 		const controller = new AbortController();
 		let compatibility: InPageFeatureCompatibility = {
+			approveMergeRequestFromTabs: "supported",
 			confirmMergeRequest: "supported",
 			copyMergeRequestLink: "supported",
 			dimDraftMergeRequests: "supported",
@@ -940,6 +945,7 @@ describe("top-bar control-surface lifecycle", () => {
 		expect(within(dialog).queryByRole("status")).toBeNull();
 
 		compatibility = {
+			approveMergeRequestFromTabs: "unsupported",
 			confirmMergeRequest: "unsupported",
 			copyMergeRequestLink: "unsupported",
 			dimDraftMergeRequests: "unsupported",
@@ -955,7 +961,7 @@ describe("top-bar control-surface lifecycle", () => {
 		});
 
 		await waitFor(() => {
-			expect(within(dialog).getAllByRole("status")).toHaveLength(10);
+			expect(within(dialog).getAllByRole("status")).toHaveLength(11);
 		});
 		expect(shadowRoot.querySelector('[data-slot="popover-content"]')).toBe(
 			dialog,

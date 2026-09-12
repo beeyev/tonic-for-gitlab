@@ -14,6 +14,7 @@ import { Switch } from "../../ui/components/switch";
 import type { FeaturePageCompatibility } from "../runtime/feature-context";
 
 export interface SettingChangeHandlers {
+	onApproveMergeRequestFromTabsEnabledChange(enabled: boolean): Promise<void>;
 	onCollapseJobLogSectionsByDefaultEnabledChange(
 		enabled: boolean,
 	): Promise<void>;
@@ -38,6 +39,7 @@ export interface SettingChangeHandlers {
 }
 
 export interface InPageFeatureCompatibility {
+	approveMergeRequestFromTabs: FeaturePageCompatibility;
 	confirmMergeRequest: FeaturePageCompatibility;
 	copyMergeRequestLink: FeaturePageCompatibility;
 	dimDraftMergeRequests: FeaturePageCompatibility;
@@ -51,6 +53,7 @@ export interface InPageFeatureCompatibility {
 
 export const DEFAULT_IN_PAGE_FEATURE_COMPATIBILITY: InPageFeatureCompatibility =
 	{
+		approveMergeRequestFromTabs: "not-applicable",
 		confirmMergeRequest: "not-applicable",
 		copyMergeRequestLink: "not-applicable",
 		dimDraftMergeRequests: "not-applicable",
@@ -297,6 +300,19 @@ export function InPageControlPanelView({
 						/>
 					</SettingGroup>
 					<SettingGroup title="Merge requests">
+						<SettingSwitchRow
+							label="Approve from the tab bar"
+							description="Mirror GitLab's Approve button into the merge request tab bar so it stays reachable from Commits, Pipelines and Changes."
+							inactiveReason={
+								compatibility.approveMergeRequestFromTabs === "unsupported"
+									? "Inactive on this page. This feature does not support the current GitLab merge request tab bar."
+									: undefined
+							}
+							storedValue={settings.approveMergeRequestFromTabsEnabled}
+							onEnabledChange={
+								handlers.onApproveMergeRequestFromTabsEnabledChange
+							}
+						/>
 						<SettingSwitchRow
 							label="Copy merge request link"
 							description="Add a header button that copies the base merge request link from any detail tab."

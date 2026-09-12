@@ -1,0 +1,56 @@
+<!--
+GitLab version: 18.11.9-ce.0
+Page: authenticated merge request detail tab bar and approvals widget section after Vue hydration
+Page identifier: projects:merge_requests:show
+Capture date: 2026-09-11
+Source type: independently minimized live local-lab DOM, checked against official GitLab 18-11-stable-ee source
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/views/projects/merge_requests/_page.html.haml
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/assets/javascripts/vue_merge_request_widget/components/approvals/approvals.vue
+Sanitization: synthetic namespace and merge request IID; badge counts, to-do and subscription
+controls, approver avatars, approvals summary help link, and the widget collapse control removed;
+no executable scripts. Retained classes, test IDs and button structure are GitLab-owned values
+observed after hydration. The same markup was observed on 19.2.2-ce.0.
+-->
+<div class="merge-request-sticky-header-wrapper js-merge-request-sticky-header-wrapper">
+	<div class="merge-request-sticky-header gl-border-b">
+		<div class="merge-request-tabs-container gl-flex gl-justify-between gl-relative gl-gap-2 is-merge-request js-tabs-affix">
+			<ul class="merge-request-tabs nav-tabs nav nav-links gl-flex gl-flex-nowrap gl-m-0 gl-p-0 gl-border-0">
+				<li class="notes-tab active" data-testid="notes-tab">
+					<a data-action="show" data-target="#notes" data-toggle="tabvue" href="/example/project/-/merge_requests/7">Overview</a>
+				</li>
+				<li class="commits-tab" data-testid="commits-tab">
+					<a data-action="commits" data-target="#commits" data-toggle="tabvue" href="/example/project/-/merge_requests/7/commits">Commits</a>
+				</li>
+				<li class="pipelines-tab">
+					<a data-action="pipelines" data-target="#pipelines" data-toggle="tabvue" href="/example/project/-/merge_requests/7/pipelines">Pipelines</a>
+				</li>
+				<li class="diffs-tab js-diffs-tab" data-testid="diffs-tab" id="diffs-tab">
+					<a data-action="diffs" data-target="#diffs" data-toggle="tabvue" href="/example/project/-/merge_requests/7/diffs">Changes</a>
+				</li>
+			</ul>
+			<div class="merge-request-tabs-actions gl-flex gl-flex-wrap gl-items-center gl-gap-3">
+				<!---->
+				<!---->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="js-vue-mr-widget">
+	<div class="js-mr-approvals mr-section-container">
+		<div class="mr-widget-body media gl-flex gl-items-center gl-py-4 gl-pl-5 gl-pr-4">
+			<div class="gl-flex gl-w-full">
+				<div class="media-body gl-leading-normal gl-flex-wrap gl-items-center gl-gap-3 @md/panel:gl-flex">
+					<div class="gl-flex gl-flex-col">
+						<div class="gl-flex gl-flex-col gl-flex-wrap gl-items-baseline gl-gap-3 @sm/panel:gl-flex-row @sm/panel:gl-items-center">
+							<!---->
+							<button data-testid="approve-button" type="button" class="btn gl-button btn-confirm btn-sm"><!----> <!----> <span class="gl-button-text">
+            Approve
+           <!----></span></button>
+							<div data-testid="approvals-summary-content" class="gl-flex gl-flex-wrap gl-items-center gl-gap-2"><span class="gl-text-subtle">Approval is optional</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

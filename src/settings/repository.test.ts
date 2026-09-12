@@ -38,7 +38,8 @@ describe("settings resolution", () => {
 	test("ignores unknown keys so a newer build's extra settings do not invalidate", () => {
 		expect(
 			parseSettings({
-				schemaVersion: 11,
+				schemaVersion: 12,
+				approveMergeRequestFromTabsEnabled: true,
 				collapseJobLogSectionsByDefaultEnabled: false,
 				confirmMergeRequestEnabled: true,
 				copyMergeRequestLinkEnabled: true,
@@ -57,6 +58,42 @@ describe("settings resolution", () => {
 			confirmMergeRequestEnabled: true,
 			dimDraftMergeRequestsEnabled: false,
 			hideDuoAgentPlatformEntrypointEnabled: true,
+		});
+	});
+
+	test("upgrades schema 11, preserves every choice, and mirrors the approve control", () => {
+		expect(
+			resolveSettings({
+				schemaVersion: 11,
+				collapseJobLogSectionsByDefaultEnabled: true,
+				confirmMergeRequestEnabled: true,
+				copyMergeRequestLinkEnabled: false,
+				dimDraftMergeRequestsEnabled: false,
+				filterMyAuthoredMergeRequestsEnabled: false,
+				hideDuoAgentPlatformEntrypointEnabled: true,
+				hideFileTreeBrowserFeedbackButtonEnabled: false,
+				highlightAuthoredMergeRequestsEnabled: false,
+				rememberMergeRequestListFiltersEnabled: false,
+				startThreadsByDefaultEnabled: false,
+				toggleJobLogSectionsEnabled: false,
+			}),
+		).toEqual({
+			outcome: "migrated",
+			settings: {
+				...DEFAULT_SETTINGS,
+				approveMergeRequestFromTabsEnabled: true,
+				collapseJobLogSectionsByDefaultEnabled: true,
+				confirmMergeRequestEnabled: true,
+				copyMergeRequestLinkEnabled: false,
+				dimDraftMergeRequestsEnabled: false,
+				filterMyAuthoredMergeRequestsEnabled: false,
+				hideDuoAgentPlatformEntrypointEnabled: true,
+				hideFileTreeBrowserFeedbackButtonEnabled: false,
+				highlightAuthoredMergeRequestsEnabled: false,
+				rememberMergeRequestListFiltersEnabled: false,
+				startThreadsByDefaultEnabled: false,
+				toggleJobLogSectionsEnabled: false,
+			},
 		});
 	});
 
@@ -327,7 +364,7 @@ describe("settings resolution", () => {
 	test("treats a higher schema version as newer, not invalid", () => {
 		expect(
 			resolveSettings({
-				schemaVersion: 12,
+				schemaVersion: 13,
 				dimDraftMergeRequestsEnabled: false,
 			}),
 		).toEqual({ outcome: "newer-schema", settings: DEFAULT_SETTINGS });
