@@ -1,5 +1,5 @@
 /**
- * Seeds both lab GitLab instances with users, groups, projects and merge requests.
+ * Seeds every lab GitLab instance with users, groups, projects and merge requests.
  *
  * Runs inside the compose network as a one-shot service. Each instance is reached
  * by its service name; the admin token is minted by the instance itself after
@@ -22,13 +22,8 @@ type Instance = {
 	tokenFile: string;
 };
 
+// One entry per service in compose.yaml, which is one per supported GitLab major.
 const INSTANCES: Instance[] = [
-	{
-		id: "18",
-		baseUrl: "http://gitlab-18",
-		publicUrl: "http://localhost:10018",
-		tokenFile: "/lab/token-18",
-	},
 	{
 		id: "19",
 		baseUrl: "http://gitlab-19",
@@ -1002,8 +997,8 @@ async function ensureState(
 		return;
 	}
 
-	// GitLab 19 rejects a merge without the head SHA; 18.11 treated it as optional.
-	// The SHA appears once the diff is computed, which is a background job.
+	// GitLab 19 rejects a merge without the head SHA. The SHA appears once the
+	// diff is computed, which is a background job.
 	let sha = asRecord(current.body).sha;
 	for (let attempt = 1; attempt <= 30 && typeof sha !== "string"; attempt++) {
 		await sleep(2000);

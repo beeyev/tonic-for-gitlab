@@ -4,7 +4,9 @@ import {
 	asBrowserWindow,
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
+	type GitLabMajor,
 	readMergeRequestListFiltersFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { activateFeatureRuntime } from "../../content/runtime/feature-lifecycle";
@@ -65,7 +67,7 @@ function createFakeStore(seeded?: string, isWritable = true): FakeStore {
 async function mount(
 	store: ListFilterStore,
 	url: string,
-	version: "18" | "19" = "19",
+	version: GitLabMajor = "19",
 ): Promise<{ testWindow: Window; controller: AbortController }> {
 	const testWindow = await createGitLabTestWindow(
 		await readMergeRequestListFiltersFixture(version),
@@ -110,7 +112,7 @@ function chipText(testWindow: Window): string | undefined {
 }
 
 describe("filter status chip", () => {
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"discloses a remembered set in the GitLab %s contract",
 		async (version) => {
 			const store = createFakeStore("label_name%5B%5D=Bug");

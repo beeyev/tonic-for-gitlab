@@ -28,7 +28,6 @@
 				"features/dim-draft-merge-requests/styles.css",
 				"features/dismiss-broadcast-banner/styles.css",
 				"features/hide-duo-agent-platform-entrypoint/styles.css",
-				"features/hide-file-tree-browser-feedback-button/styles.css",
 				"features/highlight-authored-merge-requests/styles.css",
 				"features/remember-merge-request-list-filters/styles.css"
 			],

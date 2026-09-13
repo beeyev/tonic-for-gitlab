@@ -9,6 +9,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readBroadcastBannerFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { activateFeatureRuntime } from "../../content/runtime/feature-lifecycle";
@@ -169,7 +170,7 @@ afterEach(() => {
 });
 
 describe("dismiss broadcast banner", () => {
-	for (const version of ["18", "19"] as const) {
+	for (const version of SUPPORTED_GITLAB_MAJORS) {
 		test(`injects the native-shaped accessible control for GitLab ${version}`, async () => {
 			const testWindow = createGitLabTestWindow(
 				await readBroadcastBannerFixture(version, "non-dismissible"),

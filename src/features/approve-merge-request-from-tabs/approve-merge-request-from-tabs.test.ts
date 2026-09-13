@@ -31,7 +31,7 @@ afterEach(() => {
 
 async function openTabBar(url = MERGE_REQUEST_URL): Promise<HappyDOMWindow> {
 	return createGitLabTestWindow(
-		await readMergeRequestTabBarFixture(),
+		await readMergeRequestTabBarFixture("19"),
 		url,
 		"projects:merge_requests:show",
 	);
@@ -390,7 +390,7 @@ describe("approve-merge-request-from-tabs", () => {
 	});
 
 	test("mounts after hydration and reconciles a replaced tab bar root", async () => {
-		const markup = await readMergeRequestTabBarFixture();
+		const markup = await readMergeRequestTabBarFixture("19");
 		const testWindow = createGitLabTestWindow(
 			"<div></div>",
 			MERGE_REQUEST_URL,
@@ -475,7 +475,7 @@ describe("approve-merge-request-from-tabs", () => {
 	});
 
 	test("stays absent on a cold load that carries no approvals widget", async () => {
-		const markup = await readMergeRequestTabBarFixture();
+		const markup = await readMergeRequestTabBarFixture("19");
 		const testWindow = createGitLabTestWindow(
 			markup,
 			`${MERGE_REQUEST_URL}/diffs`,

@@ -6,6 +6,7 @@ import {
 	type MergeRequestContractFixture,
 	type MergeRequestContractSurface,
 	readMergeRequestContractFixture,
+	SUPPORTED_GITLAB_MAJORS,
 } from "../../../tests/helpers/gitlab-dom";
 import { getDimDraftMergeRequestsCompatibility } from "../../features/dim-draft-merge-requests/dim-draft-merge-requests";
 import { getHighlightAuthoredMergeRequestsCompatibility } from "../../features/highlight-authored-merge-requests/highlight-authored-merge-requests";
@@ -30,6 +31,24 @@ const SURFACE_CONTEXT: Record<
 	},
 };
 
+/*
+ * Fixture identifiers and text are synthetic and deliberately identical across
+ * majors, so one surface table times the supported majors is the whole matrix
+ * and a new major needs no row here.
+ */
+const SURFACE_CONTRACTS = [
+	["project", "Draft: Improve project presentation", "current.user"],
+	["group", "Improve group presentation", "other.user"],
+	["dashboard", "Draft: Improve dashboard presentation", "current.user"],
+] as const;
+
+const CONTRACT_MATRIX = SUPPORTED_GITLAB_MAJORS.flatMap((version) =>
+	SURFACE_CONTRACTS.map(
+		([surface, title, authorUsername]) =>
+			[version, surface, title, authorUsername] as const,
+	),
+);
+
 afterEach(() => {
 	closeGitLabTestWindows();
 });
@@ -47,24 +66,7 @@ function createContractWindow(
 }
 
 describe("merge request list compatibility contract", () => {
-	test.each([
-		["18", "project", "Draft: Improve project presentation", "current.user"],
-		["18", "group", "Improve group presentation", "other.user"],
-		[
-			"18",
-			"dashboard",
-			"Draft: Improve dashboard presentation",
-			"current.user",
-		],
-		["19", "project", "Draft: Improve project presentation", "current.user"],
-		["19", "group", "Improve group presentation", "other.user"],
-		[
-			"19",
-			"dashboard",
-			"Draft: Improve dashboard presentation",
-			"current.user",
-		],
-	] as const)(
+	test.each(CONTRACT_MATRIX)(
 		"resolves required rows and fields for GitLab %s %s markup",
 		async (version, surface, expectedTitle, expectedAuthorUsername) => {
 			const testWindow = createContractWindow(

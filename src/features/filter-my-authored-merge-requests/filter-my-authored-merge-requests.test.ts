@@ -4,7 +4,9 @@ import {
 	asBrowserWindow,
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
+	type GitLabMajor,
 	readMergeRequestListFiltersFixture,
+	SUPPORTED_GITLAB_MAJORS,
 } from "../../../tests/helpers/gitlab-dom";
 import { createFeatureContext } from "../../content/runtime/feature-context";
 import {
@@ -33,7 +35,7 @@ afterEach(() => {
 });
 
 async function openList(
-	version: "18" | "19",
+	version: GitLabMajor,
 	url = PROJECT_URL,
 	page = "projects:merge_requests:index",
 ): Promise<Window> {
@@ -60,7 +62,7 @@ function activate(testWindow: Window): AbortController {
 }
 
 describe("filter-my-authored-merge-requests", () => {
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"builds a normal author-filter link for the GitLab %s contract",
 		async (version) => {
 			const testWindow = await openList(
@@ -116,7 +118,7 @@ describe("filter-my-authored-merge-requests", () => {
 		}
 	});
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"reports the supported GitLab %s project contract independently of identity",
 		async (version) => {
 			const signedIn = await openList(version);

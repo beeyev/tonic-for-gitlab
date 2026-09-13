@@ -107,7 +107,7 @@ function resolveRealApproveButton(
 /**
  * Whether GitLab's control is mid-request.
  *
- * Observed on 18.11.9-ce and 19.2.2-ce: while an approval is in flight the
+ * Observed on 19.2.2-ce: while an approval is in flight the
  * control keeps `disabled` false and is blocked through `aria-disabled` and the
  * `disabled` class instead. Reading the property alone reports an idle control
  * and lets a forwarded click submit a second approval, which the CSS stops a
@@ -400,7 +400,7 @@ export function getApproveMergeRequestFromTabsCompatibility(
 export const approveMergeRequestFromTabs: Feature = {
 	id: APPROVE_MERGE_REQUEST_FROM_TABS_ID,
 	/*
-	 * No attribute is observed. Measured on 18.11.9-ce and 19.2.2-ce: GitLab
+	 * No attribute is observed. Measured on 19.2.2-ce: GitLab
 	 * never sets `disabled` here, the in-flight state arrives as spinner children
 	 * inside `.js-mr-approvals`, and the label and variant are patched in place,
 	 * as `characterData` and `class`, which the shared observer does not carry.

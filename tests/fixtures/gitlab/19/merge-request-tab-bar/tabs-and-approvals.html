@@ -1,15 +1,17 @@
 <!--
-GitLab version: 18.11.9-ce.0
+GitLab version: 19.2.2-ce.0
 Page: authenticated merge request detail tab bar and approvals widget section after Vue hydration
 Page identifier: projects:merge_requests:show
 Capture date: 2026-09-11
-Source type: independently minimized live local-lab DOM, checked against official GitLab 18-11-stable-ee source
-Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/views/projects/merge_requests/_page.html.haml
-Source: https://gitlab.com/gitlab-org/gitlab/-/blob/18-11-stable-ee/app/assets/javascripts/vue_merge_request_widget/components/approvals/approvals.vue
+Source type: independently minimized live local-lab DOM, observed identically on 19.2.2-ce.0 and on
+the 18.11.9-ce.0 instance this fixture was first captured against; re-baselined to 19 on 2026-09-13
+without re-capturing
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/19-2-stable-ee/app/views/projects/merge_requests/_page.html.haml
+Source: https://gitlab.com/gitlab-org/gitlab/-/blob/19-2-stable-ee/app/assets/javascripts/vue_merge_request_widget/components/approvals/approvals.vue
 Sanitization: synthetic namespace and merge request IID; badge counts, to-do and subscription
 controls, approver avatars, approvals summary help link, and the widget collapse control removed;
 no executable scripts. Retained classes, test IDs and button structure are GitLab-owned values
-observed after hydration. The same markup was observed on 19.2.2-ce.0.
+observed after hydration.
 -->
 <div class="merge-request-sticky-header-wrapper js-merge-request-sticky-header-wrapper">
 	<div class="merge-request-sticky-header gl-border-b">

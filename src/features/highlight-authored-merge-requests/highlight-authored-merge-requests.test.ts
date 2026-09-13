@@ -4,7 +4,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readMergeRequestListFixture,
-	readObservedGitLab18MergeRequestListFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { createFeatureContext } from "../../content/runtime/feature-context";
@@ -57,7 +57,7 @@ describe("highlight-authored-merge-requests", () => {
 		).toBe(true);
 	});
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"marks only rows authored by the current user in the GitLab %s contract",
 		async (version) => {
 			const testWindow = createGitLabTestWindow(
@@ -75,36 +75,14 @@ describe("highlight-authored-merge-requests", () => {
 			).toHaveLength(1);
 			expect(
 				testWindow.document.querySelector(`[${AUTHORED_ROW_ATTRIBUTE}]`)?.id,
-			).toBe(version === "18" ? "issuable_1801" : "issuable_1901");
+			).toBe("issuable_1");
 			expect(
 				testWindow.document
-					.getElementById(version === "18" ? "issuable_1802" : "issuable_1902")
+					.getElementById("issuable_2")
 					?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
 			).toBe(false);
 		},
 	);
-
-	test("uses the author contract observed on the public GitLab 18 instance", async () => {
-		const testWindow = createGitLabTestWindow(
-			await readObservedGitLab18MergeRequestListFixture(),
-		);
-		testWindow.document.body.insertAdjacentHTML(
-			"afterbegin",
-			'<a data-testid="user-menu-toggle" href="/observed.author">Current user</a>',
-		);
-		const controller = new AbortController();
-
-		highlightAuthoredMergeRequests.activate(
-			createFeatureContext(asBrowserWindow(testWindow)),
-			controller.signal,
-		);
-
-		expect(
-			testWindow.document
-				.getElementById("issuable_observed_18")
-				?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
-		).toBe(true);
-	});
 
 	test("signed-out and ambiguous current-user identity are safe no-ops", async () => {
 		const markup = await readMergeRequestListFixture("19");
@@ -171,7 +149,7 @@ describe("highlight-authored-merge-requests", () => {
 				.querySelector(CURRENT_USER_LINK_SELECTOR)
 				?.setAttribute("href", href);
 			testWindow.document
-				.querySelector('#issuable_1901 [data-testid="issuable-author"]')
+				.querySelector('#issuable_1 [data-testid="issuable-author"]')
 				?.setAttribute("href", href);
 			const controller = new AbortController();
 
@@ -182,7 +160,7 @@ describe("highlight-authored-merge-requests", () => {
 
 			expect(
 				testWindow.document
-					.getElementById("issuable_1901")
+					.getElementById("issuable_1")
 					?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
 			).toBe(true);
 		},
@@ -192,7 +170,7 @@ describe("highlight-authored-merge-requests", () => {
 		const testWindow = createGitLabTestWindow(
 			await readMergeRequestListFixture("19"),
 		);
-		const currentUserRow = testWindow.document.getElementById("issuable_1901");
+		const currentUserRow = testWindow.document.getElementById("issuable_1");
 		currentUserRow
 			?.querySelector('[data-testid="issuable-author"]')
 			?.removeAttribute("data-username");
@@ -235,7 +213,7 @@ describe("highlight-authored-merge-requests", () => {
 			await readMergeRequestListFixture("19"),
 		);
 		const controller = new AbortController();
-		const detachedRow = testWindow.document.getElementById("issuable_1901");
+		const detachedRow = testWindow.document.getElementById("issuable_1");
 
 		highlightAuthoredMergeRequests.activate(
 			createFeatureContext(asBrowserWindow(testWindow)),
@@ -275,14 +253,14 @@ describe("highlight-authored-merge-requests", () => {
 
 		expect(
 			testWindow.document
-				.getElementById("issuable_1901")
+				.getElementById("issuable_1")
 				?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
 		).toBe(true);
 
 		const currentList = testWindow.document.querySelector(
 			".issuable-list-container",
 		);
-		const detachedRow = testWindow.document.getElementById("issuable_1901");
+		const detachedRow = testWindow.document.getElementById("issuable_1");
 		const replacement = testWindow.document.createElement("div");
 		replacement.className = "issuable-list-container";
 		replacement.innerHTML = `
@@ -366,12 +344,12 @@ describe("highlight-authored-merge-requests", () => {
 
 		expect(
 			testWindow.document
-				.getElementById("issuable_1901")
+				.getElementById("issuable_1")
 				?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
 		).toBe(false);
 		expect(
 			testWindow.document
-				.getElementById("issuable_1902")
+				.getElementById("issuable_2")
 				?.hasAttribute(AUTHORED_ROW_ATTRIBUTE),
 		).toBe(true);
 	});
@@ -388,7 +366,7 @@ describe("highlight-authored-merge-requests", () => {
 		const hostElement = testWindow.document.getElementById("host-owned");
 		expect(hostElement).not.toBeNull();
 		const hostBefore = hostElement?.outerHTML;
-		const composedRow = testWindow.document.getElementById("issuable_1901");
+		const composedRow = testWindow.document.getElementById("issuable_1");
 
 		dimDraftMergeRequests.activate(context, draftController.signal);
 		highlightAuthoredMergeRequests.activate(context, authoredController.signal);

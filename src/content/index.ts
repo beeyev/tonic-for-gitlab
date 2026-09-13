@@ -26,10 +26,6 @@ import {
 	hideDuoAgentPlatformEntrypoint,
 } from "../features/hide-duo-agent-platform-entrypoint/hide-duo-agent-platform-entrypoint";
 import {
-	getHideFileTreeBrowserFeedbackButtonCompatibility,
-	hideFileTreeBrowserFeedbackButton,
-} from "../features/hide-file-tree-browser-feedback-button/hide-file-tree-browser-feedback-button";
-import {
 	getHighlightAuthoredMergeRequestsCompatibility,
 	highlightAuthoredMergeRequests,
 } from "../features/highlight-authored-merge-requests/highlight-authored-merge-requests";
@@ -190,16 +186,6 @@ export function startContentRuntime({
 		},
 	};
 
-	const configuredHideFileTreeBrowserFeedbackButton: Feature = {
-		...hideFileTreeBrowserFeedbackButton,
-		matches(context) {
-			return (
-				settings.hideFileTreeBrowserFeedbackButtonEnabled &&
-				hideFileTreeBrowserFeedbackButton.matches(context)
-			);
-		},
-	};
-
 	const rememberMergeRequestListFilters =
 		createRememberMergeRequestListFiltersFeature(listFilters);
 
@@ -266,10 +252,6 @@ export function startContentRuntime({
 							writeSetting({
 								hideDuoAgentPlatformEntrypointEnabled: enabled,
 							}),
-						onHideFileTreeBrowserFeedbackButtonEnabledChange: (enabled) =>
-							writeSetting({
-								hideFileTreeBrowserFeedbackButtonEnabled: enabled,
-							}),
 						onHighlightAuthoredMergeRequestsEnabledChange: (enabled) =>
 							writeSetting({ highlightAuthoredMergeRequestsEnabled: enabled }),
 						onRememberMergeRequestListFiltersEnabledChange: (enabled) =>
@@ -293,8 +275,6 @@ export function startContentRuntime({
 							getFilterMyAuthoredMergeRequestsCompatibility(context),
 						hideDuoAgentPlatformEntrypoint:
 							getHideDuoAgentPlatformEntrypointCompatibility(context),
-						hideFileTreeBrowserFeedbackButton:
-							getHideFileTreeBrowserFeedbackButtonCompatibility(context),
 						highlightAuthoredMergeRequests:
 							getHighlightAuthoredMergeRequestsCompatibility(context),
 						startThreadsByDefault:
@@ -321,7 +301,6 @@ export function startContentRuntime({
 			configuredDimDraftMergeRequests,
 			configuredFilterMyAuthoredMergeRequests,
 			configuredHideDuoAgentPlatformEntrypoint,
-			configuredHideFileTreeBrowserFeedbackButton,
 			configuredHighlightAuthoredMergeRequests,
 			configuredRememberMergeRequestListFilters,
 			configuredApproveMergeRequestFromTabs,

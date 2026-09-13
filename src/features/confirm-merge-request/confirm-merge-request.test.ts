@@ -5,6 +5,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readMergeRequestMergeWidgetFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import {
@@ -154,7 +155,7 @@ describe("confirm-merge-request", () => {
 		).toBeNull();
 	});
 
-	for (const version of ["18", "19"] as const) {
+	for (const version of SUPPORTED_GITLAB_MAJORS) {
 		for (const actionCase of primaryMergeActionCases) {
 			test(`confirms ${actionCase.confirmLabel} once in the GitLab ${version} contract`, async () => {
 				const page = createMergeWidgetPage(

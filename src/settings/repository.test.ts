@@ -38,7 +38,7 @@ describe("settings resolution", () => {
 	test("ignores unknown keys so a newer build's extra settings do not invalidate", () => {
 		expect(
 			parseSettings({
-				schemaVersion: 12,
+				schemaVersion: 13,
 				approveMergeRequestFromTabsEnabled: true,
 				collapseJobLogSectionsByDefaultEnabled: false,
 				confirmMergeRequestEnabled: true,
@@ -58,6 +58,42 @@ describe("settings resolution", () => {
 			confirmMergeRequestEnabled: true,
 			dimDraftMergeRequestsEnabled: false,
 			hideDuoAgentPlatformEntrypointEnabled: true,
+		});
+	});
+
+	test("upgrades schema 12, preserves every choice, and drops the removed file tree feedback key", () => {
+		expect(
+			resolveSettings({
+				schemaVersion: 12,
+				approveMergeRequestFromTabsEnabled: false,
+				collapseJobLogSectionsByDefaultEnabled: true,
+				confirmMergeRequestEnabled: true,
+				copyMergeRequestLinkEnabled: false,
+				dimDraftMergeRequestsEnabled: false,
+				filterMyAuthoredMergeRequestsEnabled: false,
+				hideDuoAgentPlatformEntrypointEnabled: true,
+				hideFileTreeBrowserFeedbackButtonEnabled: false,
+				highlightAuthoredMergeRequestsEnabled: false,
+				rememberMergeRequestListFiltersEnabled: false,
+				startThreadsByDefaultEnabled: false,
+				toggleJobLogSectionsEnabled: false,
+			}),
+		).toEqual({
+			outcome: "migrated",
+			settings: {
+				...DEFAULT_SETTINGS,
+				approveMergeRequestFromTabsEnabled: false,
+				collapseJobLogSectionsByDefaultEnabled: true,
+				confirmMergeRequestEnabled: true,
+				copyMergeRequestLinkEnabled: false,
+				dimDraftMergeRequestsEnabled: false,
+				filterMyAuthoredMergeRequestsEnabled: false,
+				hideDuoAgentPlatformEntrypointEnabled: true,
+				highlightAuthoredMergeRequestsEnabled: false,
+				rememberMergeRequestListFiltersEnabled: false,
+				startThreadsByDefaultEnabled: false,
+				toggleJobLogSectionsEnabled: false,
+			},
 		});
 	});
 
@@ -88,7 +124,6 @@ describe("settings resolution", () => {
 				dimDraftMergeRequestsEnabled: false,
 				filterMyAuthoredMergeRequestsEnabled: false,
 				hideDuoAgentPlatformEntrypointEnabled: true,
-				hideFileTreeBrowserFeedbackButtonEnabled: false,
 				highlightAuthoredMergeRequestsEnabled: false,
 				rememberMergeRequestListFiltersEnabled: false,
 				startThreadsByDefaultEnabled: false,
@@ -122,7 +157,6 @@ describe("settings resolution", () => {
 				dimDraftMergeRequestsEnabled: false,
 				filterMyAuthoredMergeRequestsEnabled: false,
 				hideDuoAgentPlatformEntrypointEnabled: true,
-				hideFileTreeBrowserFeedbackButtonEnabled: false,
 				highlightAuthoredMergeRequestsEnabled: false,
 				rememberMergeRequestListFiltersEnabled: false,
 				startThreadsByDefaultEnabled: false,
@@ -154,7 +188,6 @@ describe("settings resolution", () => {
 				dimDraftMergeRequestsEnabled: false,
 				filterMyAuthoredMergeRequestsEnabled: false,
 				hideDuoAgentPlatformEntrypointEnabled: true,
-				hideFileTreeBrowserFeedbackButtonEnabled: false,
 				highlightAuthoredMergeRequestsEnabled: false,
 				rememberMergeRequestListFiltersEnabled: false,
 				startThreadsByDefaultEnabled: false,
@@ -185,7 +218,6 @@ describe("settings resolution", () => {
 				dimDraftMergeRequestsEnabled: false,
 				filterMyAuthoredMergeRequestsEnabled: false,
 				hideDuoAgentPlatformEntrypointEnabled: true,
-				hideFileTreeBrowserFeedbackButtonEnabled: false,
 				highlightAuthoredMergeRequestsEnabled: false,
 				rememberMergeRequestListFiltersEnabled: false,
 				startThreadsByDefaultEnabled: false,
@@ -311,7 +343,7 @@ describe("settings resolution", () => {
 		});
 	});
 
-	test("upgrades schema 7, preserves saved choices, and starts hiding the file tree feedback link", () => {
+	test("upgrades schema 7 and preserves saved choices", () => {
 		expect(
 			resolveSettings({
 				schemaVersion: 7,
@@ -331,7 +363,6 @@ describe("settings resolution", () => {
 				dimDraftMergeRequestsEnabled: false,
 				filterMyAuthoredMergeRequestsEnabled: false,
 				hideDuoAgentPlatformEntrypointEnabled: true,
-				hideFileTreeBrowserFeedbackButtonEnabled: true,
 				highlightAuthoredMergeRequestsEnabled: false,
 				rememberMergeRequestListFiltersEnabled: false,
 				startThreadsByDefaultEnabled: false,
@@ -364,7 +395,7 @@ describe("settings resolution", () => {
 	test("treats a higher schema version as newer, not invalid", () => {
 		expect(
 			resolveSettings({
-				schemaVersion: 13,
+				schemaVersion: 14,
 				dimDraftMergeRequestsEnabled: false,
 			}),
 		).toEqual({ outcome: "newer-schema", settings: DEFAULT_SETTINGS });

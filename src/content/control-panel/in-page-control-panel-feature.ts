@@ -49,8 +49,6 @@ function compatibilityIsEqual(
 			right.filterMyAuthoredMergeRequests &&
 		left.hideDuoAgentPlatformEntrypoint ===
 			right.hideDuoAgentPlatformEntrypoint &&
-		left.hideFileTreeBrowserFeedbackButton ===
-			right.hideFileTreeBrowserFeedbackButton &&
 		left.highlightAuthoredMergeRequests ===
 			right.highlightAuthoredMergeRequests &&
 		left.startThreadsByDefault === right.startThreadsByDefault &&

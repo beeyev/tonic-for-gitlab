@@ -7,7 +7,10 @@ import {
 	asBrowserWindow,
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
+	type GitLabMajor,
+	readGitLabComMergeRequestHeaderFixture,
 	readMergeRequestHeaderFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { createFeatureContext } from "../../content/runtime/feature-context";
@@ -28,19 +31,32 @@ import {
 const MERGE_REQUEST_URL =
 	"https://gitlab.com/example/project/-/merge_requests/7";
 const BUTTON = `[${COPY_MERGE_REQUEST_LINK_ATTRIBUTE}]`;
-type HeaderFixture = "18" | "19" | "gitlab-com-public";
-const HEADER_FIXTURES: HeaderFixture[] = ["18", "19", "gitlab-com-public"];
+/**
+ * Deployment is a second axis over the supported majors: GitLab.com ships from
+ * master and wraps the action cluster differently from a numbered release.
+ */
+type HeaderSource = GitLabMajor | "gitlab-com";
+const HEADER_SOURCES: HeaderSource[] = [
+	...SUPPORTED_GITLAB_MAJORS,
+	"gitlab-com",
+];
 
 afterEach(() => {
 	closeGitLabTestWindows();
 });
 
+async function readHeaderFixture(source: HeaderSource): Promise<string> {
+	return source === "gitlab-com"
+		? readGitLabComMergeRequestHeaderFixture()
+		: readMergeRequestHeaderFixture(source);
+}
+
 async function openHeader(
-	version: HeaderFixture = "19",
+	source: HeaderSource = "19",
 	url = MERGE_REQUEST_URL,
 ): Promise<HappyDOMWindow> {
 	return createGitLabTestWindow(
-		await readMergeRequestHeaderFixture(version),
+		await readHeaderFixture(source),
 		url,
 		"projects:merge_requests:show",
 	);
@@ -159,13 +175,10 @@ describe("copy-merge-request-link", () => {
 		expect(copyMergeRequestLink.matches(context(testWindow))).toBe(false);
 	});
 
-	test.each(HEADER_FIXTURES)(
-		"injects an accessible native-shaped action in the GitLab %s header",
-		async (version) => {
-			const testWindow = await openHeader(
-				version,
-				`${MERGE_REQUEST_URL}/diffs`,
-			);
+	test.each(HEADER_SOURCES)(
+		"injects an accessible native-shaped action in the %s header",
+		async (source) => {
+			const testWindow = await openHeader(source, `${MERGE_REQUEST_URL}/diffs`);
 			activate(testWindow);
 			const button = requireButton(testWindow);
 			const actions = testWindow.document.querySelector(
@@ -230,10 +243,10 @@ describe("copy-merge-request-link", () => {
 		},
 	);
 
-	test.each(HEADER_FIXTURES)(
-		"reports the hydrated GitLab %s contract as supported",
-		async (version) => {
-			const testWindow = await openHeader(version);
+	test.each(HEADER_SOURCES)(
+		"reports the hydrated %s contract as supported",
+		async (source) => {
+			const testWindow = await openHeader(source);
 
 			expect(getCopyMergeRequestLinkCompatibility(context(testWindow))).toBe(
 				"supported",
@@ -242,7 +255,7 @@ describe("copy-merge-request-link", () => {
 	);
 
 	test("supports the current Code wrapper when signed-in actions are present", async () => {
-		const testWindow = await openHeader("gitlab-com-public");
+		const testWindow = await openHeader("gitlab-com");
 		const donor = testWindow.document.createElement("div");
 		donor.innerHTML = await readMergeRequestHeaderFixture("19");
 		const more = donor.querySelector(MERGE_REQUEST_ACTIONS_SELECTOR);
@@ -607,7 +620,7 @@ describe("copy-merge-request-link", () => {
 	});
 
 	test("rejects an unsafe Code sprite when permission-dependent actions are absent", async () => {
-		const testWindow = await openHeader("gitlab-com-public");
+		const testWindow = await openHeader("gitlab-com");
 		testWindow.document
 			.querySelector('[data-testid="chevron-down-icon"] use')
 			?.setAttribute("href", "https://evil.example/icons.svg#chevron-down");

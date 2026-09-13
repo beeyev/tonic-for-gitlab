@@ -4,6 +4,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readMergeRequestListFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { createFeatureContext } from "../../content/runtime/feature-context";
@@ -50,7 +51,7 @@ describe("dim-draft-merge-requests", () => {
 		).toBe(true);
 	});
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"marks only Draft rows in the GitLab %s contract",
 		async (version) => {
 			const testWindow = createGitLabTestWindow(
@@ -68,10 +69,10 @@ describe("dim-draft-merge-requests", () => {
 			).toHaveLength(1);
 			expect(
 				testWindow.document.querySelector(`[${DRAFT_ROW_ATTRIBUTE}]`)?.id,
-			).toBe(version === "18" ? "issuable_1801" : "issuable_1901");
+			).toBe("issuable_1");
 			expect(
 				testWindow.document
-					.querySelector(version === "18" ? "#issuable_1802" : "#issuable_1902")
+					.querySelector("#issuable_2")
 					?.hasAttribute(DRAFT_ROW_ATTRIBUTE),
 			).toBe(false);
 		},
@@ -87,7 +88,7 @@ describe("dim-draft-merge-requests", () => {
 		const testWindow = createGitLabTestWindow(
 			await readMergeRequestListFixture("19"),
 		);
-		const row = testWindow.document.getElementById("issuable_1902");
+		const row = testWindow.document.getElementById("issuable_2");
 		row?.setAttribute("data-qa-issuable-title", title);
 		const controller = new AbortController();
 
@@ -161,7 +162,7 @@ describe("dim-draft-merge-requests", () => {
 			await readMergeRequestListFixture("19"),
 		);
 		testWindow.document
-			.querySelector('#issuable_1902 [data-testid="issuable-title-link"]')
+			.querySelector('#issuable_2 [data-testid="issuable-title-link"]')
 			?.remove();
 		const controller = new AbortController();
 
@@ -193,8 +194,7 @@ describe("dim-draft-merge-requests", () => {
 		const currentList = testWindow.document.querySelector(
 			".issuable-list-container",
 		);
-		const detachedDraftRow =
-			testWindow.document.getElementById("issuable_1901");
+		const detachedDraftRow = testWindow.document.getElementById("issuable_1");
 		expect(currentList).not.toBeNull();
 
 		const replacement = testWindow.document.createElement("div");
@@ -256,7 +256,7 @@ describe("dim-draft-merge-requests", () => {
 
 		expect(
 			testWindow.document
-				.getElementById("issuable_1901")
+				.getElementById("issuable_1")
 				?.hasAttribute(DRAFT_ROW_ATTRIBUTE),
 		).toBe(true);
 	});

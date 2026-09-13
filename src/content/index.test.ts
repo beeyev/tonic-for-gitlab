@@ -6,7 +6,6 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readDuoAgentPlatformFixture,
-	readFileTreeBrowserFeedbackFixture,
 	readJobLogFixture,
 	readMergeRequestCommentFormFixture,
 	readMergeRequestHeaderFixture,
@@ -29,7 +28,6 @@ import {
 	HIDDEN_ENTRYPOINT_ATTRIBUTE,
 	HIDDEN_RAIL_ATTRIBUTE,
 } from "../features/hide-duo-agent-platform-entrypoint/selectors";
-import { HIDDEN_FEEDBACK_LINK_ATTRIBUTE } from "../features/hide-file-tree-browser-feedback-button/selectors";
 import { AUTHORED_ROW_ATTRIBUTE } from "../features/highlight-authored-merge-requests/selectors";
 import type { ListFilterStoreController } from "../features/remember-merge-request-list-filters/list-filters-store";
 import { THREAD_DEFAULT_FORM_ATTRIBUTE } from "../features/start-threads-by-default/selectors";
@@ -209,12 +207,6 @@ function countCopyMergeRequestLinkButtons(testWindow: Window): number {
 function countJobLogSectionToggles(testWindow: Window): number {
 	return testWindow.document.querySelectorAll(
 		`[${TOGGLE_JOB_LOG_SECTIONS_ATTRIBUTE}]`,
-	).length;
-}
-
-function countHiddenFileTreeFeedbackLinks(testWindow: Window): number {
-	return testWindow.document.querySelectorAll(
-		`[${HIDDEN_FEEDBACK_LINK_ATTRIBUTE}]`,
 	).length;
 }
 
@@ -405,48 +397,6 @@ describe("content runtime bootstrap", () => {
 		expect(countHiddenDuoEntrypoints(asBrowserWindow(testWindow))).toBe(0);
 	});
 
-	test("gates the file tree feedback link on its own default-on setting", async () => {
-		const testWindow = createGitLabTestWindow(
-			await readFileTreeBrowserFeedbackFixture("18"),
-			"https://gitlab.com/example/project/-/blob/main/versions.tf",
-			"projects:blob:show",
-		);
-		const { repository, resolveRead, emit } = createDeferredRepository();
-		const stop = startContentRuntime({
-			runtimeWindow: asBrowserWindow(testWindow),
-			repository,
-			listFilters: createEmptyListFilterStore(),
-			stylesheet: undefined,
-			registerStatusResponder: () => {},
-		});
-
-		// Reversible, so it decorates the first paint from the default rather than
-		// waiting for the storage read.
-		expect(countHiddenFileTreeFeedbackLinks(asBrowserWindow(testWindow))).toBe(
-			1,
-		);
-
-		resolveRead({
-			...DEFAULT_SETTINGS,
-			hideFileTreeBrowserFeedbackButtonEnabled: false,
-		});
-		await settleGitLabDom(testWindow);
-		expect(countHiddenFileTreeFeedbackLinks(asBrowserWindow(testWindow))).toBe(
-			0,
-		);
-
-		emit(DEFAULT_SETTINGS);
-		await settleGitLabDom(testWindow);
-		expect(countHiddenFileTreeFeedbackLinks(asBrowserWindow(testWindow))).toBe(
-			1,
-		);
-
-		stop();
-		expect(countHiddenFileTreeFeedbackLinks(asBrowserWindow(testWindow))).toBe(
-			0,
-		);
-	});
-
 	test("protects pending settings reads, then follows its default-off setting", async () => {
 		const testWindow = createGitLabTestWindow(
 			await readMergeRequestMergeWidgetFixture("19", "immediate"),
@@ -593,7 +543,7 @@ describe("content runtime bootstrap", () => {
 
 	test("gates the mirrored approve button on its own setting", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readMergeRequestTabBarFixture(),
+			await readMergeRequestTabBarFixture("19"),
 			"https://gitlab.com/example/project/-/merge_requests/7/diffs",
 			"projects:merge_requests:show",
 		);
@@ -626,7 +576,7 @@ describe("content runtime bootstrap", () => {
 
 	test("gates the job log section toggle on its own setting", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readJobLogFixture(),
+			await readJobLogFixture("19"),
 			"https://gitlab.com/example/project/-/jobs/1234",
 			"projects:jobs:show",
 		);
@@ -662,7 +612,7 @@ describe("content runtime bootstrap", () => {
 	 */
 	test("keeps the whole job log feature off when its toggle setting is off", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readJobLogFixture(),
+			await readJobLogFixture("19"),
 			"https://gitlab.com/example/project/-/jobs/1234",
 			"projects:jobs:show",
 		);
@@ -783,7 +733,7 @@ describe("content runtime bootstrap", () => {
 
 	test("mounts the panel and fans a stored change out to it and the features", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readTopBarFixture("19"),
+			await readTopBarFixture("19", "signed-out"),
 			"https://gitlab.com/example/project/-/merge_requests",
 		);
 		const { repository, resolveRead, emit } = createDeferredRepository();
@@ -827,7 +777,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("persists the Duo switch through the panel's partial-update path", async () => {
-		document.body.innerHTML = `${await readTopBarFixture("19")}${await readDuoAgentPlatformFixture("19")}`;
+		document.body.innerHTML = `${await readTopBarFixture("19", "signed-out")}${await readDuoAgentPlatformFixture("19")}`;
 		const { repository, resolveRead, writes } = createDeferredRepository();
 		const user = userEvent.setup({ document });
 		let stop: (() => void) | undefined;
@@ -880,7 +830,7 @@ describe("content runtime bootstrap", () => {
 	 * chrome.storage change events interleave.
 	 */
 	test("applies a stale echo without letting it corrupt the next write", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emitStaleEcho, writes } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });
@@ -940,7 +890,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("chains a second setting change onto the first instead of reverting it", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, writes } = createDeferredRepository();
 		const user = userEvent.setup({ document });
 		let stop: (() => void) | undefined;
@@ -999,7 +949,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("does not revert a setting saved before a rejected update", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emitStaleEcho, failNextUpdate, writes } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });
@@ -1070,7 +1020,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("releases the optimistic value when a write stores no change", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emit, skipNextUpdate } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });

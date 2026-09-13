@@ -75,6 +75,12 @@ Tests live beside the feature, run under Bun and Happy DOM, and use `../../../te
 
 Fixtures under `../../../tests/fixtures/gitlab` stay minimal and sanitized. Their header records GitLab version, surface, source, date, and sanitization. Never commit full page dumps, credentials, tokens, user content, network responses, or scripts. Add a version-specific fixture only after observing a real difference.
 
+The major is the only version axis: one `tests/fixtures/gitlab/<major>/` directory and one lab service per entry in `SUPPORTED_GITLAB_MAJORS` in `../../../tests/helpers/gitlab-dom.ts`, which is the single list every version matrix reads. A contract that differs inside one major is a named scenario argument, not a directory, because the directory cannot express a minor. A capture that is not about a major at all, such as GitLab.com, lives outside the tree and gets its own reader. Keep synthetic fixture identifiers version-neutral so matrix bodies carry no per-version branch.
+
+Adding a major is: append to the constant, add `tests/fixtures/gitlab/<major>/`, add the lab service. No reader or test signature changes, and the suite stays green without edits. That widens the version matrices, and only those. Behavior tests deliberately pin one major, because they assert activation, cleanup, idempotence, and mutation handling rather than a version contract, and running all of them against every major would cost suite time for no version signal. When a major ships, decide per surface whether a behavior test has a reason to grow.
+
+Copy only fixtures you have evidence for. Cloning the previous major wholesale republishes contracts that major may have dropped, which is a false compatibility claim in the one place the repository treats as evidence.
+
 Use `@webext-core/fake-browser` only for APIs it implements. Happy DOM and fake APIs do not prove Shadow DOM styling, layout, navigation, permissions, CSP, worker lifetime, or browser integration. Every test must run under `bun run verify`.
 
 ## 8. Verify
@@ -88,7 +94,7 @@ Use `@webext-core/fake-browser` only for APIs it implements. Happy DOM and fake 
 
 ## 9. Release evidence
 
-Pinned lab images and fixture headers are inputs, not compatibility claims. Before a release containing GitLab DOM behavior, verify GitLab.com and both lab versions, then record exact versions, date, environment, verdicts, and remaining gaps in `README.md` or release metadata. Never replace an observed version with "latest".
+Pinned lab images and fixture headers are inputs, not compatibility claims. Before a release containing GitLab DOM behavior, verify GitLab.com and every lab instance, then record exact versions, date, environment, verdicts, and remaining gaps in `README.md` or release metadata. Never replace an observed version with "latest".
 
 Until a new release run proves them, treat these paths as unverified:
 

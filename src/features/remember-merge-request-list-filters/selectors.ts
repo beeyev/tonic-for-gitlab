@@ -24,7 +24,7 @@ export const FILTER_BAR_SELECTORS = MERGE_REQUEST_FILTER_BAR_SELECTORS;
  * costs the same rejected path check.
  *
  * It intentionally does not match GitLab's state tabs. Those are
- * `<a role="tab" href="#">` on both 18.11.11 and 19.2.4-ee, so there is no URL
+ * `<a role="tab" href="#">` on 19.2.4-ee, so there is no URL
  * on them to carry a remembered filter.
  */
 export const MERGE_REQUEST_LIST_LINK_SELECTOR = 'a[href*="/-/merge_requests"]';
