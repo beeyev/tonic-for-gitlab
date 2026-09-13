@@ -1,10 +1,12 @@
 <!--
-GitLab version: 18.11.9-ee
+GitLab version: 19.0, the oldest supported minor that renders this placement
 Surface: Repository file tree browser on a blob page, with the "Provide feedback" link rendered as
-the panel's last child, which is how 18.7 through 19.0 place it
+the panel's last child, which is how 18.7 through 19.0 place it. 19.1 moved it to a fixed-position
+sibling and 19.2 removed it, so the two surviving placements are named rather than versioned.
 Source type: independently reconstructed 2026-08-31 from the official v18.11.9-ee
 `app/views/projects/blob/show.html.haml`, `file_tree_browser.vue`, and `tree_list.vue` post-mount
-contract
+contract, which is the same placement 19.0 renders; re-baselined to 19 on 2026-09-13 without
+re-reconstructing against 19-0-stable
 Sanitization: component state, Vue bindings, layout utility classes, tracking attributes, icon
 sprite references, resizer internals, and all but one file tree row removed; the sibling file
 content is reduced to a single external link that carries the same icon; no executable scripts

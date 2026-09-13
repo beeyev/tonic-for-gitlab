@@ -3,12 +3,27 @@ import { Window } from "happy-dom";
 const fixtureDirectory = new URL("../fixtures/gitlab/", import.meta.url);
 const openWindows: Window[] = [];
 
+/**
+ * The GitLab majors this build is tested against, and the single list every
+ * version matrix reads. Each entry owns one `../fixtures/gitlab/<major>/`
+ * directory and one lab service in `../../lab/compose.yaml`; supporting a new
+ * major means adding those two things and appending here, not editing readers
+ * or tests.
+ *
+ * Only the major is an axis. A contract that differs inside one major is a
+ * named scenario instead, because the directory cannot express a minor.
+ */
+export const SUPPORTED_GITLAB_MAJORS = ["19"] as const;
+export type GitLabMajor = (typeof SUPPORTED_GITLAB_MAJORS)[number];
+
 export type MergeRequestContractSurface = "project" | "group" | "dashboard";
 export type MergeRequestMergeWidgetScenario =
 	| "auto-merge"
 	| "immediate"
 	| "merge-train";
 export type BroadcastBannerScenario = "native-dismissible" | "non-dismissible";
+export type TopBarScenario = "signed-in" | "signed-out";
+export type FileTreeBrowserFeedbackPlacement = "in-panel" | "sibling";
 
 export interface MergeRequestContractFixture {
 	markup: string;
@@ -16,7 +31,7 @@ export interface MergeRequestContractFixture {
 }
 
 export async function readMergeRequestContractFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 	surface: MergeRequestContractSurface,
 ): Promise<MergeRequestContractFixture> {
 	const markup = await Bun.file(
@@ -37,7 +52,7 @@ export async function readMergeRequestContractFixture(
 }
 
 export async function readMergeRequestListFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 ): Promise<string> {
 	return Bun.file(
 		new URL(`${version}/merge-request-list/list.html`, fixtureDirectory),
@@ -49,7 +64,7 @@ export async function readMergeRequestListFixture(
  * list fixtures do not carry.
  */
 export async function readMergeRequestListFiltersFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 ): Promise<string> {
 	return Bun.file(
 		new URL(`${version}/merge-request-list/filters.html`, fixtureDirectory),
@@ -62,7 +77,7 @@ export async function readMergeRequestListFiltersFixture(
  * opens it.
  */
 export async function readMergeRequestCommentFormFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 ): Promise<string> {
 	return Bun.file(
 		new URL(
@@ -73,7 +88,7 @@ export async function readMergeRequestCommentFormFixture(
 }
 
 export async function readMergeRequestMergeWidgetFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 	scenario: MergeRequestMergeWidgetScenario,
 ): Promise<string> {
 	return Bun.file(
@@ -84,59 +99,60 @@ export async function readMergeRequestMergeWidgetFixture(
 	).text();
 }
 
-/**
- * The merge request detail tab bar with the approvals widget section. There is
- * one baseline because 18.11 and 19.2 render the same tab container, action
- * cluster, and approve control; a version-specific fixture waits for an
- * observed difference.
- */
-export async function readMergeRequestTabBarFixture(): Promise<string> {
+/** The merge request detail tab bar with the approvals widget section. */
+export async function readMergeRequestTabBarFixture(
+	version: GitLabMajor,
+): Promise<string> {
 	return Bun.file(
 		new URL(
-			"18/merge-request-tab-bar/tabs-and-approvals.html",
+			`${version}/merge-request-tab-bar/tabs-and-approvals.html`,
 			fixtureDirectory,
 		),
 	).text();
 }
 
 export async function readMergeRequestHeaderFixture(
-	version: "18" | "19" | "gitlab-com-public",
+	version: GitLabMajor,
 ): Promise<string> {
-	const path =
-		version === "gitlab-com-public"
-			? "19/merge-request-header/gitlab-com-public.html"
-			: `${version}/merge-request-header/header.html`;
-
-	return Bun.file(new URL(path, fixtureDirectory)).text();
-}
-
-export async function readObservedGitLab18MergeRequestListFixture(): Promise<string> {
 	return Bun.file(
-		new URL("18/merge-request-list/observed-public.html", fixtureDirectory),
+		new URL(`${version}/merge-request-header/header.html`, fixtureDirectory),
 	).text();
 }
 
 /**
- * The CI job log top bar and two section-header log lines. There is one
- * baseline because the top bar template and the section header markup are the
- * same in 18.11 and current master; a version-specific fixture waits for an
- * observed difference.
+ * The same header as rendered by GitLab.com, which deploys from master rather
+ * than a numbered release and wraps the action cluster differently. Deployment
+ * is its own axis, so this is a separate reader instead of a version value.
  */
-export async function readJobLogFixture(): Promise<string> {
+export async function readGitLabComMergeRequestHeaderFixture(): Promise<string> {
 	return Bun.file(
-		new URL("19/job-log/top-bar-and-sections.html", fixtureDirectory),
+		new URL("19/merge-request-header/gitlab-com-public.html", fixtureDirectory),
 	).text();
 }
 
-export async function readTopBarFixture(version: "18" | "19"): Promise<string> {
-	const fileName = version === "18" ? "signed-in.html" : "signed-out.html";
+/** The CI job log top bar and two section-header log lines. */
+export async function readJobLogFixture(version: GitLabMajor): Promise<string> {
 	return Bun.file(
-		new URL(`${version}/top-bar/${fileName}`, fixtureDirectory),
+		new URL(`${version}/job-log/top-bar-and-sections.html`, fixtureDirectory),
+	).text();
+}
+
+/**
+ * The top bar, whose action cluster differs by session rather than by version:
+ * signed in it ends in the user menu, signed out in the register and sign-in
+ * controls. The control panel anchors before whichever is present.
+ */
+export async function readTopBarFixture(
+	version: GitLabMajor,
+	scenario: TopBarScenario,
+): Promise<string> {
+	return Bun.file(
+		new URL(`${version}/top-bar/${scenario}.html`, fixtureDirectory),
 	).text();
 }
 
 export async function readDuoAgentPlatformFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 ): Promise<string> {
 	return Bun.file(
 		new URL(
@@ -148,23 +164,24 @@ export async function readDuoAgentPlatformFixture(
 
 /**
  * The repository file tree browser carrying GitLab's "Provide feedback" link.
- * The two versions differ in where the link sits: 18.7 through 19.0 render it
- * inside the panel, 19.1 renders it as a fixed-position sibling, and 19.2
- * removed it.
+ * Placement is the axis, not the major: 19.0 renders the link inside the panel,
+ * 19.1 as a fixed-position sibling, and 19.2 removed it, so one major carries
+ * both placements and an absent link is the ordinary state.
  */
 export async function readFileTreeBrowserFeedbackFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
+	placement: FileTreeBrowserFeedbackPlacement,
 ): Promise<string> {
 	return Bun.file(
 		new URL(
-			`${version}/file-tree-browser/feedback-link.html`,
+			`${version}/file-tree-browser/feedback-link-${placement}.html`,
 			fixtureDirectory,
 		),
 	).text();
 }
 
 export async function readBroadcastBannerFixture(
-	version: "18" | "19",
+	version: GitLabMajor,
 	scenario: BroadcastBannerScenario,
 ): Promise<string> {
 	return Bun.file(

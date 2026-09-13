@@ -4,7 +4,9 @@ import {
 	asBrowserWindow,
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
+	type GitLabMajor,
 	readMergeRequestListFiltersFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import {
@@ -63,7 +65,7 @@ function navHref(testWindow: Window): string | null {
 		?.getAttribute("href") as string | null;
 }
 
-async function openList(version: "18" | "19", url = LIST_URL): Promise<Window> {
+async function openList(version: GitLabMajor, url = LIST_URL): Promise<Window> {
 	return createGitLabTestWindow(
 		await readMergeRequestListFiltersFixture(version),
 		url,
@@ -78,7 +80,7 @@ async function openList(version: "18" | "19", url = LIST_URL): Promise<Window> {
  * keep, which is the failure the explicit model exists to remove.
  */
 describe("remember-merge-request-list-filters never writes on its own", () => {
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"stores nothing while browsing the GitLab %s contract",
 		async (version) => {
 			const store = createFakeStore();
@@ -154,7 +156,7 @@ describe("remember-merge-request-list-filters restore", () => {
 		return store;
 	}
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"rewrites the navigation link in the GitLab %s contract and keeps it relative",
 		async (version) => {
 			const store = seeded();

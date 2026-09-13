@@ -1,4 +1,7 @@
-<!-- GitLab 18.11 top bar, reconstructed 2026-08-16 from official v18.11.9-ee source.
+<!-- GitLab 19.2 top bar, signed in. Re-baselined 2026-09-13 from the 18.11 reconstruction
+     without re-capturing: the top bar shell is the one proven by the signed-out 19.2.2-ee
+     fixture beside this file, and the `user-menu-toggle` anchor is the contract observed on
+     19.2.2-ce.0 in the local lab and carried by `../merge-request-list/filters.html`.
      `user_menu.vue` renders the toggle as `<gl-button :href="data.link_to_profile">`,
      and GlButton renders an anchor whenever href is set, so the toggle is an <a>
      with the profile path. The identity contract reads that href. -->

@@ -808,7 +808,7 @@ describe("in-page control panel", () => {
 describe("top-bar control-surface lifecycle", () => {
 	test("updates an open panel after same-document navigation replaces the list surface", async () => {
 		const [topBar, project, dashboard] = await Promise.all([
-			readTopBarFixture("19"),
+			readTopBarFixture("19", "signed-out"),
 			readMergeRequestContractFixture("19", "project"),
 			readMergeRequestContractFixture("19", "dashboard"),
 		]);
@@ -903,7 +903,7 @@ describe("top-bar control-surface lifecycle", () => {
 	});
 
 	test("updates an open panel when page compatibility changes", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const user = userEvent.setup({ document });
 		const controller = new AbortController();
 		let compatibility: InPageFeatureCompatibility = {
@@ -972,15 +972,15 @@ describe("top-bar control-surface lifecycle", () => {
 		});
 	});
 
-	test("resolves the GitLab 18 signed-in and GitLab 19 signed-out anchors", async () => {
-		document.body.innerHTML = await readTopBarFixture("18");
+	test("resolves the signed-in and signed-out top bar anchors", async () => {
+		document.body.innerHTML = await readTopBarFixture("19", "signed-in");
 		const signedIn = resolveTopBarAnchor(document);
 		expect(signedIn.status).toBe("available");
 		if (signedIn.status === "available") {
 			expect(signedIn.before?.classList.contains("user-menu")).toBe(true);
 		}
 
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const signedOut = resolveTopBarAnchor(document);
 		expect(signedOut.status).toBe("available");
 		if (signedOut.status === "available") {
@@ -1017,7 +1017,7 @@ describe("top-bar control-surface lifecycle", () => {
 	});
 
 	test("replaces one host, follows theme changes, clears stale errors, and cleans up", async () => {
-		document.body.innerHTML = await readTopBarFixture("18");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-in");
 		const controller = new AbortController();
 		const controlPanel = createInPageControlPanelFeature(
 			DEFAULT_SETTINGS,

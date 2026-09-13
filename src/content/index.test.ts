@@ -407,7 +407,7 @@ describe("content runtime bootstrap", () => {
 
 	test("gates the file tree feedback link on its own default-on setting", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readFileTreeBrowserFeedbackFixture("18"),
+			await readFileTreeBrowserFeedbackFixture("19", "in-panel"),
 			"https://gitlab.com/example/project/-/blob/main/versions.tf",
 			"projects:blob:show",
 		);
@@ -593,7 +593,7 @@ describe("content runtime bootstrap", () => {
 
 	test("gates the mirrored approve button on its own setting", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readMergeRequestTabBarFixture(),
+			await readMergeRequestTabBarFixture("19"),
 			"https://gitlab.com/example/project/-/merge_requests/7/diffs",
 			"projects:merge_requests:show",
 		);
@@ -626,7 +626,7 @@ describe("content runtime bootstrap", () => {
 
 	test("gates the job log section toggle on its own setting", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readJobLogFixture(),
+			await readJobLogFixture("19"),
 			"https://gitlab.com/example/project/-/jobs/1234",
 			"projects:jobs:show",
 		);
@@ -662,7 +662,7 @@ describe("content runtime bootstrap", () => {
 	 */
 	test("keeps the whole job log feature off when its toggle setting is off", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readJobLogFixture(),
+			await readJobLogFixture("19"),
 			"https://gitlab.com/example/project/-/jobs/1234",
 			"projects:jobs:show",
 		);
@@ -783,7 +783,7 @@ describe("content runtime bootstrap", () => {
 
 	test("mounts the panel and fans a stored change out to it and the features", async () => {
 		const testWindow = createGitLabTestWindow(
-			await readTopBarFixture("19"),
+			await readTopBarFixture("19", "signed-out"),
 			"https://gitlab.com/example/project/-/merge_requests",
 		);
 		const { repository, resolveRead, emit } = createDeferredRepository();
@@ -827,7 +827,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("persists the Duo switch through the panel's partial-update path", async () => {
-		document.body.innerHTML = `${await readTopBarFixture("19")}${await readDuoAgentPlatformFixture("19")}`;
+		document.body.innerHTML = `${await readTopBarFixture("19", "signed-out")}${await readDuoAgentPlatformFixture("19")}`;
 		const { repository, resolveRead, writes } = createDeferredRepository();
 		const user = userEvent.setup({ document });
 		let stop: (() => void) | undefined;
@@ -880,7 +880,7 @@ describe("content runtime bootstrap", () => {
 	 * chrome.storage change events interleave.
 	 */
 	test("applies a stale echo without letting it corrupt the next write", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emitStaleEcho, writes } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });
@@ -940,7 +940,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("chains a second setting change onto the first instead of reverting it", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, writes } = createDeferredRepository();
 		const user = userEvent.setup({ document });
 		let stop: (() => void) | undefined;
@@ -999,7 +999,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("does not revert a setting saved before a rejected update", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emitStaleEcho, failNextUpdate, writes } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });
@@ -1070,7 +1070,7 @@ describe("content runtime bootstrap", () => {
 	});
 
 	test("releases the optimistic value when a write stores no change", async () => {
-		document.body.innerHTML = await readTopBarFixture("19");
+		document.body.innerHTML = await readTopBarFixture("19", "signed-out");
 		const { repository, resolveRead, emit, skipNextUpdate } =
 			createDeferredRepository();
 		const user = userEvent.setup({ document });

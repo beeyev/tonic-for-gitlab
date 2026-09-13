@@ -5,6 +5,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readMergeRequestCommentFormFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import {
@@ -110,7 +111,7 @@ describe("start-threads-by-default", () => {
 		).toBe(false);
 	});
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"selects Start thread once in the GitLab %s contract",
 		async (version) => {
 			const page = createCommentFormPage(
@@ -146,7 +147,7 @@ describe("start-threads-by-default", () => {
 		},
 	);
 
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"reports the GitLab %s comment-type contract as supported",
 		async (version) => {
 			const page = createCommentFormPage(

@@ -54,7 +54,7 @@ afterEach(() => {
 });
 
 async function openJobLog(url = JOB_URL): Promise<HappyDOMWindow> {
-	return createGitLabTestWindow(await readJobLogFixture(), url, JOB_PAGE);
+	return createGitLabTestWindow(await readJobLogFixture("19"), url, JOB_PAGE);
 }
 
 function context(testWindow: HappyDOMWindow) {
@@ -666,7 +666,7 @@ describe("toggle-job-log-sections", () => {
 	});
 
 	test("mounts after hydration and repairs a replaced top bar", async () => {
-		const markup = await readJobLogFixture();
+		const markup = await readJobLogFixture("19");
 		const testWindow = createGitLabTestWindow("", JOB_URL, JOB_PAGE);
 		const controller = new AbortController();
 		activateFeatureRuntime(

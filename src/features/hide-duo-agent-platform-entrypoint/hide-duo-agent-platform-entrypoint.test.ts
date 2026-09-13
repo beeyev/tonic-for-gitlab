@@ -4,6 +4,7 @@ import {
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
 	readDuoAgentPlatformFixture,
+	SUPPORTED_GITLAB_MAJORS,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
 import { createFeatureContext } from "../../content/runtime/feature-context";
@@ -40,7 +41,7 @@ function getContractElements(testWindow: Window): {
 }
 
 describe("hide-duo-agent-platform-entrypoint", () => {
-	test.each(["18", "19"] as const)(
+	test.each([...SUPPORTED_GITLAB_MAJORS])(
 		"marks the whole GitLab %s rail when Duo is its only control",
 		async (version) => {
 			const testWindow = createGitLabTestWindow(

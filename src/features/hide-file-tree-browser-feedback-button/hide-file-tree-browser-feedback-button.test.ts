@@ -3,6 +3,7 @@ import {
 	asBrowserWindow,
 	closeGitLabTestWindows,
 	createGitLabTestWindow,
+	type FileTreeBrowserFeedbackPlacement,
 	readFileTreeBrowserFeedbackFixture,
 	settleGitLabDom,
 } from "../../../tests/helpers/gitlab-dom";
@@ -26,11 +27,11 @@ afterEach(() => {
 });
 
 async function createFileTreeBrowserWindow(
-	version: "18" | "19",
+	placement: FileTreeBrowserFeedbackPlacement,
 	url = BLOB_URL,
 ): Promise<ReturnType<typeof createGitLabTestWindow>> {
 	return createGitLabTestWindow(
-		await readFileTreeBrowserFeedbackFixture(version),
+		await readFileTreeBrowserFeedbackFixture("19", placement),
 		url,
 		BLOB_PAGE,
 	);
@@ -60,28 +61,23 @@ function countHiddenLinks(
 
 describe("hide-file-tree-browser-feedback-button", () => {
 	test.each([
-		["18", "inside the panel"],
-		["19", "beside the panel"],
-	] as const)(
-		"hides the GitLab %s feedback link rendered %s",
-		async (version) => {
-			const testWindow = await createFileTreeBrowserWindow(version);
-			const controller = new AbortController();
-			const context = createFeatureContext(asBrowserWindow(testWindow));
+		["in-panel", "inside the panel"],
+		["sibling", "beside the panel"],
+	] as const)("hides the %s feedback link rendered %s", async (placement) => {
+		const testWindow = await createFileTreeBrowserWindow(placement);
+		const controller = new AbortController();
+		const context = createFeatureContext(asBrowserWindow(testWindow));
 
-			expect(getHideFileTreeBrowserFeedbackButtonCompatibility(context)).toBe(
-				"supported",
-			);
-			hideFileTreeBrowserFeedbackButton.activate(context, controller.signal);
+		expect(getHideFileTreeBrowserFeedbackButtonCompatibility(context)).toBe(
+			"supported",
+		);
+		hideFileTreeBrowserFeedbackButton.activate(context, controller.signal);
 
-			expect(
-				getFeedbackLink(testWindow).hasAttribute(
-					HIDDEN_FEEDBACK_LINK_ATTRIBUTE,
-				),
-			).toBe(true);
-			expect(countHiddenLinks(testWindow)).toBe(1);
-		},
-	);
+		expect(
+			getFeedbackLink(testWindow).hasAttribute(HIDDEN_FEEDBACK_LINK_ATTRIBUTE),
+		).toBe(true);
+		expect(countHiddenLinks(testWindow)).toBe(1);
+	});
 
 	test.each([
 		["/-/blob/main/versions.tf", true],
@@ -90,7 +86,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 		["", false],
 	] as const)("activates for %s: %p", async (path, expected) => {
 		const testWindow = await createFileTreeBrowserWindow(
-			"18",
+			"in-panel",
 			`https://gitlab.com/example/project${path}`,
 		);
 
@@ -102,7 +98,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("leaves the panel's own repository links alone", async () => {
-		const testWindow = await createFileTreeBrowserWindow("18");
+		const testWindow = await createFileTreeBrowserWindow("in-panel");
 		const controller = new AbortController();
 
 		hideFileTreeBrowserFeedbackButton.activate(
@@ -118,7 +114,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("ignores an external panel link that carries no feedback icon", async () => {
-		const testWindow = await createFileTreeBrowserWindow("18");
+		const testWindow = await createFileTreeBrowserWindow("in-panel");
 		getDocument(testWindow)
 			.querySelector(FILE_TREE_BROWSER_SELECTOR)
 			?.insertAdjacentHTML(
@@ -153,7 +149,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 			},
 		],
 	] as const)("is not applicable when %s", async (_name, change) => {
-		const testWindow = await createFileTreeBrowserWindow("19");
+		const testWindow = await createFileTreeBrowserWindow("sibling");
 		change(getDocument(testWindow));
 
 		expect(
@@ -179,7 +175,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 			},
 		],
 	] as const)("is a safe no-op for a %s contract", async (_name, change) => {
-		const testWindow = await createFileTreeBrowserWindow("18");
+		const testWindow = await createFileTreeBrowserWindow("in-panel");
 		change(getDocument(testWindow));
 		const controller = new AbortController();
 		const context = createFeatureContext(asBrowserWindow(testWindow));
@@ -193,7 +189,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("activation is idempotent and abort restores attached and detached state", async () => {
-		const testWindow = await createFileTreeBrowserWindow("18");
+		const testWindow = await createFileTreeBrowserWindow("in-panel");
 		const controller = new AbortController();
 		const context = createFeatureContext(asBrowserWindow(testWindow));
 
@@ -210,7 +206,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("clears a prior marker when the contract becomes ambiguous", async () => {
-		const testWindow = await createFileTreeBrowserWindow("19");
+		const testWindow = await createFileTreeBrowserWindow("sibling");
 		const controller = new AbortController();
 		const context = createFeatureContext(asBrowserWindow(testWindow));
 		hideFileTreeBrowserFeedbackButton.activate(context, controller.signal);
@@ -228,7 +224,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("runtime hides the link when Vue mounts the browser late", async () => {
-		const testWindow = await createFileTreeBrowserWindow("19");
+		const testWindow = await createFileTreeBrowserWindow("sibling");
 		const root = getDocument(testWindow).querySelector(".navigation-root")
 			?.firstElementChild as HTMLElement;
 		root.remove();
@@ -248,7 +244,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("runtime reconciles a replaced panel", async () => {
-		const testWindow = await createFileTreeBrowserWindow("18");
+		const testWindow = await createFileTreeBrowserWindow("in-panel");
 		const controller = new AbortController();
 		activateFeatureRuntime(
 			asBrowserWindow(testWindow),
@@ -276,7 +272,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("runtime hides a link GitLab adds beside an already-mounted panel", async () => {
-		const testWindow = await createFileTreeBrowserWindow("19");
+		const testWindow = await createFileTreeBrowserWindow("sibling");
 		const link = getFeedbackLink(testWindow);
 		const parent = link.parentElement as HTMLElement;
 		link.remove();
@@ -299,7 +295,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 
 	test("reports not-applicable off a repository file path, where it never runs", async () => {
 		const testWindow = await createFileTreeBrowserWindow(
-			"18",
+			"in-panel",
 			"https://gitlab.com/example/project/-/merge_requests/7/diffs",
 		);
 		const context = createFeatureContext(asBrowserWindow(testWindow));
@@ -325,7 +321,7 @@ describe("hide-file-tree-browser-feedback-button", () => {
 	});
 
 	test("observes no attributes and only its own three subtrees", async () => {
-		const testWindow = await createFileTreeBrowserWindow("19");
+		const testWindow = await createFileTreeBrowserWindow("sibling");
 
 		expect(
 			hideFileTreeBrowserFeedbackButton.observedAttributes,
