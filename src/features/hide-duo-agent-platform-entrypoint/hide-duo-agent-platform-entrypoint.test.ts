@@ -245,6 +245,38 @@ describe("hide-duo-agent-platform-entrypoint", () => {
 		);
 	});
 
+	/*
+	 * Not a claim that GitLab nests rails. The page is untrusted and its own
+	 * script can render an element carrying the same test ID, so the contract
+	 * resolves the rail the entrypoint actually sits in rather than the
+	 * outermost match, and hides only that one.
+	 */
+	test("marks only the nearest rail when an outer element carries the same test ID", async () => {
+		const testWindow = createGitLabTestWindow(
+			await readDuoAgentPlatformFixture("19"),
+		);
+		const document = asBrowserWindow(testWindow).document;
+		const { rail } = getContractElements(asBrowserWindow(testWindow));
+		const outerRail = document.createElement("div");
+		outerRail.setAttribute("data-testid", "ai-panels");
+		rail.before(outerRail);
+		outerRail.append(rail);
+		const controller = new AbortController();
+		const context = createFeatureContext(asBrowserWindow(testWindow));
+
+		// The predecessor of this test built its outer element from a selector
+		// that was later removed, which left it matching nothing and passing
+		// without testing anything. Prove the decoy is a real candidate first.
+		expect(outerRail.matches(AI_PANELS_SELECTOR)).toBe(true);
+		expect(getHideDuoAgentPlatformEntrypointCompatibility(context)).toBe(
+			"supported",
+		);
+		hideDuoAgentPlatformEntrypoint.activate(context, controller.signal);
+
+		expect(rail.hasAttribute(HIDDEN_RAIL_ATTRIBUTE)).toBe(true);
+		expect(outerRail.hasAttribute(HIDDEN_RAIL_ATTRIBUTE)).toBe(false);
+	});
+
 	test("activation is idempotent and abort restores attached and detached state", async () => {
 		const testWindow = createGitLabTestWindow(
 			await readDuoAgentPlatformFixture("19"),
