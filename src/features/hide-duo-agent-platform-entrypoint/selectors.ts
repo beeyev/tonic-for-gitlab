@@ -1,5 +1,4 @@
-export const AI_PANELS_SELECTOR =
-	'[data-testid="ai-panels"], .paneled-view.ai-panels';
+export const AI_PANELS_SELECTOR = '[data-testid="ai-panels"]';
 export const DUO_DISABLED_TOGGLE_SELECTOR =
 	'[data-testid="duo-disabled-toggle"]';
 

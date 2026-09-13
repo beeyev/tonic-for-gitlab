@@ -23,11 +23,11 @@ type FeedbackLinkResolution =
 const ownedAttributes = createOwnedAttributeRegistry();
 
 /**
- * GitLab shipped this link in 18.7 and removed it again in 19.2, and moved it in
- * between: 18.7 through 19.0 render it as the panel's last child, 19.1 renders
- * it as a fixed-position sibling of the panel. Searching from the panel's parent
- * covers both placements with one query, and an absent link is the ordinary
- * state on every other version rather than a broken contract.
+ * GitLab moved this link and then removed it inside the supported range: 19.0
+ * renders it as the panel's last child, 19.1 as a fixed-position sibling of the
+ * panel, and 19.2 dropped it. Searching from the panel's parent covers both
+ * placements with one query, and an absent link is the ordinary state from 19.2
+ * on rather than a broken contract.
  */
 function resolveFeedbackLink(document: Document): FeedbackLinkResolution {
 	const HTMLAnchorElementConstructor = document.defaultView?.HTMLAnchorElement;

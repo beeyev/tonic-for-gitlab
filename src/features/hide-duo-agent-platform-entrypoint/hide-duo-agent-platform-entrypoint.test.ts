@@ -245,28 +245,6 @@ describe("hide-duo-agent-platform-entrypoint", () => {
 		);
 	});
 
-	test("resolves the nearest rail when GitLab renders both rail contracts", async () => {
-		const testWindow = createGitLabTestWindow(
-			await readDuoAgentPlatformFixture("19"),
-		);
-		const document = asBrowserWindow(testWindow).document;
-		const { rail } = getContractElements(asBrowserWindow(testWindow));
-		const outerRail = document.createElement("div");
-		outerRail.className = "paneled-view ai-panels";
-		rail.before(outerRail);
-		outerRail.append(rail);
-		const controller = new AbortController();
-		const context = createFeatureContext(asBrowserWindow(testWindow));
-
-		expect(getHideDuoAgentPlatformEntrypointCompatibility(context)).toBe(
-			"supported",
-		);
-		hideDuoAgentPlatformEntrypoint.activate(context, controller.signal);
-
-		expect(rail.hasAttribute(HIDDEN_RAIL_ATTRIBUTE)).toBe(true);
-		expect(outerRail.hasAttribute(HIDDEN_RAIL_ATTRIBUTE)).toBe(false);
-	});
-
 	test("activation is idempotent and abort restores attached and detached state", async () => {
 		const testWindow = createGitLabTestWindow(
 			await readDuoAgentPlatformFixture("19"),

@@ -38,7 +38,7 @@ interface ListLinkTarget {
  * an absolute URL or a root-relative path. Anything else is refused.
  *
  * This is not pedantry. GitLab's own state tabs are `<a role="tab" href="#">`
- * on 18.11.11 and 19.2.4-ee, and a bare fragment resolves to the *current* URL.
+ * on 19.2.4-ee, and a bare fragment resolves to the *current* URL.
  * On a list page that resolves to the list itself, so without this check the
  * feature would rewrite `#` into a full list URL and break GitLab's tabs.
  */

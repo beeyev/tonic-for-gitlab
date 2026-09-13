@@ -28,8 +28,8 @@ export interface ListFilterScope {
 }
 
 /**
- * Keys GitLab uses for keyset paging and page size, observed live on 18.11.11
- * and 19.2.4-ee: switching a tab or paging rewrites the URL with
+ * Keys GitLab uses for keyset paging and page size, observed live on
+ * 19.2.4-ee: switching a tab or paging rewrites the URL with
  * `first_page_size` and, once paged, `page_after`. Restoring any of them is how
  * upstream produced broken paging, so they are stripped from what is stored and
  * a link carrying one is never rewritten. `page` and `cursor` cover the offset
