@@ -46,16 +46,3 @@ export function isMergeRequestDetailPath(pathname: string): boolean {
 export function isJobDetailPath(pathname: string): boolean {
 	return /\/-\/jobs\/\d+\/?$/.test(pathname);
 }
-
-/**
- * Repository file and directory paths, matched by the same relative-root reason
- * as the merge request matchers above.
- *
- * These are the two surfaces that render GitLab's file tree browser, from
- * `app/views/projects/_files.html.haml` and `app/views/projects/blob/show.html.haml`.
- * The project overview renders the same partial but the browser's own router
- * suppresses it there, and that path carries no `/-/tree/` segment either.
- */
-export function isRepositoryFilePath(pathname: string): boolean {
-	return /\/-\/(?:tree|blob)\//.test(pathname);
-}

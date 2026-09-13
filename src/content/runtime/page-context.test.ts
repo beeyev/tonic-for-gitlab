@@ -3,7 +3,6 @@ import {
 	isJobDetailPath,
 	isMergeRequestDetailPath,
 	isMergeRequestListPath,
-	isRepositoryFilePath,
 } from "./page-context";
 
 describe("isMergeRequestListPath", () => {
@@ -93,24 +92,5 @@ describe("isJobDetailPath", () => {
 		["/", false],
 	] as const)("classifies %s", (pathname, expected) => {
 		expect(isJobDetailPath(pathname)).toBe(expected);
-	});
-});
-
-describe("isRepositoryFilePath", () => {
-	test.each([
-		["/group/project/-/tree/main", true],
-		["/group/project/-/tree/main/modules/network", true],
-		["/group/project/-/blob/main/versions.tf", true],
-		["/gitlab/group/project/-/blob/main/README.md", true],
-		["/group/subgroup/project/-/tree/release%2F1.0/src", true],
-		// The project overview renders the same partial, but the browser's router
-		// suppresses it there and the path carries no tree or blob segment.
-		["/group/project", false],
-		["/group/project/-/tree", false],
-		["/group/project/-/merge_requests/42/diffs", false],
-		["/group/project/-/blame/main/versions.tf", false],
-		["/", false],
-	] as const)("classifies %s", (pathname, expected) => {
-		expect(isRepositoryFilePath(pathname)).toBe(expected);
 	});
 });

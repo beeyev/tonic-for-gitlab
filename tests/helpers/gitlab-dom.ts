@@ -23,7 +23,6 @@ export type MergeRequestMergeWidgetScenario =
 	| "merge-train";
 export type BroadcastBannerScenario = "native-dismissible" | "non-dismissible";
 export type TopBarScenario = "signed-in" | "signed-out";
-export type FileTreeBrowserFeedbackPlacement = "in-panel" | "sibling";
 
 export interface MergeRequestContractFixture {
 	markup: string;
@@ -122,7 +121,8 @@ export async function readMergeRequestHeaderFixture(
 /**
  * The same header as rendered by GitLab.com, which deploys from master rather
  * than a numbered release and wraps the action cluster differently. Deployment
- * is its own axis, so this is a separate reader instead of a version value.
+ * is its own axis, so this is a separate reader over a separate tree instead of
+ * a version value.
  */
 export async function readGitLabComMergeRequestHeaderFixture(): Promise<string> {
 	return Bun.file(
@@ -157,24 +157,6 @@ export async function readDuoAgentPlatformFixture(
 	return Bun.file(
 		new URL(
 			`${version}/duo-agent-platform/entrypoint-only.html`,
-			fixtureDirectory,
-		),
-	).text();
-}
-
-/**
- * The repository file tree browser carrying GitLab's "Provide feedback" link.
- * Placement is the axis, not the major: 19.0 renders the link inside the panel,
- * 19.1 as a fixed-position sibling, and 19.2 removed it, so one major carries
- * both placements and an absent link is the ordinary state.
- */
-export async function readFileTreeBrowserFeedbackFixture(
-	version: GitLabMajor,
-	placement: FileTreeBrowserFeedbackPlacement,
-): Promise<string> {
-	return Bun.file(
-		new URL(
-			`${version}/file-tree-browser/feedback-link-${placement}.html`,
 			fixtureDirectory,
 		),
 	).text();

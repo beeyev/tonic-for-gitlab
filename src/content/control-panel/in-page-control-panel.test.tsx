@@ -38,7 +38,6 @@ const NOOP_HANDLERS: SettingChangeHandlers = {
 	onDimDraftMergeRequestsEnabledChange: async () => {},
 	onFilterMyAuthoredMergeRequestsEnabledChange: async () => {},
 	onHideDuoAgentPlatformEntrypointEnabledChange: async () => {},
-	onHideFileTreeBrowserFeedbackButtonEnabledChange: async () => {},
 	onHighlightAuthoredMergeRequestsEnabledChange: async () => {},
 	onRememberMergeRequestListFiltersEnabledChange: async () => {},
 	onStartThreadsByDefaultEnabledChange: async () => {},
@@ -83,7 +82,6 @@ describe("in-page control panel", () => {
 					dimDraftMergeRequests: "unsupported",
 					filterMyAuthoredMergeRequests: "unsupported",
 					hideDuoAgentPlatformEntrypoint: "unsupported",
-					hideFileTreeBrowserFeedbackButton: "unsupported",
 					highlightAuthoredMergeRequests: "unsupported",
 					startThreadsByDefault: "unsupported",
 					toggleJobLogSections: "unsupported",
@@ -103,10 +101,9 @@ describe("in-page control panel", () => {
 		) as HTMLElement;
 		const statuses = within(dialog).getAllByRole("status");
 
-		expect(statuses).toHaveLength(11);
+		expect(statuses).toHaveLength(10);
 		expect(statuses.map(({ textContent }) => textContent)).toEqual([
 			"Hide unavailable GitLab Duo entry point: Inactive on this page. The GitLab Duo entry point uses an unsupported page structure.",
-			"Hide file tree feedback link: Inactive on this page. The file tree browser uses an unsupported page structure.",
 			"Approve from the tab bar: Inactive on this page. This feature does not support the current GitLab merge request tab bar.",
 			"Copy merge request link: Inactive on this page. This feature does not support the current GitLab merge request header.",
 			"Confirm main merge action: Inactive on this page. This feature does not support the current GitLab merge widget.",
@@ -122,18 +119,18 @@ describe("in-page control panel", () => {
 			name: "Dim draft merge requests",
 		});
 		const describedBy = dimSwitch.getAttribute("aria-describedby")?.split(" ");
-		expect(describedBy).toContain(statuses[5]?.id);
+		expect(describedBy).toContain(statuses[4]?.id);
 		expect(
 			within(dialog)
 				.getByRole("switch", { name: "Filter to my merge requests" })
 				.getAttribute("aria-describedby")
 				?.split(" "),
-		).toContain(statuses[6]?.id);
+		).toContain(statuses[5]?.id);
 		expect(
 			within(dialog)
 				.getByRole("switch", { name: "Remember list filters" })
 				.getAttribute("aria-describedby"),
-		).not.toContain(statuses[5]?.id);
+		).not.toContain(statuses[4]?.id);
 	});
 
 	test("says which setting the collapsed job log default depends on", async () => {
@@ -839,7 +836,6 @@ describe("top-bar control-surface lifecycle", () => {
 				filterMyAuthoredMergeRequests:
 					getFilterMyAuthoredMergeRequestsCompatibility(context),
 				hideDuoAgentPlatformEntrypoint: "not-applicable",
-				hideFileTreeBrowserFeedbackButton: "not-applicable",
 				highlightAuthoredMergeRequests:
 					getHighlightAuthoredMergeRequestsCompatibility(context),
 				// Not applicable on a list page, so this row carries no reason.
@@ -913,7 +909,6 @@ describe("top-bar control-surface lifecycle", () => {
 			dimDraftMergeRequests: "supported",
 			filterMyAuthoredMergeRequests: "supported",
 			hideDuoAgentPlatformEntrypoint: "supported",
-			hideFileTreeBrowserFeedbackButton: "supported",
 			highlightAuthoredMergeRequests: "supported",
 			startThreadsByDefault: "supported",
 			toggleJobLogSections: "supported",
@@ -951,7 +946,6 @@ describe("top-bar control-surface lifecycle", () => {
 			dimDraftMergeRequests: "unsupported",
 			filterMyAuthoredMergeRequests: "unsupported",
 			hideDuoAgentPlatformEntrypoint: "unsupported",
-			hideFileTreeBrowserFeedbackButton: "unsupported",
 			highlightAuthoredMergeRequests: "unsupported",
 			startThreadsByDefault: "unsupported",
 			toggleJobLogSections: "unsupported",
@@ -961,7 +955,7 @@ describe("top-bar control-surface lifecycle", () => {
 		});
 
 		await waitFor(() => {
-			expect(within(dialog).getAllByRole("status")).toHaveLength(11);
+			expect(within(dialog).getAllByRole("status")).toHaveLength(10);
 		});
 		expect(shadowRoot.querySelector('[data-slot="popover-content"]')).toBe(
 			dialog,

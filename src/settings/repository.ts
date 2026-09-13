@@ -8,7 +8,7 @@ import {
 } from "../storage/storage-key";
 
 export const SETTINGS_STORAGE_KEY = "tonic.settings";
-export const SETTINGS_SCHEMA_VERSION = 12;
+export const SETTINGS_SCHEMA_VERSION = 13;
 
 export interface TonicSettings {
 	schemaVersion: typeof SETTINGS_SCHEMA_VERSION;
@@ -19,7 +19,6 @@ export interface TonicSettings {
 	dimDraftMergeRequestsEnabled: boolean;
 	filterMyAuthoredMergeRequestsEnabled: boolean;
 	hideDuoAgentPlatformEntrypointEnabled: boolean;
-	hideFileTreeBrowserFeedbackButtonEnabled: boolean;
 	highlightAuthoredMergeRequestsEnabled: boolean;
 	rememberMergeRequestListFiltersEnabled: boolean;
 	startThreadsByDefaultEnabled: boolean;
@@ -35,7 +34,6 @@ export const DEFAULT_SETTINGS: TonicSettings = {
 	dimDraftMergeRequestsEnabled: true,
 	filterMyAuthoredMergeRequestsEnabled: true,
 	hideDuoAgentPlatformEntrypointEnabled: false,
-	hideFileTreeBrowserFeedbackButtonEnabled: true,
 	highlightAuthoredMergeRequestsEnabled: true,
 	rememberMergeRequestListFiltersEnabled: true,
 	startThreadsByDefaultEnabled: true,
@@ -69,7 +67,6 @@ export function parseSettings(value: unknown): TonicSettings {
 		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
 		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
-		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
 		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
 		typeof value.startThreadsByDefaultEnabled !== "boolean" ||
@@ -91,8 +88,6 @@ export function parseSettings(value: unknown): TonicSettings {
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled:
-			value.hideFileTreeBrowserFeedbackButtonEnabled,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -237,7 +232,8 @@ function migrateSettingsFromV6(
 	});
 }
 
-// The feedback link is safe to hide by default: GitLab removed it in 19.2.
+// Schema 8 only added the file tree feedback toggle, which no longer exists, so
+// this step now just forwards a v7 payload.
 function migrateSettingsFromV7(
 	value: Record<string, unknown>,
 ): TonicSettings | undefined {
@@ -260,7 +256,6 @@ function migrateSettingsFromV7(
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled: true,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -277,7 +272,6 @@ function migrateSettingsFromV8(
 		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
 		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
-		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
 		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
 		typeof value.startThreadsByDefaultEnabled !== "boolean"
@@ -293,8 +287,6 @@ function migrateSettingsFromV8(
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled:
-			value.hideFileTreeBrowserFeedbackButtonEnabled,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -313,7 +305,6 @@ function migrateSettingsFromV9(
 		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
 		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
-		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
 		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
 		typeof value.startThreadsByDefaultEnabled !== "boolean"
@@ -329,8 +320,6 @@ function migrateSettingsFromV9(
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled:
-			value.hideFileTreeBrowserFeedbackButtonEnabled,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -350,7 +339,6 @@ function migrateSettingsFromV10(
 		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
 		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
-		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
 		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
 		typeof value.startThreadsByDefaultEnabled !== "boolean" ||
@@ -368,8 +356,6 @@ function migrateSettingsFromV10(
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled:
-			value.hideFileTreeBrowserFeedbackButtonEnabled,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -390,7 +376,6 @@ function migrateSettingsFromV11(
 		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
 		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
-		typeof value.hideFileTreeBrowserFeedbackButtonEnabled !== "boolean" ||
 		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
 		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
 		typeof value.startThreadsByDefaultEnabled !== "boolean" ||
@@ -399,8 +384,7 @@ function migrateSettingsFromV11(
 		return undefined;
 	}
 
-	return {
-		schemaVersion: SETTINGS_SCHEMA_VERSION,
+	return migrateSettingsFromV12({
 		approveMergeRequestFromTabsEnabled: true,
 		collapseJobLogSectionsByDefaultEnabled:
 			value.collapseJobLogSectionsByDefaultEnabled,
@@ -411,8 +395,53 @@ function migrateSettingsFromV11(
 			value.filterMyAuthoredMergeRequestsEnabled,
 		hideDuoAgentPlatformEntrypointEnabled:
 			value.hideDuoAgentPlatformEntrypointEnabled,
-		hideFileTreeBrowserFeedbackButtonEnabled:
-			value.hideFileTreeBrowserFeedbackButtonEnabled,
+		highlightAuthoredMergeRequestsEnabled:
+			value.highlightAuthoredMergeRequestsEnabled,
+		rememberMergeRequestListFiltersEnabled:
+			value.rememberMergeRequestListFiltersEnabled,
+		startThreadsByDefaultEnabled: value.startThreadsByDefaultEnabled,
+		toggleJobLogSectionsEnabled: value.toggleJobLogSectionsEnabled,
+	});
+}
+
+/*
+ * Schema 13 drops the file tree feedback toggle with its feature. The key is not
+ * validated here: every step above already stopped producing it, so a payload
+ * arriving through the chain never carries it, and a stored v12 payload carries
+ * one that is simply dropped.
+ */
+function migrateSettingsFromV12(
+	value: Record<string, unknown>,
+): TonicSettings | undefined {
+	if (
+		typeof value.approveMergeRequestFromTabsEnabled !== "boolean" ||
+		typeof value.collapseJobLogSectionsByDefaultEnabled !== "boolean" ||
+		typeof value.confirmMergeRequestEnabled !== "boolean" ||
+		typeof value.copyMergeRequestLinkEnabled !== "boolean" ||
+		typeof value.dimDraftMergeRequestsEnabled !== "boolean" ||
+		typeof value.filterMyAuthoredMergeRequestsEnabled !== "boolean" ||
+		typeof value.hideDuoAgentPlatformEntrypointEnabled !== "boolean" ||
+		typeof value.highlightAuthoredMergeRequestsEnabled !== "boolean" ||
+		typeof value.rememberMergeRequestListFiltersEnabled !== "boolean" ||
+		typeof value.startThreadsByDefaultEnabled !== "boolean" ||
+		typeof value.toggleJobLogSectionsEnabled !== "boolean"
+	) {
+		return undefined;
+	}
+
+	return {
+		schemaVersion: SETTINGS_SCHEMA_VERSION,
+		approveMergeRequestFromTabsEnabled:
+			value.approveMergeRequestFromTabsEnabled,
+		collapseJobLogSectionsByDefaultEnabled:
+			value.collapseJobLogSectionsByDefaultEnabled,
+		confirmMergeRequestEnabled: value.confirmMergeRequestEnabled,
+		copyMergeRequestLinkEnabled: value.copyMergeRequestLinkEnabled,
+		dimDraftMergeRequestsEnabled: value.dimDraftMergeRequestsEnabled,
+		filterMyAuthoredMergeRequestsEnabled:
+			value.filterMyAuthoredMergeRequestsEnabled,
+		hideDuoAgentPlatformEntrypointEnabled:
+			value.hideDuoAgentPlatformEntrypointEnabled,
 		highlightAuthoredMergeRequestsEnabled:
 			value.highlightAuthoredMergeRequestsEnabled,
 		rememberMergeRequestListFiltersEnabled:
@@ -474,7 +503,9 @@ export function resolveSettings(value: unknown): SettingsResolution {
 													? migrateSettingsFromV10(value)
 													: value.schemaVersion === 11
 														? migrateSettingsFromV11(value)
-														: undefined;
+														: value.schemaVersion === 12
+															? migrateSettingsFromV12(value)
+															: undefined;
 
 		if (migrated) {
 			return { outcome: "migrated", settings: migrated };

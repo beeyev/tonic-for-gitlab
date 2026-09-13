@@ -25,9 +25,6 @@ export interface SettingChangeHandlers {
 	onHideDuoAgentPlatformEntrypointEnabledChange(
 		enabled: boolean,
 	): Promise<void>;
-	onHideFileTreeBrowserFeedbackButtonEnabledChange(
-		enabled: boolean,
-	): Promise<void>;
 	onHighlightAuthoredMergeRequestsEnabledChange(
 		enabled: boolean,
 	): Promise<void>;
@@ -45,7 +42,6 @@ export interface InPageFeatureCompatibility {
 	dimDraftMergeRequests: FeaturePageCompatibility;
 	filterMyAuthoredMergeRequests: FeaturePageCompatibility;
 	hideDuoAgentPlatformEntrypoint: FeaturePageCompatibility;
-	hideFileTreeBrowserFeedbackButton: FeaturePageCompatibility;
 	highlightAuthoredMergeRequests: FeaturePageCompatibility;
 	startThreadsByDefault: FeaturePageCompatibility;
 	toggleJobLogSections: FeaturePageCompatibility;
@@ -59,7 +55,6 @@ export const DEFAULT_IN_PAGE_FEATURE_COMPATIBILITY: InPageFeatureCompatibility =
 		dimDraftMergeRequests: "not-applicable",
 		filterMyAuthoredMergeRequests: "not-applicable",
 		hideDuoAgentPlatformEntrypoint: "not-applicable",
-		hideFileTreeBrowserFeedbackButton: "not-applicable",
 		highlightAuthoredMergeRequests: "not-applicable",
 		startThreadsByDefault: "not-applicable",
 		toggleJobLogSections: "not-applicable",
@@ -282,20 +277,6 @@ export function InPageControlPanelView({
 							storedValue={settings.hideDuoAgentPlatformEntrypointEnabled}
 							onEnabledChange={
 								handlers.onHideDuoAgentPlatformEntrypointEnabledChange
-							}
-						/>
-						<SettingSwitchRow
-							label="Hide file tree feedback link"
-							description="Hide the Provide feedback link GitLab adds to the repository file tree browser."
-							inactiveReason={
-								compatibility.hideFileTreeBrowserFeedbackButton ===
-								"unsupported"
-									? "Inactive on this page. The file tree browser uses an unsupported page structure."
-									: undefined
-							}
-							storedValue={settings.hideFileTreeBrowserFeedbackButtonEnabled}
-							onEnabledChange={
-								handlers.onHideFileTreeBrowserFeedbackButtonEnabledChange
 							}
 						/>
 					</SettingGroup>

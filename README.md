@@ -15,7 +15,7 @@ add yourself. Everything runs in the browser.
 - Start new merge request comments as threads by default.
 - Expand or collapse all job-log sections, and optionally open logs collapsed.
 - Dismiss broadcast banners locally.
-- Hide the GitLab Duo entry point and the file browser feedback link.
+- Hide the GitLab Duo entry point.
 - And more small GitLab interface fixes, all configurable from the in-page
   settings panel.
 
