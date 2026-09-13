@@ -1,6 +1,16 @@
 import { Window } from "happy-dom";
 
 const fixtureDirectory = new URL("../fixtures/gitlab/", import.meta.url);
+/**
+ * GitLab.com is a deployment, not a major: it ships from master and has no
+ * release number to file under. Keeping it outside the major tree is what stops
+ * it from being cloned into the next major's directory, and from disappearing
+ * with the oldest one.
+ */
+const gitLabComFixtureDirectory = new URL(
+	"../fixtures/gitlab-com/",
+	import.meta.url,
+);
 const openWindows: Window[] = [];
 
 /**
@@ -126,7 +136,7 @@ export async function readMergeRequestHeaderFixture(
  */
 export async function readGitLabComMergeRequestHeaderFixture(): Promise<string> {
 	return Bun.file(
-		new URL("19/merge-request-header/gitlab-com-public.html", fixtureDirectory),
+		new URL("merge-request-header/header.html", gitLabComFixtureDirectory),
 	).text();
 }
 

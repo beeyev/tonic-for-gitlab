@@ -111,8 +111,13 @@ x-gitlab-env: &gitlab-env
 
 services:
   # One service per supported GitLab major. The anchors above carry everything
-  # that is not the image pin, the published port, and the token file, so adding
-  # the next major is a copy of this block with those three changed.
+  # that is not the image pin, the published port, and the token file.
+  #
+  # Adding the next major is this block with those three changed, plus its three
+  # volumes declared at the bottom of this file, plus an entry in `seed`'s
+  # `depends_on`. That last one is the quiet failure: without it the seeder is
+  # not gated on the new instance and runs against a GitLab that is still
+  # booting, which looks like a seeding bug rather than a missing dependency.
   gitlab-19:
     <<: *gitlab
     image: gitlab/gitlab-ce:19.2.2-ce.0
