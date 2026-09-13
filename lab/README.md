@@ -1,16 +1,18 @@
 # Local GitLab lab
 
-Two disposable GitLab CE instances for live Tonic verification, separate from `bun run verify`.
-Local use only: plain HTTP and fixed passwords. Requires Docker Compose; extension commands also
-require Bun and installed repository dependencies. Allow about 6.5 GiB RAM for both instances,
-3.2 GB of image downloads and 10 minutes for the first start.
+One disposable GitLab CE instance per supported GitLab major, for live Tonic verification,
+separate from `bun run verify`. Local use only: plain HTTP and fixed passwords. Requires Docker
+Compose; extension commands also require Bun and installed repository dependencies. Allow 10
+minutes for the first start. The earlier two-instance lab measured about 6.5 GiB RAM idle and
+about 3.2 GB of image downloads, so a single instance is roughly half of each; that halving is
+derived from those measurements rather than re-measured.
 
 ## Run
 
 From the repository root:
 
 ```bash
-make -C lab up                 # Start both instances, wait for health, seed; safe to re-run
+make -C lab up                 # Start every instance, wait for health, seed; safe to re-run
 make -C lab status             # Container state and health
 make -C lab logs               # Last 200 log lines per instance
 make -C lab seed               # Reconcile fixtures after editing seed.ts
@@ -22,10 +24,10 @@ deleting all lab data. Ask before running `cleanup`.
 
 | Instance | Version | URL |
 | --- | --- | --- |
-| `gitlab-18` | `18.11.9-ce.0` | http://localhost:10018 |
 | `gitlab-19` | `19.2.2-ce.0` | http://localhost:10019 |
 
-[compose.yaml](compose.yaml) owns image pins and configuration. The seeder requires both instances.
+[compose.yaml](compose.yaml) owns image pins and configuration. The seeder requires every instance
+to be healthy.
 
 ## Browser verification
 
@@ -44,7 +46,7 @@ through a required host permission. Regenerate after source edits. Never copy it
    so this step persists the target and registers the content script without a Grant step.
 3. Sign in at `/users/sign_in`. Wait for the visible Username and Password fields; the initial
    `#user_login` and `#user_password` inputs are hidden and populated by Vue.
-4. Check the relevant project and group pages on both versions. Use a fresh session per version:
+4. Check the relevant project and group pages on every instance. Use a fresh session per instance:
    cross-origin navigation can leave the development bridge in the back-forward cache and pollute logs.
 5. Check content and background errors. Report assertions as `pass`, `fail`, or `inconclusive`.
    Stop every owned browser session when done.
@@ -63,7 +65,7 @@ then fails to remove permission; reopening the toolbar restores registration.
 
 ## Credentials and API
 
-Credentials are identical on both instances.
+Credentials are identical on every instance.
 
 | User | Password | Role |
 | --- | --- | --- |
@@ -88,7 +90,7 @@ or UI automation when creating test data.
 
 ## Fixtures
 
-[seed.ts](seed.ts) owns the fixtures, identical on both instances:
+[seed.ts](seed.ts) owns the fixtures, identical on every instance:
 
 | Project path | Merge requests |
 | --- | --- |
@@ -96,7 +98,7 @@ or UI automation when creating test data.
 | `tonic-lab/backend` | 7, base set |
 | `tonic-lab/platform/internal-developer-platform` | 4, nested path and duplicate display names |
 
-Open these paths on either instance:
+Open these paths on any instance:
 
 - `/tonic-lab/frontend/-/merge_requests`
 - `/groups/tonic-lab/-/merge_requests`

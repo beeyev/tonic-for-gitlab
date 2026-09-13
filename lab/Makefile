@@ -1,10 +1,13 @@
 # Local GitLab lab. URLs and credentials live in compose.yaml and seed.ts.
 # Run from this directory, or from the repo root with `make -C lab <target>`.
-# The first full start pulls about 3.2 GB and may take 10 minutes. Both seeded
-# instances measured about 6.5 GiB idle; check host capacity before `make up`.
+# The first full start pulls one omnibus image per instance and may take 10
+# minutes. The earlier two-instance lab measured about 6.5 GiB idle and about
+# 3.2 GB of downloads, so one instance is roughly half of each; that halving is
+# derived, not re-measured. Check host capacity before `make up`.
 
 COMPOSE := docker compose -f compose.yaml
-INSTANCES := gitlab-18 gitlab-19
+# One entry per supported GitLab major, matching the services in compose.yaml.
+INSTANCES := gitlab-19
 LAB_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 REPO_ROOT := $(abspath $(LAB_DIR)/..)
 LAB_EXTENSION_PROJECT := $(REPO_ROOT)/.ignore/lab-extension
@@ -17,14 +20,14 @@ LAB_START_URL := http://localhost:10019/tonic-lab/frontend/-/merge_requests
 help: ## List targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | sed -E 's/:.*## /|/' | awk -F'|' '{printf "  make %-18s %s\n", $$1, $$2}'
 
-up: ## Start both instances and seed them. Safe to re-run
+up: ## Start every instance and seed it. Safe to re-run
 	$(COMPOSE) up -d $(INSTANCES)
 	$(COMPOSE) run --rm seed
 
 down: ## Stop and remove containers, keep all data
 	$(COMPOSE) down
 
-restart: ## Restart both instances, keep all data
+restart: ## Restart every instance, keep all data
 	$(COMPOSE) restart $(INSTANCES)
 
 cleanup: ## Remove containers AND volumes. Deletes every seeded object

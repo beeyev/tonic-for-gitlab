@@ -1,7 +1,8 @@
 name: tonic-lab
 
 # Local GitLab CE lab for manual and live-Chrome verification.
-# Two omnibus instances (all dependencies bundled) plus a one-shot seeder.
+# One omnibus instance (all dependencies bundled) per supported GitLab major,
+# plus a one-shot seeder that reconciles every instance.
 # Everything is open on purpose: plain HTTP, fixed passwords, no SSH.
 
 x-gitlab: &gitlab
@@ -109,21 +110,9 @@ x-gitlab-env: &gitlab-env
     printf '%s' "$$token" > "$${LAB_TOKEN_FILE}"
 
 services:
-  gitlab-18:
-    <<: *gitlab
-    image: gitlab/gitlab-ce:18.11.9-ce.0
-    environment:
-      <<: *gitlab-env
-      LAB_EXTERNAL_URL: http://localhost:10018
-      LAB_TOKEN_FILE: /lab/token-18
-    ports:
-      - "10018:80"
-    volumes:
-      - gitlab-18-config:/etc/gitlab
-      - gitlab-18-data:/var/opt/gitlab
-      - gitlab-18-logs:/var/log/gitlab
-      - tokens:/lab
-
+  # One service per supported GitLab major. The anchors above carry everything
+  # that is not the image pin, the published port, and the token file, so adding
+  # the next major is a copy of this block with those three changed.
   gitlab-19:
     <<: *gitlab
     image: gitlab/gitlab-ce:19.2.2-ce.0
@@ -142,8 +131,6 @@ services:
   seed:
     image: oven/bun:1.3.14-alpine
     depends_on:
-      gitlab-18:
-        condition: service_healthy
       gitlab-19:
         condition: service_healthy
     volumes:
@@ -152,9 +139,6 @@ services:
     command: ["bun", "/seed.ts"]
 
 volumes:
-  gitlab-18-config:
-  gitlab-18-data:
-  gitlab-18-logs:
   gitlab-19-config:
   gitlab-19-data:
   gitlab-19-logs:
